@@ -1,10 +1,10 @@
-package com.sangsiklog.api
+package com.sangsiklog.knowledge
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class SangsiklogApiApplicationTests {
+class KnowledgeApplicationTests {
 
 	@Test
 	fun contextLoads() {
