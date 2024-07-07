@@ -1,11 +1,11 @@
-package com.sangsiklog.api
+package com.sangsiklog.knowledge
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class SangsiklogApiApplication
+class KnowledgeApplication
 
 fun main(args: Array<String>) {
-	runApplication<SangsiklogApiApplication>(*args)
+	runApplication<KnowledgeApplication>(*args)
 }
