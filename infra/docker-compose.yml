@@ -50,82 +50,96 @@ services:
     ports:
       - "8000:8080"
 
-  redis-node-1:
-    image: redis:6.2
-    container_name: redis-node-1
-    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--appendonly", "yes"]
-    ports:
-      - "6379:6379"
+  predixy:
+    image: haandol/predixy
+    container_name: predixy
+    hostname: predixy
+    command: predixy etc/predixy/conf/predixy.conf
     volumes:
-      - ./redis-node-1-data:/data
+      - ./opt/predixy/conf:/etc/predixy/conf
+      - ./predixy.log:/etc/logs/predixy.log
+    ports:
+      - "7617:7617"
+    networks:
+      - redis-net
+
+  redis-node-1:
+    image: redis:latest
+    container_name: redis-node-1
+    volumes:
+      - ./opt/redis/master/redis-node-1.conf:/usr/local/etc/redis-node-1.conf
+      - ./start.sh:/start.sh
+    command: sh -c "redis-server /usr/local/etc/redis-node-1.conf"
+    ports:
+      - "7000:7000"
+      - "17000:17000"
+    networks:
+      - redis-net
 
   redis-node-2:
-    image: redis:6.2
+    image: redis:latest
     container_name: redis-node-2
-    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--appendonly", "yes"]
-    ports:
-      - "6380:6379"
     volumes:
-      - ./redis-node-2-data:/data
+      - ./opt/redis/master/redis-node-2.conf:/usr/local/etc/redis-node-2.conf
+    command: sh -c "sleep 3 && redis-server /usr/local/etc/redis-node-2.conf"
+    ports:
+      - "7001:7001"
+      - "17001:17001"
+    networks:
+      - redis-net
 
   redis-node-3:
-    image: redis:6.2
+    image: redis:latest
     container_name: redis-node-3
-    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--appendonly", "yes"]
-    ports:
-      - "6381:6379"
     volumes:
-      - ./redis-node-3-data:/data
+      - ./opt/redis/master/redis-node-3.conf:/usr/local/etc/redis-node-3.conf
+    command: sh -c "sleep 3 && redis-server /usr/local/etc/redis-node-3.conf"
+    ports:
+      - "7002:7002"
+      - "17002:17002"
+    networks:
+      - redis-net
 
   redis-node-4:
-    image: redis:6.2
+    image: redis:latest
     container_name: redis-node-4
-    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--appendonly", "yes"]
-    ports:
-      - "6382:6379"
     volumes:
-      - ./redis-node-4-data:/data
+      - ./opt/redis/salve/redis-node-4.conf:/usr/local/etc/redis-node-4.conf
+    command: sh -c "sleep 3 && redis-server /usr/local/etc/redis-node-4.conf"
+    ports:
+      - "7100:7100"
+      - "17100:17100"
+    networks:
+      - redis-net
 
   redis-node-5:
-    image: redis:6.2
+    image: redis:latest
     container_name: redis-node-5
-    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--appendonly", "yes"]
-    ports:
-      - "6383:6379"
     volumes:
-      - ./redis-node-5-data:/data
+      - ./opt/redis/salve/redis-node-5.conf:/usr/local/etc/redis-node-5.conf
+    command: sh -c "sleep 3 && redis-server /usr/local/etc/redis-node-5.conf"
+    ports:
+      - "7101:7101"
+      - "17101:17101"
+    networks:
+      - redis-net
 
   redis-node-6:
-    image: redis:6.2
+    image: redis:latest
     container_name: redis-node-6
-    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--appendonly", "yes"]
-    ports:
-      - "6384:6379"
     volumes:
-      - ./redis-node-6-data:/data
+      - ./opt/redis/salve/redis-node-6.conf:/usr/local/etc/redis-node-6.conf
+    command: sh -c "sleep 3 && redis-server /usr/local/etc/redis-node-6.conf"
+    ports:
+      - "7102:7102"
+      - "17102:17102"
+    networks:
+      - redis-net
 
-  redis-setup:
-    image: redis:6.2
-    container_name: redis-setup
-    depends_on:
-      - redis-node-1
-      - redis-node-2
-      - redis-node-3
-      - redis-node-4
-      - redis-node-5
-      - redis-node-6
-    entrypoint: >
-      sh -c "
-        sleep 10 &&
-        echo 'yes' | redis-cli --cluster create redis-node-1:6379 redis-node-2:6379 redis-node-3:6379 redis-node-4:6379 redis-node-5:6379 redis-node-6:6379 --cluster-replicas 1
-      "
+networks:
+  redis-net:
+    driver: bridge
 
 volumes:
   mysql-data:
   kafka-data:
-  redis-node-1-data:
-  redis-node-2-data:
-  redis-node-3-data:
-  redis-node-4-data:
-  redis-node-5-data:
-  redis-node-6-data:

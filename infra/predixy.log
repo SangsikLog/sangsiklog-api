@@ -1,0 +1,325 @@
+2024-07-10 13:50:48.946897 N Proxy.cpp:112 predixy listen in 0.0.0.0:7617
+2024-07-10 13:50:48.949563 N Proxy.cpp:143 predixy running with Name:Predixy Workers:4
+2024-07-10 13:50:48.954099 N Handler.cpp:453 h 0 create connection pool for server redis-node-5:7101
+2024-07-10 13:50:48.961036 N ConnectConnectionPool.cpp:42 h 0 create server connection redis-node-5:7101 11
+2024-07-10 13:50:48.961706 E Handler.cpp:434 h 0 s redis-node-5:7101 11 will be close with status 4 EventError
+2024-07-10 13:50:48.961793 N Handler.cpp:276 h 0 close s redis-node-5:7101 11 and c None -1 with status 4 EventError
+2024-07-10 13:50:49.962135 N Handler.cpp:453 h 3 create connection pool for server redis-node-3:7002
+2024-07-10 13:50:49.962741 N ConnectConnectionPool.cpp:42 h 3 create server connection redis-node-3:7002 11
+2024-07-10 13:50:49.962949 E Handler.cpp:434 h 3 s redis-node-3:7002 11 will be close with status 4 EventError
+2024-07-10 13:50:49.962964 N Handler.cpp:276 h 3 close s redis-node-3:7002 11 and c None -1 with status 4 EventError
+2024-07-10 13:50:50.972124 N Handler.cpp:453 h 1 create connection pool for server redis-node-1:7000
+2024-07-10 13:50:50.972944 N ConnectConnectionPool.cpp:42 h 1 create server connection redis-node-1:7000 11
+2024-07-10 13:50:50.977093 N ClusterServerPool.cpp:174 redis cluster create new group 038b37d4c246dcfca8f42c122a266ea4f7a692d4 :7000@17000 myself,master -
+2024-07-10 13:50:51.983125 N Handler.cpp:453 h 2 create connection pool for server redis-node-3:7002
+2024-07-10 13:50:51.983740 N ConnectConnectionPool.cpp:42 h 2 create server connection redis-node-3:7002 12
+2024-07-10 13:50:51.984222 N ClusterServerPool.cpp:174 redis cluster create new group aceca6ca2b8971c99622acd910d243b7b979a904 :7002@17002 myself,master -
+2024-07-10 13:50:52.991187 N Handler.cpp:453 h 3 create connection pool for server redis-node-5:7101
+2024-07-10 13:50:52.991866 N ConnectConnectionPool.cpp:42 h 3 create server connection redis-node-5:7101 13
+2024-07-10 13:50:52.992497 N ClusterServerPool.cpp:174 redis cluster create new group 9a1ca75358e4707cb8ece1133b3411b4a3996c19 :7101@17101 myself,master -
+2024-07-10 13:50:54.002169 N Handler.cpp:453 h 3 create connection pool for server redis-node-6:7102
+2024-07-10 13:50:54.002680 N ConnectConnectionPool.cpp:42 h 3 create server connection redis-node-6:7102 14
+2024-07-10 13:50:54.003253 N ClusterServerPool.cpp:174 redis cluster create new group 669858ed22a44bc8d70780e904cd2fe53e0ddc4c :7102@17102 myself,master -
+2024-07-10 13:50:55.012132 N Handler.cpp:453 h 3 create connection pool for server redis-node-1:7000
+2024-07-10 13:50:55.012519 N ConnectConnectionPool.cpp:42 h 3 create server connection redis-node-1:7000 15
+2024-07-10 13:50:58.053660 N Handler.cpp:453 h 2 create connection pool for server redis-node-4:7100
+2024-07-10 13:50:58.054169 N ConnectConnectionPool.cpp:42 h 2 create server connection redis-node-4:7100 16
+2024-07-10 13:50:58.054653 N ClusterServerPool.cpp:174 redis cluster create new group d7edaa3048c41d29d20dfccb4ce4f2dbf714119e :7100@17100 myself,master -
+2024-07-10 13:50:59.066200 N Handler.cpp:453 h 2 create connection pool for server redis-node-6:7102
+2024-07-10 13:50:59.066536 N ConnectConnectionPool.cpp:42 h 2 create server connection redis-node-6:7102 17
+2024-07-10 13:51:00.079574 N Handler.cpp:453 h 2 create connection pool for server redis-node-1:7000
+2024-07-10 13:51:00.080738 N ConnectConnectionPool.cpp:42 h 2 create server connection redis-node-1:7000 18
+2024-07-10 13:51:01.102482 N Handler.cpp:453 h 2 create connection pool for server redis-node-2:7001
+2024-07-10 13:51:01.104590 N ConnectConnectionPool.cpp:42 h 2 create server connection redis-node-2:7001 19
+2024-07-10 13:51:01.105936 N ClusterServerPool.cpp:174 redis cluster create new group 7a51976ef44c229696b44b710a6a97cf9f236828 :7001@17001 myself,master -
+2024-07-10 13:51:02.128711 N Handler.cpp:453 h 0 create connection pool for server redis-node-3:7002
+2024-07-10 13:51:02.130597 N ConnectConnectionPool.cpp:42 h 0 create server connection redis-node-3:7002 20
+2024-07-10 13:51:03.144394 N Handler.cpp:453 h 1 create connection pool for server redis-node-4:7100
+2024-07-10 13:51:03.145582 N ConnectConnectionPool.cpp:42 h 1 create server connection redis-node-4:7100 21
+2024-07-10 13:51:09.235525 N Handler.cpp:453 h 3 create connection pool for server redis-node-4:7100
+2024-07-10 13:51:09.236543 N ConnectConnectionPool.cpp:42 h 3 create server connection redis-node-4:7100 22
+2024-07-10 13:51:19.439582 N ConnectConnectionPool.cpp:50 h 3 reopen server connection redis-node-3:7002 23
+2024-07-10 13:51:23.521947 N Handler.cpp:453 h 3 create connection pool for server redis-node-2:7001
+2024-07-10 13:51:23.523669 N ConnectConnectionPool.cpp:42 h 3 create server connection redis-node-2:7001 24
+2024-07-10 13:51:34.764805 N Handler.cpp:453 h 1 create connection pool for server redis-node-5:7101
+2024-07-10 13:51:34.766452 N ConnectConnectionPool.cpp:42 h 1 create server connection redis-node-5:7101 25
+2024-07-10 13:51:36.806236 N Handler.cpp:453 h 1 create connection pool for server redis-node-3:7002
+2024-07-10 13:51:36.807827 N ConnectConnectionPool.cpp:42 h 1 create server connection redis-node-3:7002 26
+2024-07-10 13:51:41.903722 N Handler.cpp:453 h 1 create connection pool for server redis-node-6:7102
+2024-07-10 13:51:41.905453 N ConnectConnectionPool.cpp:42 h 1 create server connection redis-node-6:7102 27
+2024-07-10 13:52:02.242631 N Handler.cpp:453 h 0 create connection pool for server redis-node-2:7001
+2024-07-10 13:52:02.244200 N ConnectConnectionPool.cpp:42 h 0 create server connection redis-node-2:7001 28
+2024-07-10 13:52:03.266212 N Handler.cpp:453 h 0 create connection pool for server redis-node-4:7100
+2024-07-10 13:52:03.267674 N ConnectConnectionPool.cpp:42 h 0 create server connection redis-node-4:7100 29
+2024-07-10 13:52:06.314371 N Handler.cpp:453 h 0 create connection pool for server redis-node-1:7000
+2024-07-10 13:52:06.316025 N ConnectConnectionPool.cpp:42 h 0 create server connection redis-node-1:7000 30
+2024-07-10 13:52:07.339108 N ConnectConnectionPool.cpp:50 h 0 reopen server connection redis-node-5:7101 31
+2024-07-10 13:52:08.467634 N ClusterServerPool.cpp:149 redis cluster create new server 038b37d4c246dcfca8f42c122a266ea4f7a692d4 172.23.0.4:7000@17000 master - 
+2024-07-10 13:52:10.408861 N Handler.cpp:453 h 0 create connection pool for server redis-node-6:7102
+2024-07-10 13:52:10.409378 N ConnectConnectionPool.cpp:42 h 0 create server connection redis-node-6:7102 32
+2024-07-10 13:52:11.520937 N ClusterServerPool.cpp:149 redis cluster create new server 7a51976ef44c229696b44b710a6a97cf9f236828 172.23.0.2:7001@17001 master - 
+2024-07-10 13:52:12.529912 N ClusterServerPool.cpp:149 redis cluster create new server aceca6ca2b8971c99622acd910d243b7b979a904 172.23.0.6:7002@17002 master - 
+2024-07-10 13:52:13.557464 N ClusterServerPool.cpp:149 redis cluster create new server d7edaa3048c41d29d20dfccb4ce4f2dbf714119e 172.23.0.5:7100@17100 slave 038b37d4c246dcfca8f42c122a266ea4f7a692d4 
+2024-07-10 13:52:14.577611 N ClusterServerPool.cpp:149 redis cluster create new server 669858ed22a44bc8d70780e904cd2fe53e0ddc4c 172.23.0.3:7102@17102 master - 
+2024-07-10 13:52:14.579160 N Logger.cpp:152 MissLog count 1
+2024-07-10 13:52:15.490353 N Handler.cpp:453 h 3 create connection pool for server 172.23.0.2:7001
+2024-07-10 13:52:15.490491 N ConnectConnectionPool.cpp:42 h 3 create server connection 172.23.0.2:7001 33
+2024-07-10 13:52:16.508516 N Handler.cpp:453 h 1 create connection pool for server 172.23.0.4:7000
+2024-07-10 13:52:16.508655 N ConnectConnectionPool.cpp:42 h 1 create server connection 172.23.0.4:7000 34
+2024-07-10 13:52:17.526962 N Handler.cpp:453 h 3 create connection pool for server 172.23.0.6:7002
+2024-07-10 13:52:17.527174 N ConnectConnectionPool.cpp:42 h 3 create server connection 172.23.0.6:7002 35
+2024-07-10 13:52:18.546158 N Handler.cpp:453 h 2 create connection pool for server 172.23.0.3:7102
+2024-07-10 13:52:18.546321 N ConnectConnectionPool.cpp:42 h 2 create server connection 172.23.0.3:7102 36
+2024-07-10 13:52:19.564674 N Handler.cpp:453 h 2 create connection pool for server redis-node-5:7101
+2024-07-10 13:52:19.566764 N ConnectConnectionPool.cpp:42 h 2 create server connection redis-node-5:7101 37
+2024-07-10 13:52:21.590185 N Handler.cpp:453 h 0 create connection pool for server 172.23.0.5:7100
+2024-07-10 13:52:21.590241 N ConnectConnectionPool.cpp:42 h 0 create server connection 172.23.0.5:7100 38
+2024-07-10 13:52:23.630901 N Handler.cpp:453 h 0 create connection pool for server 172.23.0.8:7101
+2024-07-10 13:52:23.631096 N ConnectConnectionPool.cpp:42 h 0 create server connection 172.23.0.8:7101 39
+2024-07-10 13:52:27.701145 N Handler.cpp:453 h 1 create connection pool for server 172.23.0.6:7002
+2024-07-10 13:52:27.701260 N ConnectConnectionPool.cpp:42 h 1 create server connection 172.23.0.6:7002 40
+2024-07-10 13:52:32.788574 N Handler.cpp:453 h 2 create connection pool for server 172.23.0.2:7001
+2024-07-10 13:52:32.788652 N ConnectConnectionPool.cpp:42 h 2 create server connection 172.23.0.2:7001 41
+2024-07-10 13:52:33.808477 N Handler.cpp:453 h 2 create connection pool for server 172.23.0.4:7000
+2024-07-10 13:52:33.808603 N ConnectConnectionPool.cpp:42 h 2 create server connection 172.23.0.4:7000 42
+2024-07-10 13:52:36.853115 N Handler.cpp:453 h 2 create connection pool for server 172.23.0.8:7101
+2024-07-10 13:52:36.853274 N ConnectConnectionPool.cpp:42 h 2 create server connection 172.23.0.8:7101 43
+2024-07-10 13:52:39.911444 N Handler.cpp:453 h 2 create connection pool for server 172.23.0.5:7100
+2024-07-10 13:52:39.911597 N ConnectConnectionPool.cpp:42 h 2 create server connection 172.23.0.5:7100 44
+2024-07-10 13:52:42.964219 N Handler.cpp:453 h 3 create connection pool for server 172.23.0.5:7100
+2024-07-10 13:52:42.965640 N Logger.cpp:152 MissLog count 1
+2024-07-10 13:52:45.011968 N Handler.cpp:453 h 1 create connection pool for server 172.23.0.3:7102
+2024-07-10 13:52:45.012121 N ConnectConnectionPool.cpp:42 h 1 create server connection 172.23.0.3:7102 46
+2024-07-10 13:52:47.048971 N Handler.cpp:453 h 3 create connection pool for server 172.23.0.8:7101
+2024-07-10 13:52:47.049052 N ConnectConnectionPool.cpp:42 h 3 create server connection 172.23.0.8:7101 47
+2024-07-10 13:52:53.133068 N Handler.cpp:453 h 3 create connection pool for server 172.23.0.3:7102
+2024-07-10 13:52:53.133225 N ConnectConnectionPool.cpp:42 h 3 create server connection 172.23.0.3:7102 48
+2024-07-10 13:52:54.142768 N Handler.cpp:453 h 0 create connection pool for server 172.23.0.2:7001
+2024-07-10 13:52:54.142939 N ConnectConnectionPool.cpp:42 h 0 create server connection 172.23.0.2:7001 49
+2024-07-10 13:53:06.330747 N Handler.cpp:453 h 0 create connection pool for server 172.23.0.6:7002
+2024-07-10 13:53:06.330908 N ConnectConnectionPool.cpp:42 h 0 create server connection 172.23.0.6:7002 50
+2024-07-10 13:53:08.372132 N Handler.cpp:453 h 0 create connection pool for server 172.23.0.3:7102
+2024-07-10 13:53:08.372274 N ConnectConnectionPool.cpp:42 h 0 create server connection 172.23.0.3:7102 51
+2024-07-10 13:53:26.750167 N Handler.cpp:453 h 1 create connection pool for server 172.23.0.8:7101
+2024-07-10 13:53:26.750363 N ConnectConnectionPool.cpp:42 h 1 create server connection 172.23.0.8:7101 52
+2024-07-10 13:53:35.882370 N Handler.cpp:453 h 1 create connection pool for server redis-node-2:7001
+2024-07-10 13:53:35.883666 N ConnectConnectionPool.cpp:42 h 1 create server connection redis-node-2:7001 53
+2024-07-10 13:53:38.937714 N Handler.cpp:453 h 2 create connection pool for server 172.23.0.6:7002
+2024-07-10 13:53:38.937745 N ConnectConnectionPool.cpp:42 h 2 create server connection 172.23.0.6:7002 54
+2024-07-10 13:53:48.106806 N Handler.cpp:453 h 3 create connection pool for server 172.23.0.4:7000
+2024-07-10 13:53:48.106965 N ConnectConnectionPool.cpp:42 h 3 create server connection 172.23.0.4:7000 55
+2024-07-10 13:54:07.251642 N Handler.cpp:318 h 3 accept c 192.168.65.1:40557 56
+2024-07-10 13:54:07.263097 N Handler.cpp:212 h 0 remove c 192.168.65.1:40557 56 with status 2 End
+2024-07-10 13:54:29.809338 N Handler.cpp:453 h 0 create connection pool for server 172.23.0.4:7000
+2024-07-10 13:54:29.809421 N ConnectConnectionPool.cpp:42 h 0 create server connection 172.23.0.4:7000 56
+2024-07-10 13:54:36.938710 N Handler.cpp:453 h 1 create connection pool for server 172.23.0.2:7001
+2024-07-10 13:54:36.938793 N ConnectConnectionPool.cpp:42 h 1 create server connection 172.23.0.2:7001 57
+2024-07-10 13:54:42.617070 N Handler.cpp:318 h 3 accept c 192.168.65.1:19965 58
+2024-07-10 13:54:42.620163 N RequestParser.cpp:461 unknown request cmd:client
+2024-07-10 13:54:42.620796 N RequestParser.cpp:461 unknown request cmd:client
+2024-07-10 13:54:42.621626 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 13:54:42.622247 N Handler.cpp:212 h 0 remove c 192.168.65.1:19965 58 with status 2 End
+2024-07-10 13:54:51.581081 N Handler.cpp:318 h 3 accept c 192.168.65.1:53832 58
+2024-07-10 13:54:51.581908 N RequestParser.cpp:461 unknown request cmd:client
+2024-07-10 13:54:51.581934 N RequestParser.cpp:461 unknown request cmd:client
+2024-07-10 13:54:51.582307 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 13:54:51.582662 N Handler.cpp:212 h 0 remove c 192.168.65.1:53832 58 with status 2 End
+2024-07-10 13:54:56.054320 N Handler.cpp:318 h 3 accept c 192.168.65.1:35060 58
+2024-07-10 13:54:56.058756 N RequestParser.cpp:461 unknown request cmd:client
+2024-07-10 13:54:56.058840 N RequestParser.cpp:461 unknown request cmd:client
+2024-07-10 13:54:56.059579 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 13:54:56.060724 N Handler.cpp:212 h 0 remove c 192.168.65.1:35060 58 with status 2 End
+2024-07-10 13:55:04.595407 N Handler.cpp:453 h 1 create connection pool for server 172.23.0.5:7100
+2024-07-10 13:55:04.595524 N ConnectConnectionPool.cpp:42 h 1 create server connection 172.23.0.5:7100 58
+2024-07-10 13:57:11.332168 N Handler.cpp:318 h 1 accept c 192.168.65.1:32939 59
+2024-07-10 13:57:11.338390 N Handler.cpp:1485 h 0 c 192.168.65.1:32939 59 auth 'bitnami' invalid
+2024-07-10 13:57:11.344196 N Handler.cpp:212 h 0 remove c 192.168.65.1:32939 59 with status 2 End
+2024-07-10 13:57:12.855300 N Handler.cpp:318 h 3 accept c 192.168.65.1:17436 59
+2024-07-10 13:57:12.856832 N Handler.cpp:1485 h 0 c 192.168.65.1:17436 59 auth 'bitnami' invalid
+2024-07-10 13:57:12.858164 N Handler.cpp:212 h 0 remove c 192.168.65.1:17436 59 with status 2 End
+2024-07-10 13:57:14.369226 N Handler.cpp:318 h 0 accept c 192.168.65.1:38969 59
+2024-07-10 13:57:14.371041 N Handler.cpp:1485 h 0 c 192.168.65.1:38969 59 auth 'bitnami' invalid
+2024-07-10 13:57:14.372382 N Handler.cpp:212 h 0 remove c 192.168.65.1:38969 59 with status 2 End
+2024-07-10 13:57:15.885894 N Handler.cpp:318 h 3 accept c 192.168.65.1:39513 59
+2024-07-10 13:57:15.886955 N Handler.cpp:1485 h 0 c 192.168.65.1:39513 59 auth 'bitnami' invalid
+2024-07-10 13:57:15.888679 N Handler.cpp:212 h 0 remove c 192.168.65.1:39513 59 with status 2 End
+2024-07-10 13:57:22.588049 N Handler.cpp:318 h 2 accept c 192.168.65.1:42498 59
+2024-07-10 13:57:22.592678 N Handler.cpp:1485 h 0 c 192.168.65.1:42498 59 auth 'bitnami' invalid
+2024-07-10 13:57:22.598775 N Handler.cpp:212 h 0 remove c 192.168.65.1:42498 59 with status 2 End
+2024-07-10 13:57:24.107335 N Handler.cpp:318 h 1 accept c 192.168.65.1:65118 59
+2024-07-10 13:57:24.108144 N Handler.cpp:1485 h 0 c 192.168.65.1:65118 59 auth 'bitnami' invalid
+2024-07-10 13:57:24.109338 N Handler.cpp:212 h 0 remove c 192.168.65.1:65118 59 with status 2 End
+2024-07-10 13:57:25.621036 N Handler.cpp:318 h 1 accept c 192.168.65.1:29083 59
+2024-07-10 13:57:25.623236 N Handler.cpp:1485 h 0 c 192.168.65.1:29083 59 auth 'bitnami' invalid
+2024-07-10 13:57:25.624967 N Handler.cpp:212 h 0 remove c 192.168.65.1:29083 59 with status 2 End
+2024-07-10 13:57:27.135249 N Handler.cpp:318 h 3 accept c 192.168.65.1:40445 59
+2024-07-10 13:57:27.137630 N Handler.cpp:1485 h 0 c 192.168.65.1:40445 59 auth 'bitnami' invalid
+2024-07-10 13:57:27.138783 N Handler.cpp:212 h 0 remove c 192.168.65.1:40445 59 with status 2 End
+2024-07-10 13:57:50.749002 N Handler.cpp:318 h 3 accept c 192.168.65.1:18380 59
+2024-07-10 13:57:50.757269 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 13:57:52.268490 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 13:57:53.775949 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 13:57:55.285155 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 13:57:55.294166 N Handler.cpp:212 h 0 remove c 192.168.65.1:18380 59 with status 2 End
+2024-07-10 14:07:36.257077 N Handler.cpp:318 h 3 accept c 192.168.65.1:45069 59
+2024-07-10 14:07:36.261535 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 14:07:37.769917 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 14:07:39.277310 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 14:07:40.783249 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 14:07:40.789383 N Handler.cpp:212 h 0 remove c 192.168.65.1:45069 59 with status 2 End
+2024-07-10 14:07:48.564203 N Handler.cpp:318 h 2 accept c 192.168.65.1:61528 59
+2024-07-10 14:07:48.571840 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 14:07:50.080458 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 14:07:51.587968 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 14:07:53.092447 N RequestParser.cpp:461 unknown request cmd:cluster
+2024-07-10 14:07:53.098518 N Handler.cpp:212 h 0 remove c 192.168.65.1:61528 59 with status 2 End
+2024-07-10 14:11:52.628043 N Handler.cpp:318 h 3 accept c 192.168.65.1:19457 59
+2024-07-10 14:11:52.628044 N Handler.cpp:318 h 1 accept c 192.168.65.1:62314 60
+2024-07-10 14:11:52.637908 N Handler.cpp:318 h 3 accept c 192.168.65.1:37834 61
+2024-07-10 14:11:52.639806 N Handler.cpp:318 h 2 accept c 192.168.65.1:60831 62
+2024-07-10 14:11:52.641843 N Handler.cpp:318 h 2 accept c 192.168.65.1:34116 63
+2024-07-10 14:11:52.654700 N Handler.cpp:318 h 3 accept c 192.168.65.1:18423 64
+2024-07-10 14:11:52.656432 N Handler.cpp:318 h 3 accept c 192.168.65.1:50331 65
+2024-07-10 14:11:52.658559 N Handler.cpp:318 h 3 accept c 192.168.65.1:45150 66
+2024-07-10 14:11:52.660362 N Handler.cpp:318 h 3 accept c 192.168.65.1:64747 67
+2024-07-10 14:11:52.662243 N Handler.cpp:318 h 3 accept c 192.168.65.1:19108 68
+2024-07-10 14:11:52.664220 N Handler.cpp:318 h 3 accept c 192.168.65.1:20089 69
+2024-07-10 14:11:52.666064 N Handler.cpp:318 h 2 accept c 192.168.65.1:50257 70
+2024-07-10 14:11:52.667836 N Handler.cpp:318 h 3 accept c 192.168.65.1:64880 71
+2024-07-10 14:11:52.669837 N Handler.cpp:318 h 3 accept c 192.168.65.1:55913 72
+2024-07-10 14:11:52.671560 N Handler.cpp:318 h 3 accept c 192.168.65.1:61326 73
+2024-07-10 14:11:52.674154 N Handler.cpp:318 h 2 accept c 192.168.65.1:59280 74
+2024-07-10 14:11:52.676692 N Handler.cpp:318 h 3 accept c 192.168.65.1:37570 75
+2024-07-10 14:11:52.677878 N Handler.cpp:318 h 3 accept c 192.168.65.1:20820 76
+2024-07-10 14:11:52.679240 N Handler.cpp:318 h 3 accept c 192.168.65.1:36976 77
+2024-07-10 14:11:52.680100 N Handler.cpp:318 h 3 accept c 192.168.65.1:61901 78
+2024-07-10 14:11:52.681148 N Handler.cpp:318 h 3 accept c 192.168.65.1:47447 79
+2024-07-10 14:11:52.682210 N Handler.cpp:318 h 3 accept c 192.168.65.1:52970 80
+2024-07-10 14:11:52.683243 N Handler.cpp:318 h 1 accept c 192.168.65.1:25458 81
+2024-07-10 14:11:52.684149 N Handler.cpp:318 h 3 accept c 192.168.65.1:42612 82
+2024-07-10 14:11:52.685484 N Handler.cpp:318 h 3 accept c 192.168.65.1:62349 83
+2024-07-10 14:11:53.462285 N Handler.cpp:212 h 3 remove c 192.168.65.1:42612 82 with status 2 End
+2024-07-10 14:11:53.462498 N Handler.cpp:212 h 2 remove c 192.168.65.1:25458 81 with status 2 End
+2024-07-10 14:11:53.462569 N Handler.cpp:212 h 2 remove c 192.168.65.1:50331 65 with status 2 End
+2024-07-10 14:11:53.462600 N Handler.cpp:212 h 0 remove c 192.168.65.1:62349 83 with status 2 End
+2024-07-10 14:11:53.462636 N Handler.cpp:212 h 0 remove c 192.168.65.1:47447 79 with status 2 End
+2024-07-10 14:11:53.462681 N Handler.cpp:212 h 2 remove c 192.168.65.1:36976 77 with status 2 End
+2024-07-10 14:11:53.462683 N Handler.cpp:212 h 3 remove c 192.168.65.1:60831 62 with status 2 End
+2024-07-10 14:11:53.462697 N Handler.cpp:212 h 2 remove c 192.168.65.1:61326 73 with status 2 End
+2024-07-10 14:11:53.462698 N Handler.cpp:212 h 0 remove c 192.168.65.1:64747 67 with status 2 End
+2024-07-10 14:11:53.462713 N Handler.cpp:212 h 0 remove c 192.168.65.1:37570 75 with status 2 End
+2024-07-10 14:11:53.462727 N Handler.cpp:212 h 0 remove c 192.168.65.1:34116 63 with status 2 End
+2024-07-10 14:11:53.462727 N Handler.cpp:212 h 3 remove c 192.168.65.1:45150 66 with status 2 End
+2024-07-10 14:11:53.462737 N Handler.cpp:212 h 0 remove c 192.168.65.1:19457 59 with status 2 End
+2024-07-10 14:11:53.462734 N Handler.cpp:212 h 1 remove c 192.168.65.1:18423 64 with status 2 End
+2024-07-10 14:11:53.462747 N Handler.cpp:212 h 0 remove c 192.168.65.1:64880 71 with status 2 End
+2024-07-10 14:11:53.462746 N Handler.cpp:212 h 3 remove c 192.168.65.1:61901 78 with status 2 End
+2024-07-10 14:11:53.462772 N Handler.cpp:212 h 3 remove c 192.168.65.1:50257 70 with status 2 End
+2024-07-10 14:11:53.462774 N Handler.cpp:212 h 2 remove c 192.168.65.1:37834 61 with status 2 End
+2024-07-10 14:11:53.462782 N Handler.cpp:212 h 3 remove c 192.168.65.1:59280 74 with status 2 End
+2024-07-10 14:11:53.462789 N Handler.cpp:212 h 2 remove c 192.168.65.1:20089 69 with status 2 End
+2024-07-10 14:11:53.463077 N Handler.cpp:212 h 1 remove c 192.168.65.1:52970 80 with status 2 End
+2024-07-10 14:11:53.463114 N Handler.cpp:212 h 1 remove c 192.168.65.1:55913 72 with status 2 End
+2024-07-10 14:11:53.463137 N Handler.cpp:212 h 1 remove c 192.168.65.1:20820 76 with status 2 End
+2024-07-10 14:11:53.463161 N Handler.cpp:212 h 1 remove c 192.168.65.1:19108 68 with status 2 End
+2024-07-10 14:11:53.463179 N Handler.cpp:212 h 1 remove c 192.168.65.1:62314 60 with status 2 End
+2024-07-10 14:14:12.475668 N Handler.cpp:318 h 3 accept c 192.168.65.1:27299 59
+2024-07-10 14:14:12.476341 N Logger.cpp:152 MissLog count 1
+2024-07-10 14:14:12.488271 N Handler.cpp:318 h 3 accept c 192.168.65.1:29848 61
+2024-07-10 14:14:12.490825 N Handler.cpp:318 h 3 accept c 192.168.65.1:45085 62
+2024-07-10 14:14:12.493919 N Handler.cpp:318 h 2 accept c 192.168.65.1:47221 63
+2024-07-10 14:14:12.496063 N Handler.cpp:318 h 3 accept c 192.168.65.1:52703 64
+2024-07-10 14:14:12.499065 N Handler.cpp:318 h 2 accept c 192.168.65.1:47977 65
+2024-07-10 14:14:12.504104 N Handler.cpp:318 h 3 accept c 192.168.65.1:42952 66
+2024-07-10 14:14:12.507357 N Handler.cpp:318 h 3 accept c 192.168.65.1:32990 67
+2024-07-10 14:14:12.510503 N Handler.cpp:318 h 3 accept c 192.168.65.1:16833 68
+2024-07-10 14:14:12.513680 N Handler.cpp:318 h 3 accept c 192.168.65.1:52283 69
+2024-07-10 14:14:12.516082 N Handler.cpp:318 h 2 accept c 192.168.65.1:18494 70
+2024-07-10 14:14:12.519260 N Handler.cpp:318 h 3 accept c 192.168.65.1:19932 71
+2024-07-10 14:14:12.523110 N Handler.cpp:318 h 2 accept c 192.168.65.1:16889 72
+2024-07-10 14:14:12.525389 N Handler.cpp:318 h 3 accept c 192.168.65.1:59517 73
+2024-07-10 14:14:12.527952 N Handler.cpp:318 h 3 accept c 192.168.65.1:41033 74
+2024-07-10 14:14:12.530277 N Handler.cpp:318 h 3 accept c 192.168.65.1:30483 75
+2024-07-10 14:14:12.532103 N Handler.cpp:318 h 3 accept c 192.168.65.1:61344 76
+2024-07-10 14:14:12.533635 N Handler.cpp:318 h 3 accept c 192.168.65.1:30082 77
+2024-07-10 14:14:12.534536 N Handler.cpp:318 h 3 accept c 192.168.65.1:57117 78
+2024-07-10 14:14:12.535464 N Handler.cpp:318 h 3 accept c 192.168.65.1:31661 79
+2024-07-10 14:14:12.536542 N Handler.cpp:318 h 3 accept c 192.168.65.1:61254 80
+2024-07-10 14:14:12.537830 N Handler.cpp:318 h 3 accept c 192.168.65.1:55038 81
+2024-07-10 14:14:12.539336 N Handler.cpp:318 h 2 accept c 192.168.65.1:24898 82
+2024-07-10 14:14:12.540405 N Handler.cpp:318 h 3 accept c 192.168.65.1:40416 83
+2024-07-10 14:14:13.243349 N Handler.cpp:212 h 1 remove c 192.168.65.1:16889 72 with status 2 End
+2024-07-10 14:14:13.244044 N Logger.cpp:152 MissLog count 1
+2024-07-10 14:14:13.243659 N Handler.cpp:212 h 3 remove c 192.168.65.1:57117 78 with status 2 End
+2024-07-10 14:14:13.243677 N Handler.cpp:212 h 1 remove c 192.168.65.1:29848 61 with status 2 End
+2024-07-10 14:14:13.243704 N Handler.cpp:212 h 1 remove c 192.168.65.1:16833 68 with status 2 End
+2024-07-10 14:14:13.243710 N Handler.cpp:212 h 0 remove c 192.168.65.1:31661 79 with status 2 End
+2024-07-10 14:14:13.243716 N Handler.cpp:212 h 1 remove c 192.168.65.1:61254 80 with status 2 End
+2024-07-10 14:14:13.243780 N Handler.cpp:212 h 2 remove c 192.168.65.1:52283 69 with status 2 End
+2024-07-10 14:14:13.243809 N Handler.cpp:212 h 2 remove c 192.168.65.1:45085 62 with status 2 End
+2024-07-10 14:14:13.244009 N Handler.cpp:212 h 3 remove c 192.168.65.1:24898 82 with status 2 End
+2024-07-10 14:14:13.244065 N Handler.cpp:212 h 3 remove c 192.168.65.1:41033 74 with status 2 End
+2024-07-10 14:14:13.244094 N Handler.cpp:212 h 3 remove c 192.168.65.1:42952 66 with status 2 End
+2024-07-10 14:14:13.244113 N Handler.cpp:212 h 3 remove c 192.168.65.1:18494 70 with status 2 End
+2024-07-10 14:14:13.244129 N Handler.cpp:212 h 3 remove c 192.168.65.1:47221 63 with status 2 End
+2024-07-10 14:14:13.244141 N Handler.cpp:212 h 0 remove c 192.168.65.1:20328 60 with status 2 End
+2024-07-10 14:14:13.244163 N Handler.cpp:212 h 1 remove c 192.168.65.1:52703 64 with status 2 End
+2024-07-10 14:14:13.244165 N Handler.cpp:212 h 0 remove c 192.168.65.1:19932 71 with status 2 End
+2024-07-10 14:14:13.244184 N Handler.cpp:212 h 0 remove c 192.168.65.1:40416 83 with status 2 End
+2024-07-10 14:14:13.244189 N Handler.cpp:212 h 1 remove c 192.168.65.1:61344 76 with status 2 End
+2024-07-10 14:14:13.244194 N Handler.cpp:212 h 0 remove c 192.168.65.1:27299 59 with status 2 End
+2024-07-10 14:14:13.244203 N Handler.cpp:212 h 0 remove c 192.168.65.1:32990 67 with status 2 End
+2024-07-10 14:14:13.244203 N Handler.cpp:212 h 2 remove c 192.168.65.1:47977 65 with status 2 End
+2024-07-10 14:14:13.244228 N Handler.cpp:212 h 2 remove c 192.168.65.1:30082 77 with status 2 End
+2024-07-10 14:14:13.244245 N Handler.cpp:212 h 2 remove c 192.168.65.1:59517 73 with status 2 End
+2024-07-10 14:14:13.244262 N Handler.cpp:212 h 2 remove c 192.168.65.1:55038 81 with status 2 End
+2024-07-10 14:39:04.385950 N Handler.cpp:318 h 3 accept c 192.168.65.1:59535 59
+2024-07-10 14:39:04.385951 N Handler.cpp:318 h 2 accept c 192.168.65.1:46943 60
+2024-07-10 14:39:04.397885 N Handler.cpp:318 h 2 accept c 192.168.65.1:51876 61
+2024-07-10 14:39:04.401661 N Handler.cpp:318 h 3 accept c 192.168.65.1:57955 62
+2024-07-10 14:39:04.404497 N Handler.cpp:318 h 3 accept c 192.168.65.1:38654 63
+2024-07-10 14:39:04.406364 N Handler.cpp:318 h 3 accept c 192.168.65.1:26459 64
+2024-07-10 14:39:04.409550 N Handler.cpp:318 h 2 accept c 192.168.65.1:48561 65
+2024-07-10 14:39:04.411718 N Handler.cpp:318 h 2 accept c 192.168.65.1:19293 66
+2024-07-10 14:39:04.413900 N Handler.cpp:318 h 3 accept c 192.168.65.1:41485 67
+2024-07-10 14:39:04.415820 N Handler.cpp:318 h 2 accept c 192.168.65.1:64563 68
+2024-07-10 14:39:04.417788 N Handler.cpp:318 h 2 accept c 192.168.65.1:19045 69
+2024-07-10 14:39:04.419443 N Handler.cpp:318 h 2 accept c 192.168.65.1:38108 70
+2024-07-10 14:39:04.421427 N Handler.cpp:318 h 2 accept c 192.168.65.1:34031 71
+2024-07-10 14:39:04.423541 N Handler.cpp:318 h 2 accept c 192.168.65.1:54654 72
+2024-07-10 14:39:04.425719 N Handler.cpp:318 h 3 accept c 192.168.65.1:55677 73
+2024-07-10 14:39:04.427344 N Handler.cpp:318 h 3 accept c 192.168.65.1:17537 74
+2024-07-10 14:39:04.428584 N Handler.cpp:318 h 3 accept c 192.168.65.1:57703 75
+2024-07-10 14:39:04.430293 N Handler.cpp:318 h 3 accept c 192.168.65.1:40514 76
+2024-07-10 14:39:04.431968 N Handler.cpp:318 h 3 accept c 192.168.65.1:23616 77
+2024-07-10 14:39:04.433697 N Handler.cpp:318 h 3 accept c 192.168.65.1:32790 78
+2024-07-10 14:39:04.435169 N Handler.cpp:318 h 3 accept c 192.168.65.1:59061 79
+2024-07-10 14:39:04.436251 N Handler.cpp:318 h 3 accept c 192.168.65.1:39619 80
+2024-07-10 14:39:04.437383 N Handler.cpp:318 h 3 accept c 192.168.65.1:21735 81
+2024-07-10 14:39:04.438434 N Handler.cpp:318 h 3 accept c 192.168.65.1:40469 82
+2024-07-10 14:39:04.439446 N Handler.cpp:318 h 3 accept c 192.168.65.1:52872 83
+2024-07-10 14:39:05.142512 N Handler.cpp:212 h 0 remove c 192.168.65.1:59535 59 with status 2 End
+2024-07-10 14:39:05.142638 N Handler.cpp:212 h 3 remove c 192.168.65.1:32790 78 with status 2 End
+2024-07-10 14:39:05.142677 N Handler.cpp:212 h 3 remove c 192.168.65.1:19293 66 with status 2 End
+2024-07-10 14:39:05.142711 N Handler.cpp:212 h 1 remove c 192.168.65.1:64563 68 with status 2 End
+2024-07-10 14:39:05.142778 N Handler.cpp:212 h 0 remove c 192.168.65.1:34031 71 with status 2 End
+2024-07-10 14:39:05.142810 N Handler.cpp:212 h 0 remove c 192.168.65.1:57703 75 with status 2 End
+2024-07-10 14:39:05.142828 N Handler.cpp:212 h 0 remove c 192.168.65.1:59061 79 with status 2 End
+2024-07-10 14:39:05.142847 N Handler.cpp:212 h 0 remove c 192.168.65.1:41485 67 with status 2 End
+2024-07-10 14:39:05.142859 N Handler.cpp:212 h 2 remove c 192.168.65.1:57955 62 with status 2 End
+2024-07-10 14:39:05.142891 N Handler.cpp:212 h 2 remove c 192.168.65.1:23616 77 with status 2 End
+2024-07-10 14:39:05.142913 N Handler.cpp:212 h 2 remove c 192.168.65.1:19045 69 with status 2 End
+2024-07-10 14:39:05.142925 N Handler.cpp:212 h 2 remove c 192.168.65.1:55677 73 with status 2 End
+2024-07-10 14:39:05.142935 N Handler.cpp:212 h 2 remove c 192.168.65.1:21735 81 with status 2 End
+2024-07-10 14:39:05.142953 N Handler.cpp:212 h 3 remove c 192.168.65.1:38654 63 with status 2 End
+2024-07-10 14:39:05.142988 N Handler.cpp:212 h 3 remove c 192.168.65.1:38108 70 with status 2 End
+2024-07-10 14:39:05.143034 N Handler.cpp:212 h 2 remove c 192.168.65.1:48561 65 with status 2 End
+2024-07-10 14:39:05.143041 N Handler.cpp:212 h 3 remove c 192.168.65.1:17537 74 with status 2 End
+2024-07-10 14:39:05.143117 N Handler.cpp:212 h 1 remove c 192.168.65.1:40514 76 with status 2 End
+2024-07-10 14:39:05.143140 N Handler.cpp:212 h 0 remove c 192.168.65.1:46943 60 with status 2 End
+2024-07-10 14:39:05.143142 N Handler.cpp:212 h 1 remove c 192.168.65.1:26459 64 with status 2 End
+2024-07-10 14:39:05.143158 N Handler.cpp:212 h 1 remove c 192.168.65.1:54654 72 with status 2 End
+2024-07-10 14:39:05.143160 N Handler.cpp:212 h 0 remove c 192.168.65.1:52872 83 with status 2 End
+2024-07-10 14:39:05.143170 N Handler.cpp:212 h 1 remove c 192.168.65.1:39619 80 with status 2 End
+2024-07-10 14:39:05.143179 N Handler.cpp:212 h 1 remove c 192.168.65.1:51876 61 with status 2 End
+2024-07-10 14:39:05.143448 N Handler.cpp:212 h 3 remove c 192.168.65.1:40469 82 with status 2 End

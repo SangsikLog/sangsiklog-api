@@ -42,9 +42,3 @@ out/
 ### infra data ###
 /infra/kafka-data/
 /infra/mysql-data/
-/infra/redis-node-1-data/
-/infra/redis-node-2-data/
-/infra/redis-node-3-data/
-/infra/redis-node-4-data/
-/infra/redis-node-5-data/
-/infra/redis-node-6-data/
