@@ -32,6 +32,11 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
 
+  data:
+    redis:
+      single:
+        address: redis://127.0.0.1:7617
+
 logging:
   level:
     org.hibernate.sql: DEBUG
