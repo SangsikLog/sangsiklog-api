@@ -1,4 +1,4 @@
-package com.sangsiklog.knowledge.config.redis
+package com.sangsiklog.config.redis
 
 import org.redisson.Redisson
 import org.redisson.api.RedissonClient

@@ -1,4 +1,4 @@
-package com.sangsiklog.knowledge.config.redis
+package com.sangsiklog.config.redis
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration
