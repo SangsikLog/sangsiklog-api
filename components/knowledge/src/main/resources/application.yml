@@ -37,6 +37,16 @@ spring:
       single:
         address: redis://127.0.0.1:7617
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: sangsiklog
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
 logging:
   level:
     org.hibernate.sql: DEBUG

@@ -46,13 +46,19 @@ subprojects {
 		implementation ("org.springframework.boot:spring-boot-starter-web")
 		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 		implementation("org.springframework.boot:spring-boot-starter-data-redis")
+		implementation("org.springframework.kafka:spring-kafka")
+		implementation("org.springframework.boot:spring-boot-starter-integration")
+		implementation("org.springframework.integration:spring-integration-core")
+		implementation("org.springframework.integration:spring-integration-kafka")
 		implementation("org.redisson:redisson:3.32.0")
+		implementation("org.reflections:reflections:0.10.2")
 		compileOnly("org.projectlombok:lombok")
 		annotationProcessor("org.projectlombok:lombok")
 
 		runtimeOnly("com.mysql:mysql-connector-j")
 
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
+		testImplementation("org.springframework.kafka:spring-kafka-test")
 		testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 		testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	}
