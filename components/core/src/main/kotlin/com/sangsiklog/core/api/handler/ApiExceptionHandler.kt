@@ -18,12 +18,11 @@ import java.util.*
 @RestControllerAdvice(basePackages = ["com.sangsiklog.command.controller", "com.sangsiklog.query.controller"])
 class ApiExceptionHandler: ResponseEntityExceptionHandler() {
 
-    private val messageMappings: Map<Class<out Exception?>, String> = Collections
-        .unmodifiableMap(
-            linkedMapOf(
-                Pair(MethodArgumentNotValidException::class.java, "Request body is invalid")
-            )
+    private val messageMappings: Map<Class<out Exception?>, String> = Collections.unmodifiableMap(
+        linkedMapOf(
+            Pair(MethodArgumentNotValidException::class.java, "Request body is invalid")
         )
+    )
 
     override fun handleMethodArgumentNotValid(
         ex: MethodArgumentNotValidException,
@@ -89,26 +88,17 @@ class ApiExceptionHandler: ResponseEntityExceptionHandler() {
     }
 
     private fun getDetails(ex: BindException): List<HashMap<String, String?>> {
-        val details: MutableList<HashMap<String, String?>> = mutableListOf()
-
-        if (ex is MethodArgumentNotValidException) {
-            ex.bindingResult.globalErrors.forEach { error ->
-                val detail: HashMap<String, String?> = hashMapOf()
-                detail["target"] = error.objectName;
-                detail["message"] = error.defaultMessage;
-
-                details.add(detail)
+        return when (ex) {
+            is MethodArgumentNotValidException -> {
+                ex.bindingResult.globalErrors.map { error ->
+                    hashMapOf(Pair("target", error.objectName), Pair("message", error.defaultMessage))
+                }.toList()
+            }
+            else -> {
+                ex.bindingResult.fieldErrors.map { error ->
+                    hashMapOf(Pair("target", error.field), Pair("message", error.defaultMessage))
+                }.toList()
             }
         }
-
-        ex.bindingResult.fieldErrors.forEach { error ->
-            val detail: HashMap<String, String?> = hashMapOf()
-            detail["target"] = error.field
-            detail["message"] = error.defaultMessage;
-
-            details.add(detail)
-        }
-
-        return details
     }
 }
