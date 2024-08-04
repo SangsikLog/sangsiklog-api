@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    active: local
+  main:
+    web-application-type: reactive
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  cloud:
+    gateway:
+      routes:
+        - id: knowledge-api
+          uri: http://localhost:9001
+          order: 1
+          predicates:
+            - Path=/knowledge/**
+          filters:
+            - RewritePath=/knowledge/(?<segment>.*),/v1/knowledge/$\{segment}
