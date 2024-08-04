@@ -42,3 +42,4 @@ out/
 ### infra data ###
 /infra/kafka-data/
 /infra/mysql-data/
+/infra/predixy.log

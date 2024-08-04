@@ -12,6 +12,8 @@ allprojects {
 	group = "com.sangsiklog"
 	version = "0.0.1-SNAPSHOT"
 
+	extra["springCloudVersion"] = "2023.0.3"
+
 	repositories {
 		mavenCentral()
 	}

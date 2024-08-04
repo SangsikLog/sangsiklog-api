@@ -1,16 +1,15 @@
-package com.sangsiklog.gateway
+package com.sangsiklog.discovery
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
 import org.springframework.boot.runApplication
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient
-
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer
 
 @SpringBootApplication(exclude = [DataSourceAutoConfiguration::class, HibernateJpaAutoConfiguration::class])
-@EnableDiscoveryClient
-class GatewayApplication
+@EnableEurekaServer
+class DiscoveryApplication
 
 fun main(args: Array<String>) {
-    runApplication<GatewayApplication>(*args)
+	runApplication<DiscoveryApplication>(*args)
 }

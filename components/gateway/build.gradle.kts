@@ -4,8 +4,6 @@ val bootJar: BootJar by tasks
 
 bootJar.enabled = true
 
-extra["springCloudVersion"] = "2023.0.3"
-
 dependencies {
     implementation(project(":components:core"))
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -14,6 +12,7 @@ dependencies {
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     testImplementation("io.projectreactor:reactor-test")
 }
 
