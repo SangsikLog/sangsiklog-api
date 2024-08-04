@@ -5,6 +5,7 @@ val bootJar: BootJar by tasks
 bootJar.enabled = true
 
 dependencies {
+	implementation(project(":components:core"))
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server")
 }
 
