@@ -31,4 +31,10 @@ class User(
     @Column(name = "password", nullable = false)
     var password: String = password
         protected set
+
+    companion object {
+        fun create(name: String, email: String, password: String): User {
+            return User(name = name, email = email, password = password)
+        }
+    }
 }
