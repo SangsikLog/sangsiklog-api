@@ -45,4 +45,8 @@ class User(
         this.name = name
         this.profileImageUrl = profileImageUrl
     }
+
+    fun changePassword(newPassword: String) {
+        this.password = newPassword
+    }
 }
