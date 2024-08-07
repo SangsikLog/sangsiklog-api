@@ -1,4 +1,4 @@
-package com.sangsiklog.auth.controller.user.request
+package com.sangsiklog.controller.user.request
 
 data class CreateUserRequest(
     val name: String,

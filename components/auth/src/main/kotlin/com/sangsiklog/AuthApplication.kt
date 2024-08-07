@@ -1,4 +1,4 @@
-package com.sangsiklog.auth
+package com.sangsiklog
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
