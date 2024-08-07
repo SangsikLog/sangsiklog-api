@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.*
 
 
-@RestControllerAdvice(basePackages = ["com.sangsiklog.command.controller", "com.sangsiklog.query.controller"])
+@RestControllerAdvice(basePackages = ["com.sangsiklog.controller"])
 class ApiExceptionHandler: ResponseEntityExceptionHandler() {
 
     private val messageMappings: Map<Class<out Exception?>, String> = Collections.unmodifiableMap(
