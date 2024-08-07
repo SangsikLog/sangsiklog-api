@@ -15,13 +15,24 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: auth-api
+          uri: lb://auth-api
+          order: 1
+          predicates:
+            - Path=/auth/**, /users/**
+          filters:
+            - RewritePath=/auth$, /v1/auth
+            - RewritePath=/auth/(?<segment>.*), /v1/auth/${segment}
+            - RewritePath=/users$, /v1/users
+            - RewritePath=/users/(?<segment>.*), /v1/users/${segment}
         - id: knowledge-api
           uri: lb://knowledge-api
           order: 1
           predicates:
             - Path=/knowledge/**
           filters:
-            - RewritePath=/knowledge/(?<segment>.*),/v1/knowledge/$\{segment}
+            - RewritePath=/knowledge, /v1/knowledge
+            - RewritePath=/knowledge/(?<segment>.*), /v1/knowledge/${segment}
 eureka:
   client:
     service-url:
