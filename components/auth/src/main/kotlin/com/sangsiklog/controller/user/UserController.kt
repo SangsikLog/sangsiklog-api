@@ -1,6 +1,7 @@
 package com.sangsiklog.controller.user
 
 import com.sangsiklog.controller.user.request.CreateUserRequest
+import com.sangsiklog.controller.user.request.ChangePasswordRequest
 import com.sangsiklog.controller.user.request.UpdateUserRequest
 import com.sangsiklog.controller.user.response.CreateUserResponse
 import com.sangsiklog.controller.user.response.UserDetailsResponse
@@ -25,5 +26,11 @@ class UserController(
     @PutMapping("/{userId}")
     fun updateUser(@PathVariable userId: Long, @RequestBody request: UpdateUserRequest): UserDetailsResponse {
         return userService.updateUser(userId, request)
+    }
+
+    @PostMapping("/{userId}/password-change")
+    fun changePassword(@PathVariable userId: Long, @RequestBody request: ChangePasswordRequest): String {
+        userService.changePassword(userId, request)
+        return "ok"
     }
 }
