@@ -28,6 +28,9 @@ class User(
     @Column(name = "email", nullable = false)
     val email: String = email
 
+    @Column(name = "profile_image_url")
+    var profileImageUrl: String? = null
+
     @Column(name = "password", nullable = false)
     var password: String = password
         protected set
@@ -36,5 +39,10 @@ class User(
         fun create(name: String, email: String, password: String): User {
             return User(name = name, email = email, password = password)
         }
+    }
+
+    fun update(name: String, profileImageUrl: String?) {
+        this.name = name
+        this.profileImageUrl = profileImageUrl
     }
 }
