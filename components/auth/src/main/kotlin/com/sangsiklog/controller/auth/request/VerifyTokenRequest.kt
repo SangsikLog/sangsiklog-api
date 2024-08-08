@@ -1,5 +1,7 @@
 package com.sangsiklog.controller.auth.request
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 data class VerifyTokenRequest(
-    val token: String
+    @JsonProperty("token") val token: String
 )

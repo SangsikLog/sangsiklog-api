@@ -49,14 +49,18 @@ class AuthService(
     }
 
     fun refreshToken(token: String): String {
-        val claims = parseJwtClaims(token)
-        val currentTimeMillis = System.currentTimeMillis()
-        return Jwts.builder()
-            .subject(claims.subject)
-            .issuedAt(Date(currentTimeMillis))
-            .expiration(Date(currentTimeMillis + 3600000))
-            .signWith(Keys.hmacShaKeyFor(secretKey.toByteArray(Charsets.UTF_8)))
-            .compact()
+        try {
+            val claims = parseJwtClaims(token)
+            val currentTimeMillis = System.currentTimeMillis()
+            return Jwts.builder()
+                .subject(claims.subject)
+                .issuedAt(Date(currentTimeMillis))
+                .expiration(Date(currentTimeMillis + 3600000))
+                .signWith(Keys.hmacShaKeyFor(secretKey.toByteArray(Charsets.UTF_8)))
+                .compact()
+        } catch (e: Exception) {
+            throw AuthServiceException(HttpStatus.BAD_REQUEST, ErrorType.INVALID_CREDENTIALS)
+        }
     }
 
     private fun parseJwtClaims(token: String): Claims {
