@@ -31,4 +31,16 @@ class UserLoginHistory(
 
     @Column(nullable = false)
     val ipAddress: String = ipAddress
+
+    companion object {
+        fun create(user: User, loginTime: LocalDateTime, ipAddress: String): UserLoginHistory {
+            val userLoginHistory = UserLoginHistory(
+                user = user,
+                loginTime = loginTime,
+                ipAddress = ipAddress
+            )
+            user.userLoginHistories.add(userLoginHistory)
+            return userLoginHistory
+        }
+    }
 }

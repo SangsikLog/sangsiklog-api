@@ -15,6 +15,7 @@ class User(
     name: String,
     email: String,
     password: String,
+    userLoginHistories: MutableList<UserLoginHistory>
 ) : BaseEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ_GENERATOR")
@@ -35,9 +36,17 @@ class User(
     var password: String = password
         protected set
 
+    @OneToMany(mappedBy = "user", cascade = [(CascadeType.ALL)])
+    var userLoginHistories: MutableList<UserLoginHistory> = userLoginHistories
+
     companion object {
-        fun create(name: String, email: String, password: String): User {
-            return User(name = name, email = email, password = password)
+        fun create(name: String, email: String, password: String, userLoginHistories: MutableList<UserLoginHistory>): User {
+            return User(
+                name = name,
+                email = email,
+                password = password,
+                userLoginHistories = userLoginHistories
+            )
         }
     }
 
