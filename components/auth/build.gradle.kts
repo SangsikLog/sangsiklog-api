@@ -7,6 +7,7 @@ bootJar.enabled = true
 dependencies {
     implementation(project(":components:core"))
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    implementation("io.jsonwebtoken:jjwt:0.12.6")
 }
 
 dependencyManagement {
