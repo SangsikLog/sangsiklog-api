@@ -5,12 +5,12 @@ val bootJar: BootJar by tasks
 bootJar.enabled = true
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    implementation("org.springframework.cloud:spring-cloud-starter-gateway")
+    implementation("org.springframework.boot:spring-boot-starter-graphql")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-    testImplementation("io.projectreactor:reactor-test")
+    implementation("com.graphql-java:graphql-java-extended-scalars:22.0")
+
+    testImplementation("org.springframework:spring-webflux")
+    testImplementation("org.springframework.graphql:spring-graphql-test")
 }
 
 dependencyManagement {
