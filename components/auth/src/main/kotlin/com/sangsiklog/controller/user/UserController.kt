@@ -15,22 +15,52 @@ class UserController(
 ) {
     @PostMapping
     fun creatUser(@RequestBody request: CreateUserRequest): CreateUserResponse {
-        return userService.createUser(request)
+        val user = userService.createUser(
+            name = request.name,
+            email = request.email,
+            password = request.password
+        )
+
+        return CreateUserResponse(
+            id = user.id!!
+        )
     }
 
     @GetMapping("/{userId}")
     fun getUserDetails(@PathVariable userId: Long): UserDetailsResponse {
-        return userService.getUserDetails(userId)
+        val user = userService.getUserById(userId)
+
+        return UserDetailsResponse(
+            id = user.id!!,
+            name = user.name,
+            profileImageUrl = user.profileImageUrl,
+            email = user.email
+        )
     }
 
     @PutMapping("/{userId}")
     fun updateUser(@PathVariable userId: Long, @RequestBody request: UpdateUserRequest): UserDetailsResponse {
-        return userService.updateUser(userId, request)
+        val user = userService.updateUser(
+            userId = userId,
+            name = request.name,
+            profileImageUrl = request.profileImageUrl
+        )
+
+        return UserDetailsResponse(
+            id = user.id!!,
+            name = user.name,
+            profileImageUrl = user.profileImageUrl,
+            email = user.email
+        )
     }
 
     @PostMapping("/{userId}/password-change")
     fun changePassword(@PathVariable userId: Long, @RequestBody request: ChangePasswordRequest): String {
-        userService.changePassword(userId, request)
+        userService.changePassword(
+            userId = userId,
+            oldPassword = request.oldPassword,
+            newPassword = request.newPassword
+        )
         return "ok"
     }
 }

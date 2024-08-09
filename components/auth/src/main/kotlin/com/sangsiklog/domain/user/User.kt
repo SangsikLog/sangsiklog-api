@@ -26,7 +26,7 @@ class User(
     var name: String = name
         protected set
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     val email: String = email
 
     @Column(name = "profile_image_url")
