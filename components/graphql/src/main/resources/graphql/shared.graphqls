@@ -1,0 +1,6 @@
+scalar Long
+scalar DateTime
+
+type Query {}
+
+type Mutation {}

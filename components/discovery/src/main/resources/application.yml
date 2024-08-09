@@ -16,6 +16,8 @@ spring:
 eureka:
   instance:
     hostname: localhost
+    registry:
+      default-open-for-traffic-count: 1
   client:
     register-with-eureka: false
     fetch-registry: false
@@ -24,3 +26,4 @@ eureka:
     region: default
   server:
     renewal-percent-threshold: 0
+    enable-self-preservation: true

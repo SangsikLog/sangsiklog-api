@@ -4,9 +4,16 @@ val bootJar: BootJar by tasks
 
 bootJar.enabled = true
 
+plugins {
+	kotlin("plugin.jpa") version "1.9.24"
+}
+
 dependencies {
 	implementation(project(":components:core"))
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+	runtimeOnly("com.mysql:mysql-connector-j")
 }
 
 dependencyManagement {
