@@ -1,3 +1,6 @@
+directive @authenticate on FIELD_DEFINITION | OBJECT
+directive @authorize(role: String, permission: String) on FIELD_DEFINITION | OBJECT
+
 scalar Long
 scalar DateTime
 
