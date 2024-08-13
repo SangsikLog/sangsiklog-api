@@ -22,6 +22,12 @@ spring:
       inspection:
         enabled: true
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      client-type: lettuce
+
 http:
   user-service:
     base-url: http://auth-api/v1/users
