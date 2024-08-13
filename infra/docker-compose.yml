@@ -136,10 +136,19 @@ services:
     networks:
       - redis-net
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+
 networks:
   redis-net:
     driver: bridge
 
 volumes:
+  redis-data:
   mysql-data:
   kafka-data:

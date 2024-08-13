@@ -6,6 +6,7 @@ import com.sangsiklog.service.user.request.CreateUserRequest
 import com.sangsiklog.service.user.request.UpdateUserRequest
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 
 @Service
@@ -16,6 +17,7 @@ class UserService(
     @Value("\${http.user-service.base-url}")
     lateinit var userServiceBaseUrl: String
 
+    @Cacheable(key = "#userId", value = ["user"])
     fun getUser(userId: Long): User? {
         return httpClient.get(
             url = "${userServiceBaseUrl}/${userId}",
