@@ -1,8 +1,8 @@
 rootProject.name = "sangsiklog-api"
 
-include("components:knowledge")
-include("components:core")
-include("components:gateway")
-include("components:discovery")
-include("components:auth")
-include("components:graphql")
+include("knowledge")
+include("core")
+include("gateway")
+include("discovery")
+include("auth")
+include("graphql")
