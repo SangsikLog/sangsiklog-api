@@ -1,17 +1,11 @@
+server:
+  port: 8080
+
 spring:
   application:
-    name: api-gateway
-  profiles:
-    active: local
+    name: sangsiklog-gateway
   main:
     web-application-type: reactive
-
----
-spring:
-  config:
-    activate:
-      on-profile: local
-
   cloud:
     gateway:
       routes:
@@ -25,17 +19,15 @@ spring:
             - RewritePath=/auth/(?<segment>.*), /v1/auth/${segment}
             - RewritePath=/users$, /v1/users
             - RewritePath=/users/(?<segment>.*), /v1/users/${segment}
-        - id: knowledge-api
-          uri: lb://knowledge-api
-          order: 1
-          predicates:
-            - Path=/knowledge/**
-          filters:
-            - RewritePath=/knowledge, /v1/knowledge
-            - RewritePath=/knowledge/(?<segment>.*), /v1/knowledge/${segment}
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka/
-    register-with-eureka: true
-    fetch-registry: true
+    registerWithEureka: true
+    fetchRegistry: true
+
+    rest-template-timeout:
+      connect-timeout: 5000
+      connect-request-timeout: 8000
+      socket-timeout: 10000

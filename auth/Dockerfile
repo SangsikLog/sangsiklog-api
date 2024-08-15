@@ -30,5 +30,5 @@ WORKDIR /app
 COPY --from=build /app/auth/build/libs/*.jar app.jar
 
 # 컨테이너 실행 시 애플리케이션 실행
-ENV SPRING_PROFILE "dev"
+ENV SPRING_PROFILE "real"
 ENTRYPOINT ["java", "-Dspring.profiles.active=${SPRING_PROFILE}", "-jar", "app.jar"]

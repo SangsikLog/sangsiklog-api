@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: sangsiklog-gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      routes:
+        - id: auth-api
+          uri: lb://AUTH-API
+          order: 1
+          predicates:
+            - Path=/auth/**, /users/**
+          filters:
+            - RewritePath=/auth$, /v1/auth
+            - RewritePath=/auth/(?<segment>.*), /v1/auth/${segment}
+            - RewritePath=/users$, /v1/users
+            - RewritePath=/users/(?<segment>.*), /v1/users/${segment}
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: sangsiklog-gateway
+  client:
+    service-url:
+      defaultZone: http://service-discovery:8000/eureka/
+    registerWithEureka: true
+    fetchRegistry: true
+
+    rest-template-timeout:
+      connect-timeout: 5000
+      connect-request-timeout: 8000
+      socket-timeout: 10000
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.netflix.eureka: DEBUG
