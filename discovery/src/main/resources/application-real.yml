@@ -4,26 +4,19 @@ server:
 spring:
   application:
     name: service-discovery
-  profiles:
-    active: local
-
----
-spring:
-  config:
-    activate:
-      on-profile: local
 
 eureka:
   instance:
-    hostname: localhost
+    hostname: service-discovery
     registry:
       default-open-for-traffic-count: 1
   client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
     region: default
+
   server:
     renewal-percent-threshold: 0
     enable-self-preservation: true
