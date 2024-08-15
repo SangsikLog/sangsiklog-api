@@ -1,9 +1,11 @@
 replicaCount: 1
 
+imagePullSecret: regcred
+
 image:
-  repository: service-discovery
+  repository: sangsiklog-registry.kr.ncr.ntruss.com/service-discovery-amd64
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 service:
   type: ClusterIP
