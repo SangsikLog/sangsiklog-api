@@ -7,16 +7,17 @@ spring:
 
 eureka:
   instance:
+    prefer-ip-address: true
     hostname: service-discovery
     registry:
       default-open-for-traffic-count: 1
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    registerWithEureka: true
+    fetchRegistry: true
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
     region: default
 
   server:
-    renewal-percent-threshold: 0
+    renewal-percent-threshold: 0.85
     enable-self-preservation: true

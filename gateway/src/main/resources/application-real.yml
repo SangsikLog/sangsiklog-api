@@ -10,7 +10,7 @@ spring:
     gateway:
       routes:
         - id: auth-api
-          uri: lb://auth-api
+          uri: lb://AUTH-API
           order: 1
           predicates:
             - Path=/auth/**, /users/**
@@ -21,6 +21,9 @@ spring:
             - RewritePath=/users/(?<segment>.*), /v1/users/${segment}
 
 eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: sangsiklog-gateway
   client:
     service-url:
       defaultZone: http://service-discovery:8000/eureka/
@@ -31,3 +34,8 @@ eureka:
       connect-timeout: 5000
       connect-request-timeout: 8000
       socket-timeout: 10000
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.netflix.eureka: DEBUG

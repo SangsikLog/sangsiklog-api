@@ -1,23 +1,15 @@
 server:
-  port: 9090
+  port: 8080
 
 spring:
   application:
     name: auth-api
-  profiles:
-    active: local
-
----
-spring:
-  config:
-    activate:
-      on-profile: local
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sangsiklog
-    username: sangsiklog
-    password: sangsik123
+    url: ${MYSQL_URL}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
 
   jpa:
     hibernate:
@@ -29,9 +21,12 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
 
 eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: auth-api
   client:
     service-url:
-      defaultZone: http://localhost:8000/eureka/
+      defaultZone: http://service-discovery:8000/eureka/
     register-with-eureka: true
     fetch-registry: true
 
@@ -40,6 +35,4 @@ logging:
     org.hibernate.sql: DEBUG
 
 jwt:
-  secret: 1ad35d74dc65cc0ee9a3a409f7f87e332aa6aa89d9cc64c66cdf9a1ffdc534ee
-
-
+  secret: ${JWT_SECRET}
