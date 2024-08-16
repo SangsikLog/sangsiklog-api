@@ -35,31 +35,34 @@ allprojects {
 }
 
 subprojects {
-	apply(plugin = "org.springframework.boot")
-	apply(plugin = "io.spring.dependency-management")
 	apply(plugin = "org.jetbrains.kotlin.jvm")
-	apply(plugin = "org.jetbrains.kotlin.plugin.spring")
 
-	dependencies {
-		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-		implementation("org.jetbrains.kotlin:kotlin-reflect")
+	if (project.name != "grpc-common") {
+		apply(plugin = "org.springframework.boot")
+		apply(plugin = "io.spring.dependency-management")
+		apply(plugin = "org.jetbrains.kotlin.plugin.spring")
 
-		implementation ("org.springframework.boot:spring-boot-starter-web")
-		implementation("org.springframework.boot:spring-boot-starter-actuator")
-		implementation("org.springframework.boot:spring-boot-starter-cache")
-		implementation("org.springframework.boot:spring-boot-starter-data-redis")
-		implementation("org.springframework.kafka:spring-kafka")
-		implementation("org.springframework.boot:spring-boot-starter-integration")
-		implementation("org.springframework.integration:spring-integration-core")
-		implementation("org.springframework.integration:spring-integration-kafka")
-		implementation("org.redisson:redisson:3.32.0")
-		implementation("org.reflections:reflections:0.10.2")
-		compileOnly("org.projectlombok:lombok")
-		annotationProcessor("org.projectlombok:lombok")
+		dependencies {
+			implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+			implementation("org.jetbrains.kotlin:kotlin-reflect")
 
-		testImplementation("org.springframework.boot:spring-boot-starter-test")
-		testImplementation("org.springframework.kafka:spring-kafka-test")
-		testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-		testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+			implementation ("org.springframework.boot:spring-boot-starter-web")
+			implementation("org.springframework.boot:spring-boot-starter-actuator")
+			implementation("org.springframework.boot:spring-boot-starter-cache")
+			implementation("org.springframework.boot:spring-boot-starter-data-redis")
+			implementation("org.springframework.kafka:spring-kafka")
+			implementation("org.springframework.boot:spring-boot-starter-integration")
+			implementation("org.springframework.integration:spring-integration-core")
+			implementation("org.springframework.integration:spring-integration-kafka")
+			implementation("org.redisson:redisson:3.32.0")
+			implementation("org.reflections:reflections:0.10.2")
+			compileOnly("org.projectlombok:lombok")
+			annotationProcessor("org.projectlombok:lombok")
+
+			testImplementation("org.springframework.boot:spring-boot-starter-test")
+			testImplementation("org.springframework.kafka:spring-kafka-test")
+			testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+			testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+		}
 	}
 }
