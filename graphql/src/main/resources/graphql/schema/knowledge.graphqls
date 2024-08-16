@@ -1,0 +1,10 @@
+extend type Mutation {
+    registerKnowledge(userId: Long!, title: String!, description: String!): Knowledge
+}
+
+type Knowledge {
+    id: Long!
+    title: String!
+    description: String!
+    createdAt: String
+}
