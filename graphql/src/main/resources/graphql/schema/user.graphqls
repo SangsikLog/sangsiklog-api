@@ -17,6 +17,6 @@ type User {
 type UserLoginHistory {
     id: Long!
     userId: Long!
-    loginTime: DateTime
+    loginTime: String
     ipAddress: String
 }
