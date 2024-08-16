@@ -1,0 +1,39 @@
+server:
+  port: 8082
+
+grpc:
+  server:
+    port: 9090
+
+spring:
+  application:
+    name: content-api
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sangsiklog
+    username: sangsiklog
+    password: sangsik123
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+logging:
+  level:
+    org.hibernate.sql: DEBUG
+
+
+
