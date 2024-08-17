@@ -12,17 +12,16 @@ spring:
         - id: auth-route
           uri: lb://auth-api
           predicates:
-            - Path=/auth/**, /users/**
+            - Path=/auth/**
+            - Method=POST,GET,OPTIONS
           filters:
             - RewritePath=/auth$, /v1/auth
             - RewritePath=/auth/(?<segment>.*), /v1/auth/${segment}
-            - RewritePath=/users$, /v1/users
-            - RewritePath=/users/(?<segment>.*), /v1/users/${segment}
         - id: graphql-route
           uri: lb://graphql-service
           predicates:
             - Path=/graphql
-            - Method=POST, GET
+            - Method=POST,GET,OPTIONS
           filters:
             - AuthenticationFilter
 
