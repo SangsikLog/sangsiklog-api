@@ -9,9 +9,8 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: auth-api
+        - id: auth-route
           uri: lb://auth-api
-          order: 1
           predicates:
             - Path=/auth/**, /users/**
           filters:
@@ -19,8 +18,30 @@ spring:
             - RewritePath=/auth/(?<segment>.*), /v1/auth/${segment}
             - RewritePath=/users$, /v1/users
             - RewritePath=/users/(?<segment>.*), /v1/users/${segment}
+        - id: graphql-route
+          uri: lb://graphql-service
+          predicates:
+            - Path=/graphql
+            - Method=POST, GET
+
+      global-cors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "http://localhost:8080"
+            allowed-methods:
+              - GET
+              - POST
+              - OPTIONS
+            allowed-headers:
+              - "*"
+            allow-credentials: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
 
 eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: sangsiklog-gateway
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka/
@@ -31,3 +52,12 @@ eureka:
       connect-timeout: 5000
       connect-request-timeout: 8000
       socket-timeout: 10000
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    org.springframework.cloud.netflix.eureka: DEBUG
+    reactor.ipc.netty: DEBUG
+    reactor.netty: DEBUG

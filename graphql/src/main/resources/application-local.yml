@@ -3,15 +3,7 @@ server:
 
 spring:
   application:
-    name: graphql
-  profiles:
-    active: local
-
----
-spring:
-  config:
-    activate:
-      on-profile: local
+    name: graphql-service
 
   graphql:
     path: /graphql
@@ -33,6 +25,9 @@ http:
     base-url: http://auth-api/v1/users
 
 eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: graphql-service
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka/

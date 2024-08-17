@@ -19,6 +19,25 @@ spring:
             - RewritePath=/auth/(?<segment>.*), /v1/auth/${segment}
             - RewritePath=/users$, /v1/users
             - RewritePath=/users/(?<segment>.*), /v1/users/${segment}
+        - id: graphql-route
+          uri: lb://graphql-service
+          predicates:
+            - Path=/graphql
+            - Method=POST, GET
+
+      global-cors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "http://localhost:8080"
+            allowed-methods:
+              - GET
+              - POST
+              - OPTIONS
+            allowed-headers:
+              - "*"
+            allow-credentials: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
 
 eureka:
   instance:
@@ -35,7 +54,3 @@ eureka:
       connect-request-timeout: 8000
       socket-timeout: 10000
 
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
-    org.springframework.cloud.netflix.eureka: DEBUG

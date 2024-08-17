@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: graphql-service
+
+  graphql:
+    path: /graphql
+    graphiql:
+      enabled: true
+      path: /graphiql
+    schema:
+      inspection:
+        enabled: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      client-type: lettuce
+
+http:
+  user-service:
+    base-url: http://auth-api/v1/users
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: graphql-service
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+grpc:
+  client:
+    content-api:
+      service-name: "content-api"
