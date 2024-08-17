@@ -24,6 +24,8 @@ spring:
           predicates:
             - Path=/graphql
             - Method=POST, GET
+          filters:
+            - AuthenticationFilter
 
       global-cors:
         cors-configurations:

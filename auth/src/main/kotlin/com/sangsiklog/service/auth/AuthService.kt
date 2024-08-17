@@ -38,7 +38,7 @@ class AuthService(
             .compact()
     }
 
-    fun validateToken(token: String): Boolean {
+    fun verifyToken(token: String): Boolean {
         try {
             parseJwtClaims(token)
             return true
@@ -63,7 +63,7 @@ class AuthService(
         }
     }
 
-    private fun parseJwtClaims(token: String): Claims {
+    fun parseJwtClaims(token: String): Claims {
         return Jwts.parser()
             .verifyWith(Keys.hmacShaKeyFor(secretKey.toByteArray(Charsets.UTF_8)))
             .build()

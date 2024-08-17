@@ -1,5 +1,5 @@
 package com.sangsiklog.controller.auth.request
 
-data class RefreshTokenRequest(
+data class ValidateTokenRequest(
     val token: String = ""
 )
