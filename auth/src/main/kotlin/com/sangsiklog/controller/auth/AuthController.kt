@@ -2,9 +2,11 @@ package com.sangsiklog.controller.auth
 
 import com.sangsiklog.controller.auth.request.GenerateTokenRequest
 import com.sangsiklog.controller.auth.request.RefreshTokenRequest
+import com.sangsiklog.controller.auth.request.ValidateTokenRequest
 import com.sangsiklog.controller.auth.request.VerifyTokenRequest
 import com.sangsiklog.controller.auth.response.GenerateTokenResponse
 import com.sangsiklog.controller.auth.response.RefreshTokenResponse
+import com.sangsiklog.controller.auth.response.ValidateTokenResponse
 import com.sangsiklog.controller.auth.response.VerifyTokenResponse
 import com.sangsiklog.service.auth.AuthService
 import com.sangsiklog.service.user.UserService
@@ -35,7 +37,7 @@ class AuthController(
     @PostMapping("/verify-token")
     fun verifyToken(@RequestBody request: VerifyTokenRequest): VerifyTokenResponse {
         return VerifyTokenResponse(
-            isValid = authService.validateToken(request.token)
+            isValid = authService.verifyToken(request.token)
         )
     }
 
@@ -43,6 +45,15 @@ class AuthController(
     fun refreshToken(@RequestBody request: RefreshTokenRequest): RefreshTokenResponse {
         return RefreshTokenResponse(
             token = authService.refreshToken(request.token)
+        )
+    }
+
+    @PostMapping("/validate")
+    fun validateToken(@RequestBody request: ValidateTokenRequest): ValidateTokenResponse {
+        val claims = authService.parseJwtClaims(request.token)
+        val user = userService.getUserByEmail(claims.subject)
+        return ValidateTokenResponse(
+            id = user.id!!
         )
     }
 }

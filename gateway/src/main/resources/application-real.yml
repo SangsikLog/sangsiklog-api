@@ -6,19 +6,54 @@ spring:
     name: sangsiklog-gateway
   main:
     web-application-type: reactive
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
   cloud:
     gateway:
       routes:
-        - id: auth-api
-          uri: lb://AUTH-API
-          order: 1
+        - id: auth-route
+          uri: lb://auth-api
           predicates:
-            - Path=/auth/**, /users/**
+            - Path=/auth/**
+            - Method=POST,GET,OPTIONS
           filters:
+            - name: CircuitBreaker
+              args:
+                name: authCircuitBreaker
+                fallbackUri: forward:/fallback/authFailure
             - RewritePath=/auth$, /v1/auth
             - RewritePath=/auth/(?<segment>.*), /v1/auth/${segment}
-            - RewritePath=/users$, /v1/users
-            - RewritePath=/users/(?<segment>.*), /v1/users/${segment}
+
+        - id: graphql-route
+          uri: lb://graphql-service
+          predicates:
+            - Path=/graphql
+            - Method=POST,GET,OPTIONS
+          filters:
+            - AuthenticationFilter
+
+      global-cors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "http://localhost:8080"
+            allowed-methods:
+              - GET
+              - POST
+              - OPTIONS
+            allowed-headers:
+              - "*"
+            allow-credentials: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter.replenishRate: 100
+            redis-rate-limiter.burstCapacity: 500
+            key-resolver: "#{@ipKeyResolver}"
 
 eureka:
   instance:
@@ -35,7 +70,24 @@ eureka:
       connect-request-timeout: 8000
       socket-timeout: 10000
 
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
-    org.springframework.cloud.netflix.eureka: DEBUG
+resilience4j:
+  circuitbreaker:
+    instances:
+      authCircuitBreaker:
+        register-health-indicator: true
+        sliding-window-size: 5
+        minimum-number-of-calls: 10
+        permitted-number-of-calls-in-half-open-state: 10
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 5000
+        failure-rate-threshold: 50
+        event-consumer-buffer-size: 10
+        record-exceptions:
+          - java.util.concurrent.TimeoutException
+          - org.springframework.cloud.gateway.support.NotFoundException
+          - io.github.resilience4j.circuitbreaker.CallNotPermittedException
+
+  timelimiter:
+    configs:
+      default:
+        timeout-duration: 5s
