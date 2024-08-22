@@ -26,6 +26,9 @@ dependencies {
     implementation("io.grpc:grpc-services:$grpcVersion")
     implementation("com.google.protobuf:protobuf-kotlin:$protobufVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
+
+    implementation("io.micrometer:micrometer-tracing-bridge-brave")
+    implementation("io.zipkin.reporter2:zipkin-reporter-brave")
 }
 
 dependencyManagement {
