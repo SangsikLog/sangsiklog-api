@@ -15,7 +15,7 @@ class GrpcClient(
         val instances = discoveryClient.getInstances(serviceName)
         return if (instances.isNotEmpty()) {
             val instance = instances[0]
-            "${instance.host}:9090"
+            "${instance.host}:9091"
         } else {
             throw RuntimeException("Service $serviceName not found")
         }
