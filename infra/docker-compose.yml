@@ -67,13 +67,13 @@ services:
       - sangsiklog-network
 
   node-exporter:
-    image: quay.io/prometheus/node-exporter:latest
+    image: quay.io/prometheus/node-exporter:v1.8.2
     container_name: node-exporter
     command:
       - '--path.rootfs=/host'
       - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'
-      - --collector.filesystem.ignored-mount-points
+      - '--collector.filesystem.ignored-mount-points'
       - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
     volumes:
       - /proc:/host/proc:ro
@@ -109,10 +109,10 @@ services:
       org.label-schema.group: "monitoring"
 
   alertmanager:
-    image: prom/alertmanager
+    image: prom/alertmanager:v0.27.0
     container_name: alertmanager
     command:
-      - '--config.file=/etc/alertmanager/config.yml'
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--storage.path=/alertmanager'
     volumes:
       - ./alertmanager/:/etc/alertmanager/

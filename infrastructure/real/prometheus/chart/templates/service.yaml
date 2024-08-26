@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-monitoring
+  labels:
+    app: prometheus-monitoring
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: prometheus
+      port: {{ .Values.service.prometheus.port }}
+      targetPort: prometheus
+      protocol: TCP
+    - name: node-exporter
+      port: {{ .Values.service.nodeExporter.port }}
+      targetPort: node-exporter
+      protocol: TCP
+    - name: cadvisor
+      port: {{ .Values.service.cadvisor.port }}
+      targetPort: cadvisor
+      protocol: TCP
+    - name: alertmanager
+      port: {{ .Values.service.alertmanager.port }}
+      targetPort: alertmanager
+      protocol: TCP
+  selector:
+    app: prometheus-monitoring
