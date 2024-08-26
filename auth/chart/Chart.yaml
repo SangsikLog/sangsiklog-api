@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
 name: auth-api
 description: Auth api Helm chart
 version: 0.1.0
