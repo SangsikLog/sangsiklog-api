@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-monitoring
+  labels:
+    app: prometheus-monitoring
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: prometheus-monitoring
+  template:
+    metadata:
+      labels:
+        app: prometheus-monitoring
+    spec:
+      containers:
+        - name: cadvisor
+          image: "{{ .Values.image.cadvisor.repository }}:{{ .Values.image.cadvisor.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources.cadvisor | nindent 12 }}
+        - name: node-exporter
+          image: "{{ .Values.image.nodeExporter.repository }}:{{ .Values.image.nodeExporter.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            {{- range .Values.args.nodeExporter }}
+            - {{ . }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: 9100
+              protocol: TCP
+          volumeMounts:
+            - name: proc
+              mountPath: /host/proc
+              readOnly: true
+            - name: sys
+              mountPath: /host/sys
+              readOnly: true
+            - name: root
+              mountPath: /host
+              readOnly: true
+          resources:
+            {{- toYaml .Values.resources.nodeExporter | nindent 12 }}
+        - name: alertmanager
+          image: "{{ .Values.image.alertmanager.repository }}:{{ .Values.image.alertmanager.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            {{- range .Values.args.alertmanager }}
+            - {{ . }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: 9093
+              protocol: TCP
+          volumeMounts:
+            - name: alertmanager-volume
+              mountPath: /etc/alertmanager/alertmanager.yml
+              subPath: alertmanager.yml
+          resources:
+            {{- toYaml .Values.resources.alertmanager | nindent 12 }}
+        - name: prometheus
+          image: "{{ .Values.image.prometheus.repository }}:{{ .Values.image.prometheus.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 9090
+              protocol: TCP
+          volumeMounts:
+            - name: prometheus-volume
+              mountPath: /etc/prometheus/prometheus.yml
+              subPath: prometheus.yml
+            - name: rules-volume
+              mountPath: /etc/prometheus/rules/alert.rules
+              subPath: alert.rules
+          resources:
+            {{- toYaml .Values.resources.prometheus | nindent 12 }}
+      volumes:
+        - name: prometheus-volume
+          configMap:
+            name: prometheus-monitoring-config
+            items:
+              - key: prometheus.yml
+                path: prometheus.yml
+        - name: rules-volume
+          configMap:
+            name: prometheus-monitoring-config
+            items:
+              - key: alert.rules
+                path: alert.rules
+        - name: alertmanager-volume
+          configMap:
+            name: prometheus-monitoring-config
+            items:
+              - key: alertmanager.yml
+                path: alertmanager.yml
+        - name: proc
+          hostPath:
+            path: /proc
+        - name: sys
+          hostPath:
+            path: /sys
+        - name: root
+          hostPath:
+            path: /
