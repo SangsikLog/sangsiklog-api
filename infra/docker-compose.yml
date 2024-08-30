@@ -42,7 +42,7 @@ services:
       - sangsiklog-network
 
   zipkin:
-    image: openzipkin/zipkin
+    image: openzipkin/zipkin:3.4.1
     container_name: zipkin
     environment:
       - STORAGE_TYPE=elasticsearch

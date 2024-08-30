@@ -7,9 +7,9 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - name: zipkin
+    - name: http
       port: {{ .Values.service.port }}
-      targetPort: zipkin
+      targetPort: http
       protocol: TCP
   selector:
     app: zipkin
