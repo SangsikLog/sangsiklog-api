@@ -3,7 +3,7 @@ replicaCount: 1
 imagePullSecret: regcred
 
 image:
-  repository: sangsiklog-registry.kr.ncr.ntruss.com/sangsiklog-gateway-amd64
+  repository: sangsiklog-registry.kr.ncr.ntruss.com/graphql-service-amd64
   tag: latest
   pullPolicy: Always
 

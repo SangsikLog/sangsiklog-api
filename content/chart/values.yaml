@@ -3,18 +3,19 @@ replicaCount: 1
 imagePullSecret: regcred
 
 image:
-  repository: sangsiklog-registry.kr.ncr.ntruss.com/sangsiklog-gateway-amd64
+  repository: sangsiklog-registry.kr.ncr.ntruss.com/content-api-amd64
   tag: latest
   pullPolicy: Always
 
 service:
   type: ClusterIP
-  port: 8080
+  httpPort: 8080
+  grpcPort: 9090
 
 resources:
   limits:
-    cpu: 500m
+    cpu: 400m
     memory: 512Mi
   requests:
-    cpu: 250m
+    cpu: 200m
     memory: 256Mi

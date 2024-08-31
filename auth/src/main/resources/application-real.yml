@@ -39,11 +39,14 @@ management:
       produce: b3_multi
   zipkin:
     tracing:
-      endpoint: "http://localhost:9411/api/v2/spans"
-
-logging:
-  level:
-    org.hibernate.sql: DEBUG
+      endpoint: "http://zipkin:9411/api/v2/spans"
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - prometheus
 
 jwt:
   secret: ${JWT_SECRET}

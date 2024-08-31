@@ -3,18 +3,18 @@ replicaCount: 1
 imagePullSecret: regcred
 
 image:
-  repository: sangsiklog-registry.kr.ncr.ntruss.com/sangsiklog-gateway-amd64
-  tag: latest
+  repository: openzipkin/zipkin
+  tag: 3.4.1
   pullPolicy: Always
 
 service:
   type: ClusterIP
-  port: 8080
+  port: 9411
 
 resources:
   limits:
-    cpu: 500m
+    cpu: 400m
     memory: 512Mi
   requests:
-    cpu: 250m
+    cpu: 200m
     memory: 256Mi
