@@ -39,6 +39,6 @@ out/
 ### Kotlin ###
 .kotlin
 
-### infra data ###
-/infra/mysql-data/
-/infra/es-data/
+### infrastructure data ###
+/infrastructure/local/mysql-data/
+/infrastructure/local/es-data/
