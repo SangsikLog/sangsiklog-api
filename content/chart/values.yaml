@@ -3,13 +3,14 @@ replicaCount: 1
 imagePullSecret: regcred
 
 image:
-  repository: openzipkin/zipkin
-  tag: 3.4.1
+  repository: sangsiklog-registry.kr.ncr.ntruss.com/content-api-amd64
+  tag: latest
   pullPolicy: Always
 
 service:
   type: ClusterIP
-  port: 9411
+  httpPort: 8080
+  grpcPort: 9090
 
 resources:
   limits:

@@ -16,7 +16,7 @@ spring:
 
   data:
     redis:
-      host: localhost
+      host: http://172.16.2.10
       port: 6379
       client-type: lettuce
 
@@ -37,7 +37,7 @@ eureka:
 management:
   tracing:
     sampling:
-      probability: 0.1
+      probability: 1.0
     propagation:
       consume: b3
       produce: b3_multi
