@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: content-api
+  labels:
+    app: content-api
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: content-api
+  template:
+    metadata:
+      labels:
+        app: content-api
+    spec:
+      containers:
+        - name: content-api
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: MYSQL_URL
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: url
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: username
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: password
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: jwt-secret
+                key: secret
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: grpc
+              containerPort: 9090
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecret }}
