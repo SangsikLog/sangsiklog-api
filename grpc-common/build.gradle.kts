@@ -2,7 +2,7 @@ val grpcVersion = "1.54.0"
 val grpcKotlinVersion = "1.4.1"
 val protobufVersion = "3.22.0"
 val defaultProtocPlatform = "osx-x86_64"
-val protocPlatform: String = project.findProperty("protocPlatform") as String? ?: defaultProtocPlatform
+val protocPlatform = project.findProperty("protoc_platform") ?: defaultProtocPlatform
 
 plugins {
 	id("com.google.protobuf") version "0.9.4"
