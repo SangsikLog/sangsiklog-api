@@ -9,19 +9,19 @@ spec:
   ports:
     - name: prometheus
       port: {{ .Values.service.prometheus.port }}
-      targetPort: prometheus
+      targetPort: 9090
       protocol: TCP
     - name: node-exporter
       port: {{ .Values.service.nodeExporter.port }}
-      targetPort: node-exporter
+      targetPort: 9100
       protocol: TCP
     - name: cadvisor
       port: {{ .Values.service.cadvisor.port }}
-      targetPort: cadvisor
+      targetPort: 8080
       protocol: TCP
     - name: alertmanager
       port: {{ .Values.service.alertmanager.port }}
-      targetPort: alertmanager
+      targetPort: 9093
       protocol: TCP
   selector:
     app: prometheus-monitoring

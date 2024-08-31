@@ -33,16 +33,30 @@ data:
         static_configs:
           - targets: ['localhost:8080']
 
-{{/*      - job_name: 'sangsiklog-gateway'*/}}
-{{/*        kubernetes_sd_configs:*/}}
-{{/*          - role: endpoints*/}}
-{{/*        relabel_configs:*/}}
-{{/*          - source_labels: [__meta_kubernetes_service_name]*/}}
-{{/*            action: keep*/}}
-{{/*            regex: sangsiklog-gateway*/}}
-{{/*          - source_labels: [__meta_kubernetes_namespace]*/}}
-{{/*            action: keep*/}}
-{{/*            regex: default*/}}
+      - job_name: 'service-discovery'
+        metrics_path: '/actuator/prometheus'
+        static_configs:
+          - targets: ['service-discovery:8000']
+
+      - job_name: 'auth-api'
+        metrics_path: '/actuator/prometheus'
+        static_configs:
+          - targets: ['auth-api:8080']
+
+      - job_name: 'content-api'
+        metrics_path: '/actuator/prometheus'
+        static_configs:
+          - targets: ['content-api:8080']
+
+      - job_name: 'graphql-service'
+        metrics_path: '/actuator/prometheus'
+        static_configs:
+          - targets: ['graphql-service:8080']
+
+      - job_name: 'sangsiklog-gateway'
+        metrics_path: '/actuator/prometheus'
+        static_configs:
+          - targets: ['sangsiklog-gateway:8080']
 
   alert.rules: |
     groups:
