@@ -33,7 +33,7 @@ eureka:
 management:
   tracing:
     sampling:
-      probability: 0.1
+      probability: 1.0
     propagation:
       consume: b3
       produce: b3_multi
@@ -47,10 +47,6 @@ management:
           - info
           - health
           - prometheus
-
-logging:
-  level:
-    org.hibernate.sql: DEBUG
 
 jwt:
   secret: ${JWT_SECRET}
