@@ -42,29 +42,29 @@ args:
 resources:
   prometheus:
     limits:
-      cpu: 500m
-      memory: 512Mi
+      cpu: 600m
+      memory: 1Gi
     requests:
-      cpu: 500m
+      cpu: 300m
       memory: 512Mi
   nodeExporter:
     limits:
-      cpu: 100m
-      memory: 100Mi
+      cpu: 200m
+      memory: 256Mi
     requests:
-      cpu: 50m
-      memory: 50Mi
+      cpu: 100m
+      memory: 128Mi
   cadvisor:
     limits:
       cpu: 200m
-      memory: 200Mi
+      memory: 256Mi
     requests:
       cpu: 100m
-      memory: 100Mi
+      memory: 128Mi
   alertmanager:
     limits:
-      cpu: 200m
-      memory: 200Mi
+      cpu: 400m
+      memory: 512Mi
     requests:
-      cpu: 100m
-      memory: 100Mi
+      cpu: 200m
+      memory: 256Mi
