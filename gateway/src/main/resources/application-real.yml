@@ -9,7 +9,7 @@ spring:
 
   data:
     redis:
-      host: localhost
+      host: http://172.16.2.10
       port: 6379
 
   cloud:
