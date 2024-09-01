@@ -1,5 +1,5 @@
 package com.sangsiklog.exception
 
-class UnauthorizedException(
+class HttpServiceException(
     override val message: String
 ): RuntimeException(message)

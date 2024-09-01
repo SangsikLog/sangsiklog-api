@@ -1,5 +1,6 @@
 package com.sangsiklog.config
 
+import com.sangsiklog.exception.StatusExceptionInterceptor
 import io.grpc.Server
 import io.grpc.ServerBuilder
 import io.grpc.kotlin.AbstractCoroutineServerImpl
@@ -29,6 +30,7 @@ class GrpcServerConfig (
         }
 
         serverBuilder.addService(ProtoReflectionService.newInstance())
+        serverBuilder.intercept(StatusExceptionInterceptor())
 
         server = serverBuilder.build().start()
 
