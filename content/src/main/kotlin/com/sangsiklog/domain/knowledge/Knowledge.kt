@@ -1,8 +1,6 @@
 package com.sangsiklog.domain.knowledge
 
 import com.sangsiklog.core.domain.base.BaseEntity
-import com.sangsiklog.core.utils.DateTimeUtils.toUnixTimestampInMilliseconds
-import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.KnowledgeDetail
 import jakarta.persistence.*
 
 @Entity
@@ -42,14 +40,5 @@ class Knowledge(
                 description = description
             )
         }
-    }
-
-    fun convertProto(): KnowledgeDetail {
-        return KnowledgeDetail.newBuilder()
-            .setKnowledgeId(this.id!!)
-            .setTitle(this.title)
-            .setDescription(this.description)
-            .setCreatedAt(this.createdAt!!.toUnixTimestampInMilliseconds())
-            .build()
     }
 }
