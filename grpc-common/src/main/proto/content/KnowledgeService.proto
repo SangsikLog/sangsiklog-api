@@ -25,7 +25,7 @@ message KnowledgeListGetRequest {
 }
 
 message KnowledgeListGetResponse {
-  repeated KnowledgeDetail knowledgeDetailList = 1;
+  repeated KnowledgeDetail knowledgeDetail = 1;
   common.PagerInfo pagerInfo = 2;
 }
 

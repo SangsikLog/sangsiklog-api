@@ -49,7 +49,7 @@ class KnowledgeService(
                 .build()
 
             KnowledgeListGetResponse.newBuilder()
-                .addAllKnowledgeDetailList(knowledgeDetailList)
+                .addAllKnowledgeDetail(knowledgeDetailList)
                 .setPagerInfo(pagerInfo)
                 .build()
         }
