@@ -11,4 +11,7 @@ enum class ErrorType(
 
     // 2000~2999 AuthServiceException
     INVALID_CREDENTIALS(2000, "유효하지 않은 자격증명"),
+
+    // 9999
+    UNKNOWN(9999, "알 수 없는 에러"),
 }
