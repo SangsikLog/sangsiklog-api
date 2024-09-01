@@ -1,4 +1,4 @@
-package com.sangsiklog.service
+package com.sangsiklog.utils.grpc
 
 import com.sangsiklog.config.GrpcProperties
 import com.sangsiklog.service.knowledge.KnowledgeServiceGrpcKt

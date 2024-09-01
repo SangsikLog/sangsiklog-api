@@ -1,7 +1,7 @@
 package com.sangsiklog.service.knowlege
 
 import com.sangsiklog.model.knowledge.Knowledge
-import com.sangsiklog.service.GrpcClient
+import com.sangsiklog.utils.grpc.GrpcClient
 import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.KnowledgeRegistrationRequest
 import org.springframework.stereotype.Service
 

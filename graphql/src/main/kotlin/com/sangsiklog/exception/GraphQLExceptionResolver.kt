@@ -17,7 +17,15 @@ class GraphQLExceptionResolver: DataFetcherExceptionResolverAdapter() {
                 .path(env.executionStepInfo.path)
                 .location(env.field.sourceLocation)
                 .build()
+        } else if (ex is HttpServiceException) {
+            return GraphqlErrorBuilder.newError()
+                .errorType(ErrorType.BAD_REQUEST)
+                .message(ex.message)
+                .path(env.executionStepInfo.path)
+                .location(env.field.sourceLocation)
+                .build()
         }
+
         return super.resolveToSingleError(ex, env)
     }
 }
