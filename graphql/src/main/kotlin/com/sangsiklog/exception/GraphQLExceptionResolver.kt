@@ -1,7 +1,5 @@
 package com.sangsiklog.exception
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import graphql.GraphQLError
 import graphql.GraphqlErrorBuilder
 import graphql.schema.DataFetchingEnvironment
@@ -12,8 +10,6 @@ import org.springframework.stereotype.Component
 
 @Component
 class GraphQLExceptionResolver: DataFetcherExceptionResolverAdapter() {
-    private val objectMapper = ObjectMapper()
-
     override fun resolveToSingleError(ex: Throwable, env: DataFetchingEnvironment): GraphQLError? {
         when (ex) {
             is UnauthorizedException -> {

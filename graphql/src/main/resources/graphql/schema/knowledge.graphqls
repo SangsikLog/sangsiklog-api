@@ -1,9 +1,20 @@
+extend type Query {
+    getKnowledgeList(page: Int!, size: Int!, sortColumn: String!, direction: SortDirection! = DESC): KnowledgeListGetResponse
+    getKnowledgeDetail(knowledgeId: Long!): Knowledge
+}
+
 extend type Mutation {
     registerKnowledge(userId: Long!, title: String!, description: String!): Knowledge
 }
 
+type KnowledgeListGetResponse {
+    knowledgeList: [Knowledge!]!,
+    pagerInfo: PagerInfo!
+}
+
 type Knowledge {
     id: Long!
+    userId: Long!
     title: String!
     description: String!
     createdAt: String

@@ -7,3 +7,12 @@ scalar DateTime
 type Query {}
 
 type Mutation {}
+
+enum SortDirection {
+    ASC,
+    DESC
+}
+
+type PagerInfo {
+    totalCount: Long!
+}
