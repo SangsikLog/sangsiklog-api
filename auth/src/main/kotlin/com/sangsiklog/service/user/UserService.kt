@@ -31,6 +31,11 @@ class UserService(
 
     @Transactional
     fun createUser(name: String, email: String, password: String): User {
+        val existsUser = userRepository.findByEmail(email).orElse(null)
+        if (existsUser != null) {
+            throw UserServiceException(HttpStatus.BAD_REQUEST, ErrorType.EMAIL_ALREADY_EXISTS)
+        }
+
         val user = User.create(
             name = name,
             email = email,
