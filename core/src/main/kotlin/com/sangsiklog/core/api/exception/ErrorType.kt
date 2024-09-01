@@ -12,6 +12,10 @@ enum class ErrorType(
     // 2000~2999 AuthServiceException
     INVALID_CREDENTIALS(2000, "유효하지 않은 자격증명"),
 
-    // 9999
+    // 3000~3999 KnowledgeServiceException
+    NOT_FOUND_KNOWLEDGE(3000, "상식을 찾을 수 없습니다."),
+
+    // default
     UNKNOWN(9999, "알 수 없는 에러"),
+    PAGE_INDEX_ERROR(10000, "페이지는 1 보다 작을 수 없습니다."),
 }
