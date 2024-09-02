@@ -1,4 +1,4 @@
-package com.sangsiklog.exception
+package com.sangsiklog.core.http
 
 class HttpServiceException(
     override val message: String

@@ -1,5 +1,6 @@
 package com.sangsiklog.exception
 
+import com.sangsiklog.core.http.HttpServiceException
 import graphql.GraphQLError
 import graphql.GraphqlErrorBuilder
 import graphql.schema.DataFetchingEnvironment

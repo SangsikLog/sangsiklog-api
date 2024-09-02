@@ -1,8 +1,8 @@
 package com.sangsiklog.model.knowledge
 
+import com.sangsiklog.core.utils.DateTimeUtils
 import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.KnowledgeDetail
 import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.KnowledgeRegistrationResponse
-import com.sangsiklog.utils.DateTimeUtils
 
 data class Knowledge(
     val id: Long = 0,

@@ -9,6 +9,7 @@ val protobufVersion = "3.22.0"
 bootJar.enabled = true
 
 dependencies {
+    implementation(project(":core"))
     implementation("org.springframework.boot:spring-boot-starter-graphql")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("com.graphql-java:graphql-java-extended-scalars:22.0")
