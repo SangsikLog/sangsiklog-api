@@ -1,4 +1,4 @@
-package com.sangsiklog.config
+package com.sangsiklog.core.http
 
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.cloud.client.loadbalancer.LoadBalanced

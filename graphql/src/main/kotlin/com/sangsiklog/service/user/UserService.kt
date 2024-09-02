@@ -1,7 +1,7 @@
 package com.sangsiklog.service.user
 
 import com.sangsiklog.model.user.User
-import com.sangsiklog.utils.http.HttpClient
+import com.sangsiklog.core.http.HttpClient
 import com.sangsiklog.service.user.request.CreateUserRequest
 import com.sangsiklog.service.user.request.UpdateUserRequest
 import lombok.RequiredArgsConstructor

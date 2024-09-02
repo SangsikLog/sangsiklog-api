@@ -1,8 +1,8 @@
-package com.sangsiklog.utils.http
+package com.sangsiklog.core.http
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.sangsiklog.exception.HttpServiceException
+import com.sangsiklog.core.api.response.ApiResponse
 import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Component
 import org.springframework.web.client.HttpStatusCodeException

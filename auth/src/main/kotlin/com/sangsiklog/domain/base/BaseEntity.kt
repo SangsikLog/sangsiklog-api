@@ -1,4 +1,4 @@
-package com.sangsiklog.core.domain.base
+package com.sangsiklog.domain.base
 
 import jakarta.persistence.EntityListeners
 import jakarta.persistence.MappedSuperclass

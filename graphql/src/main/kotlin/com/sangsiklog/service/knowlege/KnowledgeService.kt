@@ -1,20 +1,25 @@
 package com.sangsiklog.service.knowlege
 
+import com.sangsiklog.config.GrpcProperties
+import com.sangsiklog.core.grpc.GrpcClient
 import com.sangsiklog.model.SortDirection
 import com.sangsiklog.model.knowledge.Knowledge
 import com.sangsiklog.model.knowledge.KnowledgeListGetResponse
-import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.KnowledgeDetailGetRequest
-import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.KnowledgeListGetRequest
-import com.sangsiklog.utils.grpc.GrpcClient
-import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.KnowledgeRegistrationRequest
+import com.sangsiklog.service.knowledge.KnowledgeServiceGrpcKt
+import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.*
 import common.Common.Pageable
 import org.springframework.stereotype.Service
 
 @Service
 class KnowledgeService(
-    grpcClient: GrpcClient
+    grpcClient: GrpcClient,
+    grpcProperties: GrpcProperties
 ) {
-    private val knowledgeServiceStub = grpcClient.createKnowledgeServiceStub()
+    private val knowledgeServiceStub = grpcClient.createStub(
+        stubClass = KnowledgeServiceGrpcKt.KnowledgeServiceCoroutineStub::class,
+        serviceName = grpcProperties.contentApi.serviceName,
+        port = grpcProperties.contentApi.port
+    )
 
     suspend fun registerKnowledge(userId: Long, title: String, description: String): Knowledge {
         val request = KnowledgeRegistrationRequest.newBuilder()

@@ -10,5 +10,6 @@ class GrpcProperties {
 
     class ServiceProperties {
         lateinit var serviceName: String
+        lateinit var port: String
     }
 }

@@ -1,6 +1,6 @@
 package com.sangsiklog.domain.user
 
-import com.sangsiklog.core.domain.base.BaseEntity
+import com.sangsiklog.domain.base.BaseEntity
 import jakarta.persistence.*
 import java.time.LocalDateTime
 

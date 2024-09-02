@@ -1,4 +1,4 @@
-package com.sangsiklog.core.api.handler
+package com.sangsiklog.handler
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.sangsiklog.core.api.response.ApiErrorResponse

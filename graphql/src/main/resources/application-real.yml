@@ -56,3 +56,4 @@ grpc:
   client:
     content-api:
       service-name: "content-api"
+      port: 9090
