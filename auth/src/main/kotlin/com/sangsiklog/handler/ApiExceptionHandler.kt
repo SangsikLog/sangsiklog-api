@@ -1,4 +1,4 @@
-package com.sangsiklog.core.api.handler
+package com.sangsiklog.handler
 
 import com.sangsiklog.core.api.exception.CustomException
 import com.sangsiklog.core.api.response.ApiErrorResponse
