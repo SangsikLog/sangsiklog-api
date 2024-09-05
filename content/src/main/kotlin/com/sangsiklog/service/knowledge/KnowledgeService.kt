@@ -3,22 +3,23 @@ package com.sangsiklog.service.knowledge
 import com.sangsiklog.core.api.exception.ErrorType
 import com.sangsiklog.domain.knowledge.Knowledge
 import com.sangsiklog.exception.knowledge.KnowledgeServiceException
-import com.sangsiklog.service.model.knowledge.KnowledgeDetail
 import com.sangsiklog.repository.knowledge.KnowledgeRepository
 import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.*
+import com.sangsiklog.service.model.knowledge.KnowledgeDetail
 import com.sangsiklog.utils.PageableUtil
 import common.Common.PagerInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional(readOnly = true)
 class KnowledgeService(
     private val repository: KnowledgeRepository
 ): KnowledgeServiceGrpcKt.KnowledgeServiceCoroutineImplBase() {
-    override suspend fun registerKnowledge(request: KnowledgeRegistrationRequest):
-
-        KnowledgeRegistrationResponse {
+    @Transactional
+    override suspend fun registerKnowledge(request: KnowledgeRegistrationRequest): KnowledgeRegistrationResponse {
         return withContext(Dispatchers.IO) {
             val knowledge = Knowledge.create(
                 userId = request.userId,
