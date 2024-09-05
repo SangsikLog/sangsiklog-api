@@ -1,16 +1,14 @@
 package com.sangsiklog.service.user
 
-import com.sangsiklog.model.user.User
 import com.sangsiklog.core.http.HttpClient
+import com.sangsiklog.model.user.User
 import com.sangsiklog.service.user.request.CreateUserRequest
 import com.sangsiklog.service.user.request.UpdateUserRequest
-import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 
 @Service
-@RequiredArgsConstructor
 class UserService(
     private val httpClient: HttpClient,
 ) {
