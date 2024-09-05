@@ -50,6 +50,7 @@ subprojects {
 			implementation("org.springframework.boot:spring-boot-starter-actuator")
 			implementation("org.springframework.boot:spring-boot-starter-cache")
 			implementation("org.springframework.boot:spring-boot-starter-data-redis")
+			implementation("org.springframework:spring-expression")
 			implementation("org.springframework.kafka:spring-kafka")
 			implementation("org.springframework.boot:spring-boot-starter-integration")
 			implementation("org.springframework.integration:spring-integration-core")

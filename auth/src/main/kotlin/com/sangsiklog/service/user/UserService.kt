@@ -1,11 +1,14 @@
 package com.sangsiklog.service.user
 
+import com.sangsiklog.core.api.lock.DistributedLock
+import com.sangsiklog.core.api.lock.LockType
 import com.sangsiklog.core.api.exception.ErrorType
 import com.sangsiklog.domain.user.User
 import com.sangsiklog.domain.user.UserLoginHistory
 import com.sangsiklog.exception.user.UserServiceException
 import com.sangsiklog.repository.user.UserLoginHistoryRepository
 import com.sangsiklog.repository.user.UserRepository
+import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -17,7 +20,8 @@ import java.time.LocalDateTime
 class UserService(
     private val userRepository: UserRepository,
     private val userLoginHistoryRepository: UserLoginHistoryRepository,
-    private val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder,
+    private val redisTemplate: RedisTemplate<String, Any>
 ) {
     fun getUserById(userId: Long): User {
         return userRepository.findById(userId)
@@ -30,7 +34,12 @@ class UserService(
     }
 
     @Transactional
+    @DistributedLock(value = LockType.CREATE_USER, keys = ["#email"])
     fun createUser(name: String, email: String, password: String): User {
+        if (!isEmailVerified(email)) {
+            throw UserServiceException(HttpStatus.BAD_REQUEST, ErrorType.EMAIL_NOT_VERIFIED)
+        }
+
         val existsUser = userRepository.findByEmail(email).orElse(null)
         if (existsUser != null) {
             throw UserServiceException(HttpStatus.BAD_REQUEST, ErrorType.EMAIL_ALREADY_EXISTS)
@@ -49,6 +58,7 @@ class UserService(
     }
 
     @Transactional
+    @DistributedLock(value = LockType.CREATE_USER, keys = ["#userId"])
     fun updateUser(userId: Long, name: String, profileImageUrl: String?): User {
         val user = userRepository.findById(userId)
             .orElseThrow{ UserServiceException(HttpStatus.BAD_REQUEST, ErrorType.NOT_FOUND_USER) }
@@ -59,6 +69,7 @@ class UserService(
     }
 
     @Transactional
+    @DistributedLock(value = LockType.CREATE_USER, keys = ["#userId"])
     fun changePassword(userId: Long, oldPassword: String, newPassword: String) {
         val user = userRepository.findById(userId)
             .orElseThrow{ UserServiceException(HttpStatus.BAD_REQUEST, ErrorType.NOT_FOUND_USER) }
@@ -81,5 +92,10 @@ class UserService(
         userLoginHistoryRepository.save(userLoginHistory)
 
         return userLoginHistory
+    }
+
+    private fun isEmailVerified(email: String): Boolean {
+        val result = redisTemplate.opsForValue().get("verified:$email")
+        return result?.let { it == "true" } ?: false
     }
 }
