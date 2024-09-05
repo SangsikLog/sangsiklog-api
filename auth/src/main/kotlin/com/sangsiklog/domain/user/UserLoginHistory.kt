@@ -11,7 +11,7 @@ import java.time.LocalDateTime
     initialValue = 1,
     allocationSize = 50
 )
-@Table(name = "user_login_histories")
+@Table(name = "user_login_history")
 class UserLoginHistory(
     user: User,
     loginTime: LocalDateTime,
@@ -23,7 +23,7 @@ class UserLoginHistory(
     val id: Long? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT))
     val user: User = user
 
     @Column(nullable = false)
