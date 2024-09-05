@@ -11,6 +11,8 @@ enum class ErrorType(
 
     // 2000~2999 AuthServiceException
     INVALID_CREDENTIALS(2000, "유효하지 않은 자격증명"),
+    INVALID_EMAIL_ADDRESS(2001, "유효하지 않은 이메일입니다."),
+    INVALID_EMAIL_TOKEN(2002, "이메일 인증번호가 일치하지 않습니다."),
 
     // 3000~3999 KnowledgeServiceException
     NOT_FOUND_KNOWLEDGE(3000, "상식을 찾을 수 없습니다."),
