@@ -1,5 +1,7 @@
 package com.sangsiklog.service.user
 
+import com.sangsiklog.core.api.lock.DistributedLock
+import com.sangsiklog.core.api.lock.LockType
 import com.sangsiklog.core.api.exception.ErrorType
 import com.sangsiklog.domain.user.User
 import com.sangsiklog.domain.user.UserLoginHistory
@@ -32,6 +34,7 @@ class UserService(
     }
 
     @Transactional
+    @DistributedLock(value = LockType.CREATE_USER, keys = ["#email"])
     fun createUser(name: String, email: String, password: String): User {
         if (!isEmailVerified(email)) {
             throw UserServiceException(HttpStatus.BAD_REQUEST, ErrorType.EMAIL_NOT_VERIFIED)
@@ -55,6 +58,7 @@ class UserService(
     }
 
     @Transactional
+    @DistributedLock(value = LockType.CREATE_USER, keys = ["#userId"])
     fun updateUser(userId: Long, name: String, profileImageUrl: String?): User {
         val user = userRepository.findById(userId)
             .orElseThrow{ UserServiceException(HttpStatus.BAD_REQUEST, ErrorType.NOT_FOUND_USER) }
@@ -65,6 +69,7 @@ class UserService(
     }
 
     @Transactional
+    @DistributedLock(value = LockType.CREATE_USER, keys = ["#userId"])
     fun changePassword(userId: Long, oldPassword: String, newPassword: String) {
         val user = userRepository.findById(userId)
             .orElseThrow{ UserServiceException(HttpStatus.BAD_REQUEST, ErrorType.NOT_FOUND_USER) }
@@ -90,6 +95,7 @@ class UserService(
     }
 
     private fun isEmailVerified(email: String): Boolean {
-        return redisTemplate.opsForValue().get("verified:$email") as Boolean
+        val result = redisTemplate.opsForValue().get("verified:$email")
+        return result?.let { it == "true" } ?: false
     }
 }

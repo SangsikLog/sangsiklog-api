@@ -21,4 +21,6 @@ enum class ErrorType(
     // default
     UNKNOWN(9999, "알 수 없는 에러"),
     PAGE_INDEX_ERROR(10000, "페이지는 1 보다 작을 수 없습니다."),
+    CAN_NOT_ACQUIRE_LOCK(10001, "잠시 후 다시 요청해주세요."),
+    INVALID_LOCK_KEY_VALUE(10002, "유효하지 않은 키값입니다."),
 }
