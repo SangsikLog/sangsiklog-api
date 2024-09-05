@@ -22,7 +22,7 @@ spring:
 
   data:
     redis:
-      host: http://172.16.2.10
+      host: redisc-p3157.vpc-cdb.ntruss.com
       port: 6379
 
   mail:
