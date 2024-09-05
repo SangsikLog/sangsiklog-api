@@ -1,9 +1,6 @@
 package com.sangsiklog.controller.auth
 
-import com.sangsiklog.controller.auth.request.GenerateTokenRequest
-import com.sangsiklog.controller.auth.request.RefreshTokenRequest
-import com.sangsiklog.controller.auth.request.ValidateTokenRequest
-import com.sangsiklog.controller.auth.request.VerifyTokenRequest
+import com.sangsiklog.controller.auth.request.*
 import com.sangsiklog.controller.auth.response.GenerateTokenResponse
 import com.sangsiklog.controller.auth.response.RefreshTokenResponse
 import com.sangsiklog.controller.auth.response.ValidateTokenResponse
@@ -55,5 +52,15 @@ class AuthController(
         return ValidateTokenResponse(
             id = user.id!!
         )
+    }
+
+    @PostMapping("/email")
+    fun sendVerificationMail(@RequestBody request: EmailVerificationRequest) {
+        authService.sendVerificationMail(request.email)
+    }
+
+    @PostMapping("/email/verify-token")
+    fun verifyEmailToken(@RequestBody request: VerifyEmailTokenRequest) {
+        authService.verifyEmailToken(request.email, request.token)
     }
 }

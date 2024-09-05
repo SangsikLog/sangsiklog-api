@@ -20,6 +20,23 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: sangsiklog@gmail.com
+    password: ""
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 eureka:
   instance:
     prefer-ip-address: true
@@ -52,11 +69,9 @@ management:
           - shutdown
           - prometheus
 
-logging:
-  level:
-    org.hibernate.sql: DEBUG
-
 jwt:
   secret: 1ad35d74dc65cc0ee9a3a409f7f87e332aa6aa89d9cc64c66cdf9a1ffdc534ee
 
-
+logging:
+  level:
+    org.hibernate.sql: DEBUG
