@@ -18,12 +18,12 @@ class UserController(
     }
 
     @MutationMapping
-    fun createUser(@Argument name: String, @Argument email: String, @Argument password: String): User? {
-        return userService.createUser(name, email, password)
+    fun createUser(@Argument nickname: String, @Argument email: String, @Argument password: String): User? {
+        return userService.createUser(nickname, email, password)
     }
 
     @MutationMapping
-    fun updateUser(@Argument userId: Long, @Argument name: String): User? {
-        return userService.updateUser(userId, name)
+    fun updateUser(@Argument userId: Long, @Argument nickname: String): User? {
+        return userService.updateUser(userId, nickname)
     }
 }

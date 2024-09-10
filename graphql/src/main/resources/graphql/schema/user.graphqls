@@ -3,14 +3,14 @@ extend type Query {
 }
 
 extend type Mutation {
-    createUser(name: String!, email: String!, password: String!): User
+    createUser(nickname: String!, email: String!, password: String!): User
 
-    updateUser(userId: Long!, name: String): User @authenticate @authorize(role: "user", permission: "update_user")
+    updateUser(userId: Long!, nickname: String): User @authenticate @authorize(role: "user", permission: "update_user")
 }
 
 type User {
     id: Long!
-    name: String!
+    nickname: String!
     email: String!
 }
 

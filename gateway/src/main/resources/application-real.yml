@@ -39,7 +39,7 @@ spring:
       global-cors:
         cors-configurations:
           '[/**]':
-            allowed-origins: "http://localhost:8080"
+            allowed-origins: "https://sangsiklog.store"
             allowed-methods:
               - GET
               - POST

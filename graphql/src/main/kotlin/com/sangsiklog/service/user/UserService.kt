@@ -23,8 +23,8 @@ class UserService(
         )
     }
 
-    fun createUser(name: String, email: String, password: String): User? {
-        val createUserRequest = CreateUserRequest(name = name, email = email, password = password)
+    fun createUser(nickname: String, email: String, password: String): User? {
+        val createUserRequest = CreateUserRequest(nickname = nickname, email = email, password = password)
 
         return httpClient.post(
             url = userServiceBaseUrl,
@@ -33,18 +33,13 @@ class UserService(
         )
     }
 
-    fun updateUser(userId: Long, name: String): User? {
-        val updateUserRequest = UpdateUserRequest(name = name)
+    fun updateUser(userId: Long, nickname: String): User? {
+        val updateUserRequest = UpdateUserRequest(nickname = nickname)
 
-        httpClient.put(
+        return httpClient.patch(
             url = "${userServiceBaseUrl}/${userId}",
-            request = updateUserRequest
-        )
-
-        return User(
-            id = userId,
-            name = name,
-            email = ""
+            request = updateUserRequest,
+            responseType = User::class.java
         )
     }
 }

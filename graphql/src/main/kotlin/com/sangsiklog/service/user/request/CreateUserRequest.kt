@@ -1,7 +1,7 @@
 package com.sangsiklog.service.user.request
 
 data class CreateUserRequest(
-    val name: String,
+    val nickname: String,
     val email: String,
     val password: String
 )

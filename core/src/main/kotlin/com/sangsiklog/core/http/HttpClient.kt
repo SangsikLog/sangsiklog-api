@@ -3,6 +3,9 @@ package com.sangsiklog.core.http
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.sangsiklog.core.api.response.ApiResponse
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpMethod
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import org.springframework.web.client.HttpStatusCodeException
 import org.springframework.web.client.RestTemplate
@@ -33,6 +36,17 @@ class HttpClient(
     fun <T> post(url: String, request: Any, responseType: Class<T>): T? {
         try {
             val json = restTemplate.postForObject(url, request, String::class.java)
+            val apiResponse = objectMapper.readValue<ApiResponse<Map<String, Any>>>(json!!)
+
+            return objectMapper.convertValue(apiResponse.result, responseType)
+        } catch (e: HttpStatusCodeException) {
+            throw HttpServiceException(e.responseBodyAsString)
+        }
+    }
+
+    fun <T> patch(url: String, request: Any, responseType: Class<T>): T? {
+        try {
+            val json = restTemplate.patchForObject(url, request, String::class.java)
             val apiResponse = objectMapper.readValue<ApiResponse<Map<String, Any>>>(json!!)
 
             return objectMapper.convertValue(apiResponse.result, responseType)
