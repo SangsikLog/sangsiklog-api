@@ -27,8 +27,10 @@ class AuthService(
     @Value("\${jwt.secret}")
     lateinit var secretKey: String
 
-    private val EMAIL_VERIFY_TOKEN_EXPIRE_TIME = 5L
-    private val VERIFIED_EMAIL_EXPIRE_TIME = 10L
+    companion object {
+        private const val EMAIL_VERIFY_TOKEN_EXPIRE_TIME = 5L
+        private const val VERIFIED_EMAIL_EXPIRE_TIME = 10L
+    }
 
     fun generateToken(existingUser: User, requestPassword: String): String {
         if (!passwordEncoder.matches(requestPassword, existingUser.password)) {
@@ -98,5 +100,10 @@ class AuthService(
         redisTemplate.opsForValue().set("verified:$email", "true", VERIFIED_EMAIL_EXPIRE_TIME, TimeUnit.MINUTES)
 
         redisTemplate.delete("token:$email")
+    }
+
+    fun isEmailVerified(email: String): Boolean {
+        val result = redisTemplate.opsForValue().get("verified:$email")
+        return result?.let { it == "true" } ?: throw AuthServiceException(HttpStatus.BAD_REQUEST, ErrorType.NOT_VERIFIED_EMAIL)
     }
 }

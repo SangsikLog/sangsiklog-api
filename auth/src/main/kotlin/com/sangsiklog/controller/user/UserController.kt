@@ -5,18 +5,22 @@ import com.sangsiklog.controller.user.request.ChangePasswordRequest
 import com.sangsiklog.controller.user.request.UpdateUserRequest
 import com.sangsiklog.controller.user.response.CreateUserResponse
 import com.sangsiklog.controller.user.response.UserDetailsResponse
+import com.sangsiklog.service.auth.AuthService
 import com.sangsiklog.service.user.UserService
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/v1/users")
 class UserController(
+    private val authService: AuthService,
     private val userService: UserService
 ) {
     @PostMapping
     fun creatUser(@RequestBody request: CreateUserRequest): CreateUserResponse {
+        authService.isEmailVerified(request.email)
+
         val user = userService.createUser(
-            name = request.name,
+            nickname = request.nickname,
             email = request.email,
             password = request.password
         )
@@ -32,23 +36,23 @@ class UserController(
 
         return UserDetailsResponse(
             id = user.id!!,
-            name = user.name,
+            nickname = user.nickname,
             profileImageUrl = user.profileImageUrl,
             email = user.email
         )
     }
 
-    @PutMapping("/{userId}")
+    @PatchMapping("/{userId}")
     fun updateUser(@PathVariable userId: Long, @RequestBody request: UpdateUserRequest): UserDetailsResponse {
         val user = userService.updateUser(
             userId = userId,
-            name = request.name,
+            nickname = request.nickname,
             profileImageUrl = request.profileImageUrl
         )
 
         return UserDetailsResponse(
             id = user.id!!,
-            name = user.name,
+            nickname = user.nickname,
             profileImageUrl = user.profileImageUrl,
             email = user.email
         )

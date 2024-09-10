@@ -12,18 +12,17 @@ import jakarta.persistence.*
 )
 @Table(name = "users")
 class User(
-    name: String,
+    nickname: String,
     email: String,
-    password: String,
-    userLoginHistories: MutableList<UserLoginHistory>
+    password: String
 ) : BaseEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ_GENERATOR")
     @Column(name = "user_id")
     val id: Long? = null
 
-    @Column(name = "name", nullable = false)
-    var name: String = name
+    @Column(name = "nickname", nullable = false)
+    var nickname: String = nickname
         protected set
 
     @Column(name = "email", unique = true, nullable = false)
@@ -37,21 +36,20 @@ class User(
         protected set
 
     @OneToMany(mappedBy = "user", cascade = [(CascadeType.ALL)])
-    var userLoginHistories: MutableList<UserLoginHistory> = userLoginHistories
+    var userLoginHistories: MutableList<UserLoginHistory> = mutableListOf()
 
     companion object {
-        fun create(name: String, email: String, password: String, userLoginHistories: MutableList<UserLoginHistory>): User {
+        fun create(nickname: String, email: String, password: String): User {
             return User(
-                name = name,
+                nickname = nickname,
                 email = email,
-                password = password,
-                userLoginHistories = userLoginHistories
+                password = password
             )
         }
     }
 
-    fun update(name: String, profileImageUrl: String?) {
-        this.name = name
+    fun update(nickname: String, profileImageUrl: String?) {
+        this.nickname = nickname
         this.profileImageUrl = profileImageUrl
     }
 
