@@ -1,9 +1,6 @@
 package com.sangsiklog.core.grpc
 
-import io.grpc.CallOptions
-import io.grpc.Channel
-import io.grpc.ManagedChannel
-import io.grpc.ManagedChannelBuilder
+import io.grpc.*
 import io.grpc.stub.AbstractStub
 import org.springframework.cloud.client.discovery.DiscoveryClient
 import org.springframework.stereotype.Component
@@ -13,21 +10,17 @@ import kotlin.reflect.KClass
 class GrpcClient(
     private val discoveryClient: DiscoveryClient
 ) {
-    private fun getServiceAddress(serviceName: String, port: String): String {
-        val instances = discoveryClient.getInstances(serviceName)
-        return if (instances.isNotEmpty()) {
-            val instance = instances[0]
-            "${instance.host}:${port}"
-        } else {
-            throw RuntimeException("Service $serviceName not found")
-        }
+    fun createChannel(serviceName: String, port: String): ManagedChannel {
+        NameResolverRegistry.getDefaultRegistry().register(EurekaNameResolverProvider(discoveryClient, port))
+
+        return ManagedChannelBuilder.forTarget("eureka:///$serviceName")
+            .defaultLoadBalancingPolicy("round_robin")
+            .usePlaintext()
+            .build()
     }
 
     fun <T : AbstractStub<T>> createStub(stubClass: KClass<T>, serviceName: String, port: String): T {
-        val address = getServiceAddress(serviceName, port)
-        val channel: ManagedChannel = ManagedChannelBuilder.forTarget(address)
-            .usePlaintext()
-            .build()
+        val channel = createChannel(serviceName, port)
 
         val constructor = stubClass.constructors.firstOrNull { ctor ->
             val params = ctor.parameters
