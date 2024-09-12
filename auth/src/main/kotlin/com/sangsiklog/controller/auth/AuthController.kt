@@ -55,12 +55,16 @@ class AuthController(
     }
 
     @PostMapping("/email")
-    fun sendVerificationMail(@RequestBody request: EmailVerificationRequest) {
+    fun sendVerificationMail(@RequestBody request: EmailVerificationRequest): String {
         authService.sendVerificationMail(request.email)
+
+        return "ok"
     }
 
     @PostMapping("/email/verify-token")
-    fun verifyEmailToken(@RequestBody request: VerifyEmailTokenRequest) {
+    fun verifyEmailToken(@RequestBody request: VerifyEmailTokenRequest): String {
         authService.verifyEmailToken(request.email, request.token)
+
+        return "ok"
     }
 }
