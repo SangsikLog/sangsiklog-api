@@ -18,11 +18,7 @@ dependencies {
 	api("io.github.microutils:kotlin-logging-jvm:2.0.11")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
-	implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
-	implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
-	implementation("io.grpc:grpc-protobuf:$grpcVersion")
-	implementation("io.grpc:grpc-services:$grpcVersion")
-	implementation("com.google.protobuf:protobuf-kotlin:$protobufVersion")
+	compileOnly(project(":grpc-common"))
 }
 
 dependencyManagement {

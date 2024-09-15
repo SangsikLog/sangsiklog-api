@@ -13,14 +13,14 @@ repositories {
 }
 
 dependencies {
-	implementation("org.jetbrains.kotlin:kotlin-stdlib")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	api("org.jetbrains.kotlin:kotlin-stdlib")
 
-	implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
-	implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
-	implementation("io.grpc:grpc-protobuf:$grpcVersion")
-	implementation("com.google.protobuf:protobuf-kotlin:$protobufVersion")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
+	api("io.grpc:grpc-netty-shaded:$grpcVersion")
+	api("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
+	api("io.grpc:grpc-protobuf:$grpcVersion")
+	api("io.grpc:grpc-services:$grpcVersion")
+	api("com.google.protobuf:protobuf-kotlin:$protobufVersion")
+	api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
 }
 
 protobuf {
