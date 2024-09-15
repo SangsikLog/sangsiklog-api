@@ -21,6 +21,8 @@ dependencies {
     implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("io.micrometer:micrometer-core")
 
+    implementation(project(":grpc-common"))
+
     runtimeOnly("com.mysql:mysql-connector-j")
 }
 
