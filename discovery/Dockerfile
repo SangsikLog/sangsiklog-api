@@ -16,9 +16,10 @@ RUN ./gradlew build -x test --stacktrace --no-daemon || return 0
 # 해당 모듈의 소스 복사
 COPY discovery/ discovery/
 COPY core/ core/
+COPY grpc-common/ grpc-common/
 
 # 필요한 모듈 빌드
-RUN ./gradlew :discovery:build -x test --stacktrace --no-daemon
+RUN ./gradlew -Pprotoc_platform=linux-x86_64 :discovery:build -x test --stacktrace --no-daemon
 
 # 2단계: 실행 단계
 FROM openjdk:17-jdk-slim

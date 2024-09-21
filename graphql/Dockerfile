@@ -10,6 +10,7 @@ COPY ../build.gradle.kts .
 RUN ./gradlew build -x test --stacktrace --no-daemon || return 0
 
 COPY graphql/ graphql/
+COPY core/ core/
 COPY grpc-common/ grpc-common/
 
 RUN ./gradlew -Pprotoc_platform=linux-x86_64 :graphql:build -x test --stacktrace --no-daemon
