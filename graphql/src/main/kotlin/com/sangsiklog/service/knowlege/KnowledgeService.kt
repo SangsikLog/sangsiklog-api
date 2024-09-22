@@ -12,12 +12,16 @@ import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.*
 import common.Common.Pageable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.springframework.cache.annotation.Cacheable
+import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
+import java.util.concurrent.TimeUnit
 
 @Service
 class KnowledgeService(
     grpcClient: GrpcClient,
-    grpcProperties: GrpcProperties
+    grpcProperties: GrpcProperties,
+    private val redisTemplate: RedisTemplate<String, Any>
 ) {
     private val knowledgeServiceStub = grpcClient.createStub(
         stubClass = KnowledgeServiceGrpcKt.KnowledgeServiceCoroutineStub::class,
@@ -76,6 +80,19 @@ class KnowledgeService(
             val response = knowledgeServiceStub.getPopularKnowledgeList(Empty.getDefaultInstance())
 
             PopularKnowledgeListGetResponse.fromProto(response)
+        }
+    }
+
+    @Cacheable("daily_knowledge")
+    suspend fun getDailyKnowledge(): Knowledge {
+        return withContext(Dispatchers.IO) {
+            val response = knowledgeServiceStub.getRandomKnowledge(Empty.getDefaultInstance())
+
+            val result = Knowledge.fromProto(response.knowledgeDetail)
+
+            redisTemplate.opsForValue().set("daily_knowledge", result, 24, TimeUnit.HOURS)
+
+            result
         }
     }
 }
