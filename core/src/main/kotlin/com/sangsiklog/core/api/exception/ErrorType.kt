@@ -18,6 +18,7 @@ enum class ErrorType(
 
     // 3000~3999 KnowledgeServiceException
     NOT_FOUND_KNOWLEDGE(3000, "상식을 찾을 수 없습니다."),
+    NOT_FOUND_CATEGORY(3001, "해당 카테고리를 찾을 수 없습니다."),
 
     // default
     UNKNOWN(9999, "알 수 없는 에러"),

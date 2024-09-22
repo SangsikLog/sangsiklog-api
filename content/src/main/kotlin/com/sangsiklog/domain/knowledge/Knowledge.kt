@@ -34,7 +34,7 @@ class Knowledge(
     var description: String = description
         protected set
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     var category: Category = category
         protected set

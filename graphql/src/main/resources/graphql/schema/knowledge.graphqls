@@ -4,7 +4,7 @@ extend type Query {
 }
 
 extend type Mutation {
-    registerKnowledge(userId: Long!, title: String!, description: String!): Knowledge
+    registerKnowledge(userId: Long!, title: String!, description: String!, categoryId: Long!): Knowledge
 }
 
 type KnowledgeListGetResponse {
@@ -17,5 +17,6 @@ type Knowledge {
     userId: Long!
     title: String!
     description: String!
+    category: Category!
     createdAt: String
 }
