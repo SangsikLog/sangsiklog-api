@@ -1,11 +1,11 @@
 extend type Query {
-    getUser(userId: Long!): User @authenticate @authorize(role: "user", permission: "read_user")
+    getUser(userId: Long!): User @authenticate @authorize(role: "user", permission: "yourself")
 }
 
 extend type Mutation {
     createUser(nickname: String!, email: String!, password: String!): User
 
-    updateUser(userId: Long!, nickname: String): User @authenticate @authorize(role: "user", permission: "update_user")
+    updateUser(userId: Long!, nickname: String): User @authenticate @authorize(role: "user", permission: "yourself")
 }
 
 type User {

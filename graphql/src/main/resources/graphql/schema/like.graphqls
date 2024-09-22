@@ -1,0 +1,11 @@
+extend type Mutation {
+    addKnowledgeLike(knowledgeId: Long!, userId: Long!): Like
+
+    removeKnowledgeLike(knowledgeId: Long!, userId: Long!): Like
+}
+
+type Like {
+    id: Long!
+    knowledgeId: Long!
+    userId: Long!
+}
