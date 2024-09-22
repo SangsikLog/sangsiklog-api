@@ -45,4 +45,9 @@ class KnowledgeController(
     suspend fun getPopularKnowledgeList(): PopularKnowledgeListGetResponse {
         return knowledgeService.getPopularKnowledgeList()
     }
+
+    @QueryMapping
+    suspend fun getDailyKnowledge(): Knowledge {
+        return knowledgeService.getDailyKnowledge()
+    }
 }

@@ -86,4 +86,15 @@ class KnowledgeService(
                 .build()
         }
     }
+
+    override suspend fun getRandomKnowledge(request: Empty): RandomKnowledgeGetResponse {
+        return withContext(Dispatchers.IO) {
+            val knowledge = repository.findDailyKnowledge()
+                .orElseThrow { KnowledgeServiceException(ErrorType.NOT_FOUND_KNOWLEDGE) }
+
+            RandomKnowledgeGetResponse.newBuilder()
+                .setKnowledgeDetail(KnowledgeDetail.from(knowledge).toProto())
+                .build()
+        }
+    }
 }
