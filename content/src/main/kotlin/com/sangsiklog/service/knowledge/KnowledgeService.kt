@@ -1,5 +1,6 @@
 package com.sangsiklog.service.knowledge
 
+import com.google.protobuf.Empty
 import com.sangsiklog.core.api.exception.ErrorType
 import com.sangsiklog.domain.knowledge.Knowledge
 import com.sangsiklog.exception.knowledge.KnowledgeServiceException
@@ -71,5 +72,18 @@ class KnowledgeService(
                .setKnowledgeDetail(KnowledgeDetail.from(knowledge).toProto())
                .build()
        }
+    }
+
+    override suspend fun getPopularKnowledgeList(request: Empty): PopularKnowledgeListGetResponse {
+        return withContext(Dispatchers.IO) {
+            val knowledgeList = repository.findPopularKnowledgeByLikes()
+            val knowledgeDetailList = knowledgeList
+                .map { KnowledgeDetail.from(it).toProto() }
+                .toList()
+
+            PopularKnowledgeListGetResponse.newBuilder()
+                .addAllKnowledgeDetail(knowledgeDetailList)
+                .build()
+        }
     }
 }
