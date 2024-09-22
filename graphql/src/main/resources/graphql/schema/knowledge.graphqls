@@ -1,6 +1,7 @@
 extend type Query {
     getKnowledgeList(page: Int!, size: Int!, sortColumn: String!, direction: SortDirection! = DESC): KnowledgeListGetResponse
     getKnowledgeDetail(knowledgeId: Long!): Knowledge
+    getPopularKnowledgeList: PopularKnowledgeListGetResponse
 }
 
 extend type Mutation {
@@ -10,6 +11,10 @@ extend type Mutation {
 type KnowledgeListGetResponse {
     knowledgeList: [Knowledge!]!,
     pagerInfo: PagerInfo!
+}
+
+type PopularKnowledgeListGetResponse {
+    knowledgeList: [Knowledge!]!
 }
 
 type Knowledge {
