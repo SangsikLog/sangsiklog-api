@@ -26,6 +26,7 @@ class Category(
 
     @OneToMany(mappedBy = "category")
     var knowledgeList: MutableSet<Knowledge> = HashSet()
+        protected set
 
     companion object {
         fun create(name: String): Category {
