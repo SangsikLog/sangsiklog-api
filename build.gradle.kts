@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.5" apply false
 	kotlin("jvm") version "1.9.24"
 	kotlin("plugin.spring") version "1.9.24" apply false
+	kotlin("kapt") version "1.9.24"
 }
 
 allprojects {
@@ -36,6 +37,7 @@ allprojects {
 
 subprojects {
 	apply(plugin = "org.jetbrains.kotlin.jvm")
+	apply(plugin = "org.jetbrains.kotlin.kapt")
 
 	if (project.name != "grpc-common") {
 		apply(plugin = "org.springframework.boot")
