@@ -1,9 +1,11 @@
 package com.sangsiklog.repository.knowledge
 
+import com.querydsl.core.types.dsl.Expressions
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.sangsiklog.domain.knowledge.Knowledge
 import com.sangsiklog.domain.knowledge.QKnowledge
 import com.sangsiklog.domain.like.QLike
+import java.util.*
 
 class KnowledgeRepositoryImpl(
     private val jpaQueryFactory: JPAQueryFactory,
@@ -22,4 +24,13 @@ class KnowledgeRepositoryImpl(
             .fetch()
     }
 
+    override fun findDailyKnowledge(): Optional<Knowledge> {
+        val knowledge = QKnowledge.knowledge
+        return Optional.ofNullable(
+            jpaQueryFactory
+                .selectFrom(knowledge)
+                .orderBy(Expressions.numberTemplate(Double::class.java, "function('rand')").asc())
+                .fetchFirst()
+        )
+    }
 }
