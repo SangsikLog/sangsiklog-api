@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.sangsiklog.service.knowledge;
 
+import "google/protobuf/empty.proto";
 import "common/common.proto";
 import "content/CategoryService.proto";
 
@@ -9,6 +10,8 @@ service KnowledgeService {
   rpc RegisterKnowledge(KnowledgeRegistrationRequest) returns (KnowledgeRegistrationResponse);
   rpc GetKnowledgeList(KnowledgeListGetRequest) returns (KnowledgeListGetResponse);
   rpc GetKnowledgeDetail(KnowledgeDetailGetRequest) returns (KnowledgeDetailGetResponse);
+  rpc GetPopularKnowledgeList(google.protobuf.Empty) returns (PopularKnowledgeListGetResponse);
+  rpc GetRandomKnowledge(google.protobuf.Empty) returns (RandomKnowledgeGetResponse);
 }
 
 message KnowledgeRegistrationRequest {
@@ -36,6 +39,14 @@ message KnowledgeDetailGetRequest {
 }
 
 message KnowledgeDetailGetResponse {
+  KnowledgeDetail knowledgeDetail = 1;
+}
+
+message PopularKnowledgeListGetResponse {
+  repeated KnowledgeDetail knowledgeDetail = 1;
+}
+
+message RandomKnowledgeGetResponse {
   KnowledgeDetail knowledgeDetail = 1;
 }
 

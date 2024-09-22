@@ -3,6 +3,7 @@ package com.sangsiklog.controller
 import com.sangsiklog.model.SortDirection
 import com.sangsiklog.model.knowledge.Knowledge
 import com.sangsiklog.model.knowledge.KnowledgeListGetResponse
+import com.sangsiklog.model.knowledge.PopularKnowledgeListGetResponse
 import com.sangsiklog.service.knowlege.KnowledgeService
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.MutationMapping
@@ -38,5 +39,15 @@ class KnowledgeController(
         @Argument knowledgeId: Long
     ): Knowledge {
         return knowledgeService.getKnowledgeDetail(knowledgeId)
+    }
+
+    @QueryMapping
+    suspend fun getPopularKnowledgeList(): PopularKnowledgeListGetResponse {
+        return knowledgeService.getPopularKnowledgeList()
+    }
+
+    @QueryMapping
+    suspend fun getDailyKnowledge(): Knowledge {
+        return knowledgeService.getDailyKnowledge()
     }
 }

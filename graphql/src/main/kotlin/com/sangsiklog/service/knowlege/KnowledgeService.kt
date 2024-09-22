@@ -1,19 +1,27 @@
 package com.sangsiklog.service.knowlege
 
+import com.google.protobuf.Empty
 import com.sangsiklog.config.GrpcProperties
 import com.sangsiklog.core.grpc.GrpcClient
 import com.sangsiklog.model.SortDirection
 import com.sangsiklog.model.knowledge.Knowledge
 import com.sangsiklog.model.knowledge.KnowledgeListGetResponse
+import com.sangsiklog.model.knowledge.PopularKnowledgeListGetResponse
 import com.sangsiklog.service.knowledge.KnowledgeServiceGrpcKt
 import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.*
 import common.Common.Pageable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.springframework.cache.annotation.Cacheable
+import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
+import java.util.concurrent.TimeUnit
 
 @Service
 class KnowledgeService(
     grpcClient: GrpcClient,
-    grpcProperties: GrpcProperties
+    grpcProperties: GrpcProperties,
+    private val redisTemplate: RedisTemplate<String, Any>
 ) {
     private val knowledgeServiceStub = grpcClient.createStub(
         stubClass = KnowledgeServiceGrpcKt.KnowledgeServiceCoroutineStub::class,
@@ -22,42 +30,69 @@ class KnowledgeService(
     )
 
     suspend fun registerKnowledge(userId: Long, title: String, description: String, categoryId: Long): Knowledge {
-        val request = KnowledgeRegistrationRequest.newBuilder()
-            .setUserId(userId)
-            .setTitle(title)
-            .setDescription(description)
-            .setCategoryId(categoryId)
-            .build()
+        return withContext(Dispatchers.IO) {
+            val request = KnowledgeRegistrationRequest.newBuilder()
+                .setUserId(userId)
+                .setTitle(title)
+                .setDescription(description)
+                .setCategoryId(categoryId)
+                .build()
 
-        val response = knowledgeServiceStub.registerKnowledge(request)
+            val response = knowledgeServiceStub.registerKnowledge(request)
 
-        return Knowledge.fromProto(response)
+            Knowledge.fromProto(response)
+        }
     }
 
     suspend fun getKnowledgeList(page: Int, size: Int, sortColumn: String, direction: SortDirection): KnowledgeListGetResponse {
-        val pageable = Pageable.newBuilder()
-            .setPage(page)
-            .setSize(size)
-            .setSortColumn(sortColumn)
-            .setDirection(direction.toProto())
-            .build()
+        return withContext(Dispatchers.IO) {
+            val pageable = Pageable.newBuilder()
+                .setPage(page)
+                .setSize(size)
+                .setSortColumn(sortColumn)
+                .setDirection(direction.toProto())
+                .build()
 
-        val request = KnowledgeListGetRequest.newBuilder()
-            .setPageable(pageable)
-            .build()
+            val request = KnowledgeListGetRequest.newBuilder()
+                .setPageable(pageable)
+                .build()
 
-        val response = knowledgeServiceStub.getKnowledgeList(request)
+            val response = knowledgeServiceStub.getKnowledgeList(request)
 
-        return KnowledgeListGetResponse.fromProto(response)
+            KnowledgeListGetResponse.fromProto(response)
+        }
     }
 
     suspend fun getKnowledgeDetail(knowledgeId: Long): Knowledge {
-        val request = KnowledgeDetailGetRequest.newBuilder()
-            .setKnowledgeId(knowledgeId)
-            .build()
+        return withContext(Dispatchers.IO) {
+            val request = KnowledgeDetailGetRequest.newBuilder()
+                .setKnowledgeId(knowledgeId)
+                .build()
 
-        val response = knowledgeServiceStub.getKnowledgeDetail(request)
+            val response = knowledgeServiceStub.getKnowledgeDetail(request)
 
-        return Knowledge.fromProto(response.knowledgeDetail)
+            Knowledge.fromProto(response.knowledgeDetail)
+        }
+    }
+
+    suspend fun getPopularKnowledgeList(): PopularKnowledgeListGetResponse {
+        return withContext(Dispatchers.IO) {
+            val response = knowledgeServiceStub.getPopularKnowledgeList(Empty.getDefaultInstance())
+
+            PopularKnowledgeListGetResponse.fromProto(response)
+        }
+    }
+
+    @Cacheable("daily_knowledge")
+    suspend fun getDailyKnowledge(): Knowledge {
+        return withContext(Dispatchers.IO) {
+            val response = knowledgeServiceStub.getRandomKnowledge(Empty.getDefaultInstance())
+
+            val result = Knowledge.fromProto(response.knowledgeDetail)
+
+            redisTemplate.opsForValue().set("daily_knowledge", result, 24, TimeUnit.HOURS)
+
+            result
+        }
     }
 }
