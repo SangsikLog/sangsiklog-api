@@ -14,8 +14,7 @@ class RolePermissionService(
 
     private final fun initializeRoles() {
         val userPermissions = hashSetOf<PermissionAction>()
-        userPermissions.add(PermissionAction("read_user") { env -> loginUserCheckAction(env) })
-        userPermissions.add(PermissionAction("update_user") { env -> loginUserCheckAction(env) })
+        userPermissions.add(PermissionAction("yourself") { env -> loginUserCheckAction(env) })
 
         rolePermissions["user"] = userPermissions
     }

@@ -1,0 +1,11 @@
+extend type Mutation {
+    addKnowledgeLike(knowledgeId: Long!, userId: Long!): Like @authenticate @authorize(role: "user", permission: "yourself")
+
+    removeKnowledgeLike(knowledgeId: Long!, userId: Long!): Like @authenticate @authorize(role: "user", permission: "yourself")
+}
+
+type Like {
+    id: Long!
+    knowledgeId: Long!
+    userId: Long!
+}

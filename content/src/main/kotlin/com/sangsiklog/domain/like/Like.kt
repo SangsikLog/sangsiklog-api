@@ -1,7 +1,6 @@
 package com.sangsiklog.domain.like
 
 import com.sangsiklog.domain.base.BaseEntity
-import com.sangsiklog.domain.knowledge.Knowledge
 import jakarta.persistence.*
 
 @Entity
@@ -11,9 +10,10 @@ import jakarta.persistence.*
     initialValue = 1,
     allocationSize = 50
 )
-@Table(name = "likes", uniqueConstraints = [UniqueConstraint(columnNames = arrayOf("knowledge_id", "user_id"))])
+@Table(name = "likes", uniqueConstraints = [UniqueConstraint(columnNames = arrayOf("knowledge_id", "user_id"))],
+    indexes = [Index(name = "idx_knowledge_user", columnList = "knowledge_id, user_id")])
 class Like(
-    knowledge: Knowledge,
+    knowledgeId: Long,
     userId: Long
 ) : BaseEntity() {
     @Id
@@ -21,17 +21,16 @@ class Like(
     @Column(name = "like_id")
     val id: Long? = null
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "knowledge_id", nullable = false)
-    val knowledge: Knowledge = knowledge
+    @Column(name = "knowledge_id", nullable = false)
+    val knowledgeId: Long = knowledgeId
 
     @Column(name = "user_id", nullable = false)
     val userId: Long = userId
 
     companion object {
-        fun create(knowledge: Knowledge, userId: Long,): Like {
+        fun create(knowledgeId: Long, userId: Long): Like {
             return Like(
-                knowledge = knowledge,
+                knowledgeId = knowledgeId,
                 userId = userId
             )
         }
