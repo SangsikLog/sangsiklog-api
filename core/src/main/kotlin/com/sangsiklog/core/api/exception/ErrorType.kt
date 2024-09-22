@@ -20,6 +20,10 @@ enum class ErrorType(
     NOT_FOUND_KNOWLEDGE(3000, "상식을 찾을 수 없습니다."),
     NOT_FOUND_CATEGORY(3001, "해당 카테고리를 찾을 수 없습니다."),
 
+    // 4000~4999 LikeServiceException
+    NOT_FOUND_LIKE(4000, "좋아요를 찾을 수 없습니다."),
+    ALREADY_LIKES(4000, "이미 좋아요 한 상식입니다."),
+
     // default
     UNKNOWN(9999, "알 수 없는 에러"),
     PAGE_INDEX_ERROR(10000, "페이지는 1 보다 작을 수 없습니다."),
