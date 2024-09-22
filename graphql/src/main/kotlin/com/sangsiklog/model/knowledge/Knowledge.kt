@@ -1,6 +1,7 @@
 package com.sangsiklog.model.knowledge
 
 import com.sangsiklog.core.utils.DateTimeUtils
+import com.sangsiklog.model.category.Category
 import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.KnowledgeDetail
 import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.KnowledgeRegistrationResponse
 
@@ -9,6 +10,7 @@ data class Knowledge(
     val userId: Long = 0,
     val title: String = "",
     val description: String = "",
+    val category: Category? = null,
     val createdAt: String? = null
 ) {
     companion object {
@@ -23,6 +25,7 @@ data class Knowledge(
                 id = proto.knowledgeId,
                 title = proto.title,
                 description = proto.description,
+                category = Category.fromProto(proto.category),
                 createdAt = DateTimeUtils.milliToLocalDateTime(proto.createdAt).toString(),
             )
         }

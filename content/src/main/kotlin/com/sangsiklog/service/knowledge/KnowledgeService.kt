@@ -3,6 +3,7 @@ package com.sangsiklog.service.knowledge
 import com.sangsiklog.core.api.exception.ErrorType
 import com.sangsiklog.domain.knowledge.Knowledge
 import com.sangsiklog.exception.knowledge.KnowledgeServiceException
+import com.sangsiklog.repository.category.CategoryRepository
 import com.sangsiklog.repository.knowledge.KnowledgeRepository
 import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.*
 import com.sangsiklog.service.model.knowledge.KnowledgeDetail
@@ -16,15 +17,20 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = true)
 class KnowledgeService(
-    private val repository: KnowledgeRepository
+    private val repository: KnowledgeRepository,
+    private val categoryRepository: CategoryRepository
 ): KnowledgeServiceGrpcKt.KnowledgeServiceCoroutineImplBase() {
     @Transactional
     override suspend fun registerKnowledge(request: KnowledgeRegistrationRequest): KnowledgeRegistrationResponse {
         return withContext(Dispatchers.IO) {
+            val category = categoryRepository.findById(request.categoryId)
+                .orElseThrow { KnowledgeServiceException(ErrorType.NOT_FOUND_CATEGORY) }
+
             val knowledge = Knowledge.create(
                 userId = request.userId,
                 title = request.title,
-                description = request.description
+                description = request.description,
+                category = category
             )
 
             repository.save(knowledge)

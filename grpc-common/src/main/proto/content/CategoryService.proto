@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.sangsiklog.service.category;
+
+import "common/common.proto";
+
+service CategoryService {
+}
+
+message CategoryDetail {
+  int64 categoryId = 1;
+  string name = 2;
+}

@@ -21,11 +21,12 @@ class KnowledgeService(
         port = grpcProperties.contentApi.port
     )
 
-    suspend fun registerKnowledge(userId: Long, title: String, description: String): Knowledge {
+    suspend fun registerKnowledge(userId: Long, title: String, description: String, categoryId: Long): Knowledge {
         val request = KnowledgeRegistrationRequest.newBuilder()
             .setUserId(userId)
             .setTitle(title)
             .setDescription(description)
+            .setCategoryId(categoryId)
             .build()
 
         val response = knowledgeServiceStub.registerKnowledge(request)

@@ -1,6 +1,7 @@
 package com.sangsiklog.domain.knowledge
 
 import com.sangsiklog.domain.base.BaseEntity
+import com.sangsiklog.domain.category.Category
 import jakarta.persistence.*
 
 @Entity
@@ -14,7 +15,8 @@ import jakarta.persistence.*
 class Knowledge(
     userId: Long,
     title: String,
-    description: String
+    description: String,
+    category: Category,
 ) : BaseEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "KNOWLEDGE_SEQ_GENERATOR")
@@ -32,12 +34,18 @@ class Knowledge(
     var description: String = description
         protected set
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", nullable = false)
+    var category: Category = category
+        protected set
+
     companion object {
-        fun create(userId: Long, title: String, description: String): Knowledge {
+        fun create(userId: Long, title: String, description: String, category: Category): Knowledge {
             return Knowledge(
                 userId = userId,
                 title = title,
-                description = description
+                description = description,
+                category = category
             )
         }
     }

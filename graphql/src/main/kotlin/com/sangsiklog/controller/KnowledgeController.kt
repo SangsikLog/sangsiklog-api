@@ -17,9 +17,10 @@ class KnowledgeController(
     suspend fun registerKnowledge(
         @Argument userId: Long,
         @Argument title: String,
-        @Argument description: String
+        @Argument description: String,
+        @Argument categoryId: Long
     ): Knowledge {
-        return knowledgeService.registerKnowledge(userId, title, description)
+        return knowledgeService.registerKnowledge(userId, title, description, categoryId)
     }
 
     @QueryMapping
