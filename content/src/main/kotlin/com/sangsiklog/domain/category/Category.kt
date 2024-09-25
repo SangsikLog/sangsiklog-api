@@ -11,7 +11,7 @@ import jakarta.persistence.*
     initialValue = 1,
     allocationSize = 50
 )
-@Table(name = "category")
+@Table(name = "category", indexes = [Index(name = "idx_category", columnList = "category_id")])
 class Category(
     name: String
 ) : BaseEntity() {

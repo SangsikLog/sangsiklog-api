@@ -10,7 +10,8 @@ import jakarta.persistence.*
     initialValue = 1,
     allocationSize = 50
 )
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = [UniqueConstraint(columnNames = arrayOf("email"))],
+    indexes = [Index(name = "idx_user_email", columnList = "user_id, email")])
 class User(
     nickname: String,
     email: String,
