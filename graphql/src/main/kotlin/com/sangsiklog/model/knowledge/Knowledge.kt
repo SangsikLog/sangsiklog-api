@@ -11,6 +11,7 @@ data class Knowledge(
     val title: String = "",
     val description: String = "",
     val category: Category? = null,
+    val likeCount: Long = 0,
     val createdAt: String? = null
 ) {
     companion object {
@@ -26,6 +27,17 @@ data class Knowledge(
                 title = proto.title,
                 description = proto.description,
                 category = Category.fromProto(proto.category),
+                createdAt = DateTimeUtils.milliToLocalDateTime(proto.createdAt).toString(),
+            )
+        }
+
+        fun fromWithLikeCount(proto: KnowledgeDetail, likeCount: KnowledgeLikeCount): Knowledge {
+            return Knowledge(
+                id = proto.knowledgeId,
+                title = proto.title,
+                description = proto.description,
+                category = Category.fromProto(proto.category),
+                likeCount = likeCount.count,
                 createdAt = DateTimeUtils.milliToLocalDateTime(proto.createdAt).toString(),
             )
         }

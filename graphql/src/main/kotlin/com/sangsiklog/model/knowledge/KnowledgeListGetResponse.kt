@@ -8,9 +8,10 @@ class KnowledgeListGetResponse(
     val pagerInfo: PagerInfo? = null,
 )  {
     companion object {
-        fun fromProto(proto: KnowledgeServiceOuterClass.KnowledgeListGetResponse): KnowledgeListGetResponse {
+        fun fromProto(proto: KnowledgeServiceOuterClass.KnowledgeListGetResponse, likeCounts: List<KnowledgeLikeCount>): KnowledgeListGetResponse {
             val knowledgeList = proto.knowledgeDetailList
-                .map { Knowledge.fromProto(it) }
+                .map { Knowledge.fromWithLikeCount(it,
+                    likeCounts.first { likeCount -> likeCount.knowledgeId == it.knowledgeId }) }
                 .toList()
 
             return KnowledgeListGetResponse(

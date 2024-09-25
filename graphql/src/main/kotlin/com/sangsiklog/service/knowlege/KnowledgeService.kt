@@ -10,6 +10,7 @@ import com.sangsiklog.model.knowledge.KnowledgeListGetResponse
 import com.sangsiklog.model.knowledge.PopularKnowledgeListGetResponse
 import com.sangsiklog.service.knowledge.KnowledgeServiceGrpcKt
 import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.*
+import com.sangsiklog.service.like.LikeService
 import common.Common.Pageable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -22,7 +23,8 @@ import java.util.concurrent.TimeUnit
 class KnowledgeService(
     grpcClient: GrpcClient,
     grpcProperties: GrpcProperties,
-    private val redisTemplate: RedisTemplate<String, Any>
+    private val redisTemplate: RedisTemplate<String, Any>,
+    private val likeService: LikeService
 ) {
     private val knowledgeServiceStub = grpcClient.createStub(
         stubClass = KnowledgeServiceGrpcKt.KnowledgeServiceCoroutineStub::class,
@@ -59,8 +61,11 @@ class KnowledgeService(
                 .build()
 
             val response = knowledgeServiceStub.getKnowledgeList(request)
+            val knowledgeIds = response.knowledgeDetailList.map { it.knowledgeId }.toSet()
 
-            KnowledgeListGetResponse.fromProto(response)
+            val likeCounts = likeService.getLikeCounts(knowledgeIds)
+
+            KnowledgeListGetResponse.fromProto(response, likeCounts)
         }
     }
 
@@ -72,15 +77,21 @@ class KnowledgeService(
 
             val response = knowledgeServiceStub.getKnowledgeDetail(request)
 
-            Knowledge.fromProto(response.knowledgeDetail)
+            val likeCount = likeService.getLikeCounts(setOf(response.knowledgeDetail.knowledgeId))
+                .first { it.knowledgeId == knowledgeId }
+
+            Knowledge.fromWithLikeCount(response.knowledgeDetail, likeCount)
         }
     }
 
     suspend fun getPopularKnowledgeList(): PopularKnowledgeListGetResponse {
         return withContext(Dispatchers.IO) {
             val response = knowledgeServiceStub.getPopularKnowledgeList(Empty.getDefaultInstance())
+            val knowledgeIds = response.knowledgeDetailList.map { it.knowledgeId }.toSet()
 
-            PopularKnowledgeListGetResponse.fromProto(response)
+            val likeCounts = likeService.getLikeCounts(knowledgeIds)
+
+            PopularKnowledgeListGetResponse.fromProto(response, likeCounts)
         }
     }
 

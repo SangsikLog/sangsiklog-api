@@ -49,7 +49,7 @@ class LikeService(
     @Transactional
     override suspend fun getKnowledgeLikeCounts(request: KnowledgeLikeCountsRequest): KnowledgeLikeCountsResponse {
         return withContext(Dispatchers.IO) {
-            val likes = likeRepository.findAllById(request.knowledgeIdsList)
+            val likes = likeRepository.findByKnowledgeIdIn(request.knowledgeIdsList)
 
             val knowledgeLikeCounts = likes.groupBy { it.knowledgeId }
                 .map { entry -> KnowledgeLikeCount.newBuilder()
