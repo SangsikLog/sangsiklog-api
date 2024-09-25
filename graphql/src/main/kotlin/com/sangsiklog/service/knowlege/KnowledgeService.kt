@@ -5,6 +5,7 @@ import com.sangsiklog.config.GrpcProperties
 import com.sangsiklog.core.grpc.GrpcClient
 import com.sangsiklog.model.SortDirection
 import com.sangsiklog.model.knowledge.Knowledge
+import com.sangsiklog.model.knowledge.KnowledgeCountGetResponse
 import com.sangsiklog.model.knowledge.KnowledgeListGetResponse
 import com.sangsiklog.model.knowledge.PopularKnowledgeListGetResponse
 import com.sangsiklog.service.knowledge.KnowledgeServiceGrpcKt
@@ -93,6 +94,14 @@ class KnowledgeService(
             redisTemplate.opsForValue().set("daily_knowledge", result, 24, TimeUnit.HOURS)
 
             result
+        }
+    }
+
+    suspend fun getKnowledgeCount(): KnowledgeCountGetResponse {
+        return withContext(Dispatchers.IO) {
+            val response = knowledgeServiceStub.getKnowledgeCount(Empty.getDefaultInstance())
+
+            KnowledgeCountGetResponse.fromProto(response)
         }
     }
 }

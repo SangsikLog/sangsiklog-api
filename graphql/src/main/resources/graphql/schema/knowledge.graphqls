@@ -3,6 +3,7 @@ extend type Query {
     getKnowledgeDetail(knowledgeId: Long!): Knowledge
     getPopularKnowledgeList: PopularKnowledgeListGetResponse
     getDailyKnowledge: Knowledge
+    getKnowledgeCount: KnowledgeCountGetResponse
 }
 
 extend type Mutation {
@@ -16,6 +17,10 @@ type KnowledgeListGetResponse {
 
 type PopularKnowledgeListGetResponse {
     knowledgeList: [Knowledge!]!
+}
+
+type KnowledgeCountGetResponse {
+    count: Long!
 }
 
 type Knowledge {

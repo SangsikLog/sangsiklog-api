@@ -2,6 +2,7 @@ package com.sangsiklog.controller
 
 import com.sangsiklog.model.SortDirection
 import com.sangsiklog.model.knowledge.Knowledge
+import com.sangsiklog.model.knowledge.KnowledgeCountGetResponse
 import com.sangsiklog.model.knowledge.KnowledgeListGetResponse
 import com.sangsiklog.model.knowledge.PopularKnowledgeListGetResponse
 import com.sangsiklog.service.knowlege.KnowledgeService
@@ -49,5 +50,10 @@ class KnowledgeController(
     @QueryMapping
     suspend fun getDailyKnowledge(): Knowledge {
         return knowledgeService.getDailyKnowledge()
+    }
+
+    @QueryMapping
+    suspend fun getKnowledgeCount(): KnowledgeCountGetResponse {
+        return knowledgeService.getKnowledgeCount()
     }
 }

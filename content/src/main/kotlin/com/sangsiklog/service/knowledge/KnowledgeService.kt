@@ -97,4 +97,12 @@ class KnowledgeService(
                 .build()
         }
     }
+
+    override suspend fun getKnowledgeCount(request: Empty): KnowledgeCountGetResponse {
+        return withContext(Dispatchers.IO) {
+            KnowledgeCountGetResponse.newBuilder()
+                .setCount(repository.count())
+                .build()
+        }
+    }
 }
