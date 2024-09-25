@@ -9,4 +9,6 @@ import java.util.*
 interface LikeRepository: JpaRepository<Like, Long> {
 
     fun findByKnowledgeIdAndUserId(knowledgeId: Long, userId: Long): Optional<Like>
+
+    fun findByKnowledgeIdIn(knowledgeIds: List<Long>): List<Like>
 }

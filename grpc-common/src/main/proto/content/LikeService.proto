@@ -5,8 +5,9 @@ package com.sangsiklog.service.like;
 import "common/common.proto";
 
 service LikeService {
-  rpc addKnowledgeLike(KnowledgeLikeAddRequest) returns (KnowledgeLikeAddResponse);
-  rpc removeKnowledgeLike(KnowledgeLikeRemoveRequest) returns (KnowledgeLikeRemoveResponse);
+  rpc AddKnowledgeLike(KnowledgeLikeAddRequest) returns (KnowledgeLikeAddResponse);
+  rpc RemoveKnowledgeLike(KnowledgeLikeRemoveRequest) returns (KnowledgeLikeRemoveResponse);
+  rpc GetKnowledgeLikeCounts(KnowledgeLikeCountsRequest) returns (KnowledgeLikeCountsResponse);
 }
 
 message KnowledgeLikeAddRequest {
@@ -25,6 +26,19 @@ message KnowledgeLikeRemoveRequest {
 
 message KnowledgeLikeRemoveResponse {
   int64 likeId = 1;
+}
+
+message KnowledgeLikeCountsRequest {
+  repeated int64 knowledgeIds = 1;
+}
+
+message KnowledgeLikeCountsResponse {
+  repeated KnowledgeLikeCount knowledgeLikeCount = 1;
+}
+
+message KnowledgeLikeCount {
+  int64 knowledgeId = 1;
+  int64 count = 2;
 }
 
 message LikeDetail {

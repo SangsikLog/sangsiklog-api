@@ -29,5 +29,6 @@ type Knowledge {
     title: String!
     description: String!
     category: Category!
+    likeCount: Long!
     createdAt: String
 }

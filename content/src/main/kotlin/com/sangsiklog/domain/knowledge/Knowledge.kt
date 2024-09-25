@@ -11,7 +11,7 @@ import jakarta.persistence.*
     initialValue = 1,
     allocationSize = 50
 )
-@Table(name = "knowledge")
+@Table(name = "knowledge", indexes = [Index(name = "idx_knowledge", columnList = "knowledge_id")])
 class Knowledge(
     userId: Long,
     title: String,
@@ -35,7 +35,7 @@ class Knowledge(
         protected set
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id", nullable = false, foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT))
     var category: Category = category
         protected set
 

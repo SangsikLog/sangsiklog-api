@@ -2,8 +2,10 @@ package com.sangsiklog.service.like
 
 import com.sangsiklog.config.GrpcProperties
 import com.sangsiklog.core.grpc.GrpcClient
+import com.sangsiklog.model.knowledge.KnowledgeLikeCount
 import com.sangsiklog.model.like.Like
 import com.sangsiklog.service.like.LikeServiceOuterClass.KnowledgeLikeAddRequest
+import com.sangsiklog.service.like.LikeServiceOuterClass.KnowledgeLikeCountsRequest
 import com.sangsiklog.service.like.LikeServiceOuterClass.KnowledgeLikeRemoveRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -44,5 +46,17 @@ class LikeService(
 
             Like.fromProto(response)
         }
+    }
+
+    suspend fun getLikeCounts(knowledgeIds: Set<Long>): List<KnowledgeLikeCount> {
+        val request = KnowledgeLikeCountsRequest.newBuilder()
+            .addAllKnowledgeIds(knowledgeIds)
+            .build()
+
+        val response = likeServiceStub.getKnowledgeLikeCounts(request)
+
+        return response.knowledgeLikeCountList
+            .map { KnowledgeLikeCount.fromProto(it) }
+
     }
 }
