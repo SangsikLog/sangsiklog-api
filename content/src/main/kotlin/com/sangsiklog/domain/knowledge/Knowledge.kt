@@ -11,7 +11,7 @@ import jakarta.persistence.*
     initialValue = 1,
     allocationSize = 50
 )
-@Table(name = "knowledge", indexes = [Index(name = "idx_knowledge", columnList = "knowledge_id")])
+@Table(name = "knowledge", indexes = [Index(name = "idx_knowledge_category", columnList = "knowledge_id, category_id")])
 class Knowledge(
     userId: Long,
     title: String,
