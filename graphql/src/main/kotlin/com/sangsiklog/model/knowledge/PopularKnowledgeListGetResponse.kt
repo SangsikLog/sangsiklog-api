@@ -9,7 +9,7 @@ class PopularKnowledgeListGetResponse(
         fun fromProto(proto: KnowledgeServiceOuterClass.PopularKnowledgeListGetResponse, likeCounts: List<KnowledgeLikeCount>): PopularKnowledgeListGetResponse {
             val knowledgeList = proto.knowledgeDetailList
                 .map { Knowledge.fromWithLikeCount(it,
-                    likeCounts.first { likeCount -> likeCount.knowledgeId == it.knowledgeId })
+                    likeCounts.firstOrNull { likeCount -> likeCount.knowledgeId == it.knowledgeId })
                 }
                 .toList()
 

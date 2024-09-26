@@ -10,7 +10,7 @@ service KnowledgeService {
   rpc RegisterKnowledge(KnowledgeRegistrationRequest) returns (KnowledgeRegistrationResponse);
   rpc GetKnowledgeList(KnowledgeListGetRequest) returns (KnowledgeListGetResponse);
   rpc GetKnowledgeDetail(KnowledgeDetailGetRequest) returns (KnowledgeDetailGetResponse);
-  rpc GetPopularKnowledgeList(google.protobuf.Empty) returns (PopularKnowledgeListGetResponse);
+  rpc GetPopularKnowledgeList(PopularKnowledgeListGetRequest) returns (PopularKnowledgeListGetResponse);
   rpc GetRandomKnowledge(google.protobuf.Empty) returns (RandomKnowledgeGetResponse);
   rpc GetKnowledgeCount(google.protobuf.Empty) returns (KnowledgeCountGetResponse);
 }
@@ -27,7 +27,8 @@ message KnowledgeRegistrationResponse {
 }
 
 message KnowledgeListGetRequest {
-  common.Pageable pageable = 1;
+  optional int64 categoryId = 1;
+  common.Pageable pageable = 2;
 }
 
 message KnowledgeListGetResponse {
@@ -41,6 +42,10 @@ message KnowledgeDetailGetRequest {
 
 message KnowledgeDetailGetResponse {
   KnowledgeDetail knowledgeDetail = 1;
+}
+
+message PopularKnowledgeListGetRequest {
+  optional int64 categoryId = 1;
 }
 
 message PopularKnowledgeListGetResponse {

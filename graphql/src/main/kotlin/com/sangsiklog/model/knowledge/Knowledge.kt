@@ -31,13 +31,13 @@ data class Knowledge(
             )
         }
 
-        fun fromWithLikeCount(proto: KnowledgeDetail, likeCount: KnowledgeLikeCount): Knowledge {
+        fun fromWithLikeCount(proto: KnowledgeDetail, likeCount: KnowledgeLikeCount?): Knowledge {
             return Knowledge(
                 id = proto.knowledgeId,
                 title = proto.title,
                 description = proto.description,
                 category = Category.fromProto(proto.category),
-                likeCount = likeCount.count,
+                likeCount = likeCount?.count ?: 0,
                 createdAt = DateTimeUtils.milliToLocalDateTime(proto.createdAt).toString(),
             )
         }
