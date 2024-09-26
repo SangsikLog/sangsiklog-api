@@ -47,7 +47,7 @@ class KnowledgeService(
         }
     }
 
-    suspend fun getKnowledgeList(page: Int, size: Int, sortColumn: String, direction: SortDirection): KnowledgeListGetResponse {
+    suspend fun getKnowledgeList(page: Int, size: Int, sortColumn: String, direction: SortDirection, categoryId: Long?): KnowledgeListGetResponse {
         return withContext(Dispatchers.IO) {
             val pageable = Pageable.newBuilder()
                 .setPage(page)
@@ -56,9 +56,11 @@ class KnowledgeService(
                 .setDirection(direction.toProto())
                 .build()
 
-            val request = KnowledgeListGetRequest.newBuilder()
+            val requestBuilder = KnowledgeListGetRequest.newBuilder()
                 .setPageable(pageable)
-                .build()
+            categoryId?.let { requestBuilder.setCategoryId(it) }
+
+            val request = requestBuilder.build()
 
             val response = knowledgeServiceStub.getKnowledgeList(request)
             val knowledgeIds = response.knowledgeDetailList.map { it.knowledgeId }.toSet()
@@ -78,15 +80,22 @@ class KnowledgeService(
             val response = knowledgeServiceStub.getKnowledgeDetail(request)
 
             val likeCount = likeService.getLikeCounts(setOf(response.knowledgeDetail.knowledgeId))
-                .first { it.knowledgeId == knowledgeId }
+                .firstOrNull { it.knowledgeId == knowledgeId }
 
             Knowledge.fromWithLikeCount(response.knowledgeDetail, likeCount)
         }
     }
 
-    suspend fun getPopularKnowledgeList(): PopularKnowledgeListGetResponse {
+    suspend fun getPopularKnowledgeList(categoryId: Long?): PopularKnowledgeListGetResponse {
         return withContext(Dispatchers.IO) {
-            val response = knowledgeServiceStub.getPopularKnowledgeList(Empty.getDefaultInstance())
+            val requestBuilder = PopularKnowledgeListGetRequest.newBuilder()
+            categoryId?.let {
+                requestBuilder.setCategoryId(it)
+            }
+
+            val request = requestBuilder.build()
+
+            val response = knowledgeServiceStub.getPopularKnowledgeList(request)
             val knowledgeIds = response.knowledgeDetailList.map { it.knowledgeId }.toSet()
 
             val likeCounts = likeService.getLikeCounts(knowledgeIds)
