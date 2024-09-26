@@ -2,6 +2,7 @@ package com.sangsiklog.service.knowledge
 
 import com.google.protobuf.Empty
 import com.sangsiklog.core.api.exception.ErrorType
+import com.sangsiklog.domain.category.Category
 import com.sangsiklog.domain.knowledge.Knowledge
 import com.sangsiklog.exception.knowledge.KnowledgeServiceException
 import com.sangsiklog.repository.category.CategoryRepository
@@ -44,9 +45,16 @@ class KnowledgeService(
 
     override suspend fun getKnowledgeList(request: KnowledgeListGetRequest): KnowledgeListGetResponse {
         return withContext(Dispatchers.IO) {
+            val category: Category? = if (request.hasCategoryId()) {
+                categoryRepository.findById(request.categoryId)
+                    .orElseThrow{ KnowledgeServiceException(ErrorType.NOT_FOUND_CATEGORY) }
+            } else {
+                null
+            }
+
             val pageable = PageableUtil.createByProto(request.pageable)
 
-            val knowledgeList = repository.findAll(pageable)
+            val knowledgeList = repository.findAllByCategory(category, pageable)
 
             val knowledgeDetailList = knowledgeList
                 .map { KnowledgeDetail.from(it).toProto() }
@@ -74,9 +82,16 @@ class KnowledgeService(
        }
     }
 
-    override suspend fun getPopularKnowledgeList(request: Empty): PopularKnowledgeListGetResponse {
+    override suspend fun getPopularKnowledgeList(request: PopularKnowledgeListGetRequest): PopularKnowledgeListGetResponse {
         return withContext(Dispatchers.IO) {
-            val knowledgeList = repository.findPopularKnowledgeByLikes()
+            val category: Category? = if (request.hasCategoryId()) {
+                categoryRepository.findById(request.categoryId)
+                    .orElseThrow{ KnowledgeServiceException(ErrorType.NOT_FOUND_CATEGORY) }
+            } else {
+                null
+            }
+
+            val knowledgeList = repository.findPopularKnowledgeByLikes(category)
             val knowledgeDetailList = knowledgeList
                 .map { KnowledgeDetail.from(it).toProto() }
                 .toList()
