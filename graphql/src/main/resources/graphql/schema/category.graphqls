@@ -1,3 +1,11 @@
+extend type Query {
+    getCategoryList: CategoryListGetResponse
+}
+
+type CategoryListGetResponse {
+    categoryList: [Category!]!
+}
+
 type Category {
     id: Long!
     name: String!
