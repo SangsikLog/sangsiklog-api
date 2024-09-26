@@ -1,9 +1,19 @@
 extend type Query {
     getCategoryList: CategoryListGetResponse
+    getCategoryKnowledgeStatistic: CategoryKnowledgeStatisticGetResponse
 }
 
 type CategoryListGetResponse {
     categoryList: [Category!]!
+}
+
+type CategoryKnowledgeStatisticGetResponse {
+    statistic: [CategoryKnowledgeStatistic!]!
+}
+
+type CategoryKnowledgeStatistic {
+    categoryId: Long!,
+    knowledgeCount: Long!
 }
 
 type Category {

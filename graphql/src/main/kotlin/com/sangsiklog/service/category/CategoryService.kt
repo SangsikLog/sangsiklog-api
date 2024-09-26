@@ -3,6 +3,8 @@ package com.sangsiklog.service.category
 import com.google.protobuf.Empty
 import com.sangsiklog.config.GrpcProperties
 import com.sangsiklog.core.grpc.GrpcClient
+import com.sangsiklog.model.category.CategoryKnowledgeStatistic
+import com.sangsiklog.model.category.CategoryKnowledgeStatisticGetResponse
 import com.sangsiklog.model.category.CategoryListGetResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -24,6 +26,14 @@ class CategoryService(
             val response = categoryServiceStub.getCategoryList(Empty.getDefaultInstance())
 
             CategoryListGetResponse.fromProto(response)
+        }
+    }
+
+    suspend fun getCategoryKnowledgeStatistic(): CategoryKnowledgeStatisticGetResponse {
+        return withContext(Dispatchers.IO) {
+            val response = categoryServiceStub.getCategoryKnowledgeStatistic(Empty.getDefaultInstance())
+
+            CategoryKnowledgeStatisticGetResponse.fromProto(response)
         }
     }
 }
