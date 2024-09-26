@@ -2,9 +2,15 @@ syntax = "proto3";
 
 package com.sangsiklog.service.category;
 
+import "google/protobuf/empty.proto";
 import "common/common.proto";
 
 service CategoryService {
+  rpc GetCategoryList(google.protobuf.Empty) returns (CategoryListGetResponse);
+}
+
+message CategoryListGetResponse {
+  repeated CategoryDetail categoryDetail = 1;
 }
 
 message CategoryDetail {
