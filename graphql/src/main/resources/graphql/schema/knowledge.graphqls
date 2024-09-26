@@ -1,7 +1,7 @@
 extend type Query {
-    getKnowledgeList(page: Int!, size: Int!, sortColumn: String!, direction: SortDirection! = DESC): KnowledgeListGetResponse
+    getKnowledgeList(page: Int!, size: Int!, sortColumn: String!, direction: SortDirection! = DESC, categoryId: Long): KnowledgeListGetResponse
     getKnowledgeDetail(knowledgeId: Long!): Knowledge
-    getPopularKnowledgeList: PopularKnowledgeListGetResponse
+    getPopularKnowledgeList(categoryId: Long): PopularKnowledgeListGetResponse
     getDailyKnowledge: Knowledge
     getKnowledgeCount: KnowledgeCountGetResponse
 }

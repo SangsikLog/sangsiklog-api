@@ -30,9 +30,10 @@ class KnowledgeController(
         @Argument page: Int,
         @Argument size: Int,
         @Argument sortColumn: String,
-        @Argument direction: SortDirection = SortDirection.DESC
+        @Argument direction: SortDirection = SortDirection.DESC,
+        @Argument categoryId: Long? = null
     ): KnowledgeListGetResponse {
-        return knowledgeService.getKnowledgeList(page, size, sortColumn, direction)
+        return knowledgeService.getKnowledgeList(page, size, sortColumn, direction, categoryId)
     }
 
     @QueryMapping
@@ -43,8 +44,8 @@ class KnowledgeController(
     }
 
     @QueryMapping
-    suspend fun getPopularKnowledgeList(): PopularKnowledgeListGetResponse {
-        return knowledgeService.getPopularKnowledgeList()
+    suspend fun getPopularKnowledgeList(@Argument categoryId: Long? = null): PopularKnowledgeListGetResponse {
+        return knowledgeService.getPopularKnowledgeList(categoryId)
     }
 
     @QueryMapping

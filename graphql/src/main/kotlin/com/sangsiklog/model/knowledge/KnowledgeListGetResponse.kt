@@ -11,7 +11,7 @@ class KnowledgeListGetResponse(
         fun fromProto(proto: KnowledgeServiceOuterClass.KnowledgeListGetResponse, likeCounts: List<KnowledgeLikeCount>): KnowledgeListGetResponse {
             val knowledgeList = proto.knowledgeDetailList
                 .map { Knowledge.fromWithLikeCount(it,
-                    likeCounts.first { likeCount -> likeCount.knowledgeId == it.knowledgeId }) }
+                    likeCounts.firstOrNull { likeCount -> likeCount.knowledgeId == it.knowledgeId }) }
                 .toList()
 
             return KnowledgeListGetResponse(
