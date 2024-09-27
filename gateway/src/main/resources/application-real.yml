@@ -18,23 +18,24 @@ spring:
         - id: auth-route
           uri: lb://auth-api
           predicates:
-            - Path=/auth/**
+            - Path=/api/auth/**
             - Method=POST,GET,OPTIONS
           filters:
             - name: CircuitBreaker
               args:
                 name: authCircuitBreaker
                 fallbackUri: forward:/fallback/authFailure
-            - RewritePath=/auth$, /v1/auth
-            - RewritePath=/auth/(?<segment>.*), /v1/auth/${segment}
+            - RewritePath=/api/auth$, /v1/auth
+            - RewritePath=/api/auth/(?<segment>.*), /v1/auth/${segment}
 
         - id: graphql-route
           uri: lb://graphql-service
           predicates:
-            - Path=/graphql
+            - Path=/api/graphql
             - Method=POST,GET,OPTIONS
           filters:
             - AuthenticationFilter
+            - RewritePath=/api/graphql$, /graphql
 
       global-cors:
         cors-configurations:

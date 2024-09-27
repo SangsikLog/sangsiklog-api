@@ -12,14 +12,14 @@ eureka:
     registry:
       default-open-for-traffic-count: 1
   client:
-    registerWithEureka: true
-    fetchRegistry: true
+    registerWithEureka: false
+    fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
     region: default
 
   server:
-    renewal-percent-threshold: 0.85
+    renewal-percent-threshold: 0
     enable-self-preservation: true
 
 management:
