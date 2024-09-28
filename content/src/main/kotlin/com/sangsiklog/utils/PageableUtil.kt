@@ -14,13 +14,18 @@ class PageableUtil {
             if (pageable.page < 1) {
                 throw KnowledgeServiceException(ErrorType.PAGE_INDEX_ERROR)
             }
-            val sort = if (pageable.direction == Enum.SortDirection.ASC) {
-                Sort.by(pageable.sortColumn).ascending()
-            } else {
-                Sort.by(pageable.sortColumn).descending()
+
+            if (pageable.hasSortColumn()) {
+                val sort = if (pageable.direction == Enum.SortDirection.ASC) {
+                    Sort.by(pageable.sortColumn).ascending()
+                } else {
+                    Sort.by(pageable.sortColumn).descending()
+                }
+
+                return PageRequest.of(pageable.page-1, pageable.size, sort)
             }
 
-            return PageRequest.of(pageable.page-1, pageable.size, sort)
+            return PageRequest.of(pageable.page-1, pageable.size)
         }
     }
 }

@@ -13,6 +13,7 @@ service KnowledgeService {
   rpc GetPopularKnowledgeList(PopularKnowledgeListGetRequest) returns (PopularKnowledgeListGetResponse);
   rpc GetRandomKnowledge(google.protobuf.Empty) returns (RandomKnowledgeGetResponse);
   rpc GetKnowledgeCount(google.protobuf.Empty) returns (KnowledgeCountGetResponse);
+  rpc SearchKnowledge(KnowledgeSearchRequest) returns (KnowledgeListGetResponse);
 }
 
 message KnowledgeRegistrationRequest {
@@ -58,6 +59,12 @@ message RandomKnowledgeGetResponse {
 
 message KnowledgeCountGetResponse {
   int64 count = 1;
+}
+
+message KnowledgeSearchRequest {
+  string query = 1;
+  optional int64 categoryId = 2;
+  common.Pageable pageable = 3;
 }
 
 message KnowledgeDetail {

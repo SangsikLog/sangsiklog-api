@@ -9,10 +9,14 @@ import com.sangsiklog.repository.category.CategoryRepository
 import com.sangsiklog.repository.knowledge.KnowledgeRepository
 import com.sangsiklog.service.knowledge.KnowledgeServiceOuterClass.*
 import com.sangsiklog.service.model.knowledge.KnowledgeDetail
+import com.sangsiklog.service.model.knowledge.KnowledgeDocument
 import com.sangsiklog.utils.PageableUtil
 import common.Common.PagerInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.elasticsearch.index.query.QueryBuilders
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -20,7 +24,8 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional(readOnly = true)
 class KnowledgeService(
     private val repository: KnowledgeRepository,
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: CategoryRepository,
+    private val elasticsearchTemplate: ElasticsearchRestTemplate
 ): KnowledgeServiceGrpcKt.KnowledgeServiceCoroutineImplBase() {
     @Transactional
     override suspend fun registerKnowledge(request: KnowledgeRegistrationRequest): KnowledgeRegistrationResponse {
@@ -117,6 +122,37 @@ class KnowledgeService(
         return withContext(Dispatchers.IO) {
             KnowledgeCountGetResponse.newBuilder()
                 .setCount(repository.count())
+                .build()
+        }
+    }
+
+    override suspend fun searchKnowledge(request: KnowledgeSearchRequest): KnowledgeListGetResponse {
+        return withContext(Dispatchers.IO) {
+            val boolQuery = QueryBuilders.boolQuery()
+                .must(QueryBuilders.wildcardQuery("title", "*${request.query}*"))
+                .apply {
+                    if (request.hasCategoryId()) {
+                        filter(QueryBuilders.termQuery("categoryId", request.categoryId))
+                    }
+                }
+
+            val pageable = PageableUtil.createByProto(request.pageable)
+
+            val query = NativeSearchQueryBuilder()
+                .withQuery(boolQuery)
+                .withPageable(pageable)
+                .build()
+
+            val searchHits = elasticsearchTemplate.search(query, KnowledgeDocument::class.java)
+            val knowledgeDetailList = searchHits.searchHits.map { KnowledgeDetail.from(it.content).toProto() }
+
+            val pagerInfo = PagerInfo.newBuilder()
+                .setTotalCount(searchHits.totalHits)
+                .build()
+
+            KnowledgeListGetResponse.newBuilder()
+                .addAllKnowledgeDetail(knowledgeDetailList)
+                .setPagerInfo(pagerInfo)
                 .build()
         }
     }
