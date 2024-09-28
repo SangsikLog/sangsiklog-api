@@ -2,9 +2,11 @@ package com.sangsiklog.domain.knowledge
 
 import com.sangsiklog.domain.base.BaseEntity
 import com.sangsiklog.domain.category.Category
+import com.sangsiklog.domain.listener.KnowledgeListener
 import jakarta.persistence.*
 
 @Entity
+@EntityListeners(KnowledgeListener::class)
 @SequenceGenerator(
     name = "KNOWLEDGE_SEQ_GENERATOR",
     sequenceName = "KNOWLEDGE_SEQ",
