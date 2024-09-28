@@ -4,6 +4,7 @@ extend type Query {
     getPopularKnowledgeList(categoryId: Long): PopularKnowledgeListGetResponse
     getDailyKnowledge: Knowledge
     getKnowledgeCount: KnowledgeCountGetResponse
+    searchKnowledge(query: String!, categoryId: Long, page: Int!, size: Int!): KnowledgeListGetResponse
 }
 
 extend type Mutation {

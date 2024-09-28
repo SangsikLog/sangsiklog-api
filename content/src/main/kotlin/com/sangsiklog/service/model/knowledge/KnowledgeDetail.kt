@@ -29,7 +29,7 @@ class KnowledgeDetail(
                 id = knowledgeDocument.id,
                 title = knowledgeDocument.title,
                 description = knowledgeDocument.description,
-                createdAt = knowledgeDocument.createdAt
+                createdAt = knowledgeDocument.toLocalDateTime()
             )
         }
     }

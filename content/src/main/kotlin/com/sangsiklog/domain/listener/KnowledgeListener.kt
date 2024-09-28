@@ -12,27 +12,13 @@ class KnowledgeListener(
 ) {
     @PostPersist
     fun onPostPersist(knowledge: Knowledge) {
-        val productDocument = KnowledgeDocument(
-            id = knowledge.id!!,
-            title = knowledge.title,
-            description = knowledge.description,
-            categoryId = knowledge.category.id,
-            createdAt = knowledge.createdAt
-        )
-
+        val productDocument = KnowledgeDocument.fromKnowledge(knowledge)
         elasticsearchTemplate.save(productDocument)
     }
 
     @PostUpdate
     fun onPostUpdate(knowledge: Knowledge) {
-        val productDocument = KnowledgeDocument(
-            id = knowledge.id!!,
-            title = knowledge.title,
-            description = knowledge.description,
-            categoryId = knowledge.category.id,
-            createdAt = knowledge.createdAt
-        )
-
+        val productDocument = KnowledgeDocument.fromKnowledge(knowledge)
         elasticsearchTemplate.save(productDocument)
     }
 

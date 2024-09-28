@@ -124,4 +124,27 @@ class KnowledgeService(
             KnowledgeCountGetResponse.fromProto(response)
         }
     }
+
+    suspend fun searchKnowledge(query: String, categoryId: Long?, page: Int, size: Int): KnowledgeListGetResponse {
+        return withContext(Dispatchers.IO) {
+            val pageable = Pageable.newBuilder()
+                .setPage(page)
+                .setSize(size)
+                .build()
+
+            val requestBuilder = KnowledgeSearchRequest.newBuilder()
+                .setQuery(query)
+                .setPageable(pageable)
+            categoryId?.let { requestBuilder.setCategoryId(it) }
+
+            val request = requestBuilder.build()
+
+            val response = knowledgeServiceStub.searchKnowledge(request)
+            val knowledgeIds = response.knowledgeDetailList.map { it.knowledgeId }.toSet()
+
+            val likeCounts = likeService.getLikeCounts(knowledgeIds)
+
+            KnowledgeListGetResponse.fromProto(response, likeCounts)
+        }
+    }
 }
