@@ -7,8 +7,8 @@ import "common/enum.proto";
 message Pageable {
   int32 page = 1;
   int32 size = 2;
-  string sortColumn = 3;
-  common.SortDirection direction = 4;
+  optional string sortColumn = 3;
+  optional common.SortDirection direction = 4;
 }
 
 message PagerInfo {

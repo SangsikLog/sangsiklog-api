@@ -23,15 +23,28 @@ class KnowledgeDetail(
                 createdAt = knowledge.createdAt
             )
         }
+
+        fun from(knowledgeDocument: KnowledgeDocument): KnowledgeDetail {
+            return KnowledgeDetail(
+                id = knowledgeDocument.id,
+                title = knowledgeDocument.title,
+                description = knowledgeDocument.description,
+                createdAt = knowledgeDocument.toLocalDateTime()
+            )
+        }
     }
 
     fun toProto(): KnowledgeServiceOuterClass.KnowledgeDetail {
-        return KnowledgeServiceOuterClass.KnowledgeDetail.newBuilder()
+        val builder = KnowledgeServiceOuterClass.KnowledgeDetail.newBuilder()
             .setKnowledgeId(this.id)
             .setTitle(this.title)
             .setDescription(this.description)
-            .setCategory(this.categoryDetail?.toProto())
             .setCreatedAt(this.createdAt!!.toUnixTimestampInMilliseconds())
-            .build()
+
+        if (categoryDetail != null) {
+            builder.setCategory(this.categoryDetail.toProto())
+        }
+
+        return builder.build()
     }
 }

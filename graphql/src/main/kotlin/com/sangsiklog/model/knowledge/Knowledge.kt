@@ -26,7 +26,7 @@ data class Knowledge(
                 id = proto.knowledgeId,
                 title = proto.title,
                 description = proto.description,
-                category = Category.fromProto(proto.category),
+                category = proto.category?.let { Category.fromProto(it) },
                 createdAt = DateTimeUtils.milliToLocalDateTime(proto.createdAt).toString(),
             )
         }
@@ -36,7 +36,7 @@ data class Knowledge(
                 id = proto.knowledgeId,
                 title = proto.title,
                 description = proto.description,
-                category = Category.fromProto(proto.category),
+                category = proto.category?.let { Category.fromProto(it) },
                 likeCount = likeCount?.count ?: 0,
                 createdAt = DateTimeUtils.milliToLocalDateTime(proto.createdAt).toString(),
             )

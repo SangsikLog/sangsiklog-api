@@ -57,4 +57,16 @@ class KnowledgeController(
     suspend fun getKnowledgeCount(): KnowledgeCountGetResponse {
         return knowledgeService.getKnowledgeCount()
     }
+
+    @QueryMapping
+    suspend fun searchKnowledge(
+        @Argument query: String,
+        @Argument categoryId: Long? = null,
+        @Argument page: Int,
+        @Argument size: Int
+    ): KnowledgeListGetResponse {
+        return knowledgeService.searchKnowledge(query, categoryId, page, size)
+    }
+
+
 }
