@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package com.sangsiklog.service.knowledge;
+
+import "google/protobuf/empty.proto";
+import "common/common.proto";
+import "content/CategoryService.proto";
+
+service KnowledgeService {
+  rpc RegisterKnowledge(KnowledgeRegistrationRequest) returns (KnowledgeRegistrationResponse);
+  rpc GetKnowledgeList(KnowledgeListGetRequest) returns (KnowledgeListGetResponse);
+  rpc GetKnowledgeDetail(KnowledgeDetailGetRequest) returns (KnowledgeDetailGetResponse);
+  rpc GetPopularKnowledgeList(PopularKnowledgeListGetRequest) returns (PopularKnowledgeListGetResponse);
+  rpc GetRandomKnowledge(google.protobuf.Empty) returns (RandomKnowledgeGetResponse);
+  rpc GetKnowledgeCount(google.protobuf.Empty) returns (KnowledgeCountGetResponse);
+  rpc SearchKnowledge(KnowledgeSearchRequest) returns (KnowledgeListGetResponse);
+}
+
+message KnowledgeRegistrationRequest {
+  int64 userId = 1;
+  string title = 2;
+  string description = 3;
+  int64 categoryId = 4;
+}
+
+message KnowledgeRegistrationResponse {
+  int64 knowledgeId = 1;
+}
+
+message KnowledgeListGetRequest {
+  optional int64 categoryId = 1;
+  common.Pageable pageable = 2;
+}
+
+message KnowledgeListGetResponse {
+  repeated KnowledgeDetail knowledgeDetail = 1;
+  common.PagerInfo pagerInfo = 2;
+}
+
+message KnowledgeDetailGetRequest {
+  int64 knowledgeId = 1;
+}
+
+message KnowledgeDetailGetResponse {
+  KnowledgeDetail knowledgeDetail = 1;
+}
+
+message PopularKnowledgeListGetRequest {
+  optional int64 categoryId = 1;
+}
+
+message PopularKnowledgeListGetResponse {
+  repeated KnowledgeDetail knowledgeDetail = 1;
+}
+
+message RandomKnowledgeGetResponse {
+  KnowledgeDetail knowledgeDetail = 1;
+}
+
+message KnowledgeCountGetResponse {
+  int64 count = 1;
+}
+
+message KnowledgeSearchRequest {
+  string query = 1;
+  optional int64 categoryId = 2;
+  common.Pageable pageable = 3;
+}
+
+message KnowledgeDetail {
+  int64 knowledgeId = 1;
+  string title = 2;
+  string description = 3;
+  category.CategoryDetail category = 4;
+  int64 createdAt = 5;
+}

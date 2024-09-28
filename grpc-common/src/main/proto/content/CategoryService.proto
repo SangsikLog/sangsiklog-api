@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package com.sangsiklog.service.category;
+
+import "google/protobuf/empty.proto";
+import "common/common.proto";
+
+service CategoryService {
+  rpc GetCategoryList(google.protobuf.Empty) returns (CategoryListGetResponse);
+  rpc GetCategoryKnowledgeStatistic(google.protobuf.Empty) returns (CategoryKnowledgeStatisticGetResponse);
+}
+
+message CategoryListGetResponse {
+  repeated CategoryDetail categoryDetail = 1;
+}
+
+message CategoryKnowledgeStatisticGetResponse {
+  repeated CategoryKnowledgeStatistic categoryKnowledgeStatistic = 1;
+}
+
+message CategoryKnowledgeStatistic {
+  int64 categoryId = 1;
+  int64 knowledgeCount = 2;
+}
+
+message CategoryDetail {
+  int64 categoryId = 1;
+  string name = 2;
+}

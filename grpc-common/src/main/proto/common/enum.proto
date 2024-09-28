@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package common;
+
+enum SortDirection {
+  ASC = 0;
+  DESC = 1;
+}

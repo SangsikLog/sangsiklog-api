@@ -1,0 +1,41 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: service-discovery
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: service-discovery
+    registry:
+      default-open-for-traffic-count: 1
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    region: default
+
+  server:
+    renewal-percent-threshold: 0
+    enable-self-preservation: true
+
+management:
+  tracing:
+    sampling:
+      probability: 0.1
+    propagation:
+      consume: b3
+      produce: b3_multi
+  zipkin:
+    tracing:
+      endpoint: "http://zipkin:9411/api/v2/spans"
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - prometheus

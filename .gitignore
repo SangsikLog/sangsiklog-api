@@ -38,3 +38,8 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+### infrastructure data ###
+/infrastructure/local/mysql-data/
+/infrastructure/local/es-data/
+/infrastructure/local/redis-data/

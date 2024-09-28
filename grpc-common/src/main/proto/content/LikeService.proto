@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package com.sangsiklog.service.like;
+
+import "common/common.proto";
+
+service LikeService {
+  rpc AddKnowledgeLike(KnowledgeLikeAddRequest) returns (KnowledgeLikeAddResponse);
+  rpc RemoveKnowledgeLike(KnowledgeLikeRemoveRequest) returns (KnowledgeLikeRemoveResponse);
+  rpc GetKnowledgeLikeCounts(KnowledgeLikeCountsRequest) returns (KnowledgeLikeCountsResponse);
+}
+
+message KnowledgeLikeAddRequest {
+  int64 knowledgeId = 1;
+  int64 userId = 2;
+}
+
+message KnowledgeLikeAddResponse {
+  int64 likeId = 1;
+}
+
+message KnowledgeLikeRemoveRequest {
+  int64 knowledgeId = 1;
+  int64 userId = 2;
+}
+
+message KnowledgeLikeRemoveResponse {
+  int64 likeId = 1;
+}
+
+message KnowledgeLikeCountsRequest {
+  repeated int64 knowledgeIds = 1;
+}
+
+message KnowledgeLikeCountsResponse {
+  repeated KnowledgeLikeCount knowledgeLikeCount = 1;
+}
+
+message KnowledgeLikeCount {
+  int64 knowledgeId = 1;
+  int64 count = 2;
+}
+
+message LikeDetail {
+  int64 likeId = 1;
+  int64 knowledgeId = 2;
+  int64 userId = 3;
+}

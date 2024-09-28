@@ -1,0 +1,70 @@
+replicaCount: 1
+
+imagePullSecret: regcred
+
+image:
+  prometheus:
+    repository: prom/prometheus
+    tag: v2.53.2
+  nodeExporter:
+    repository: prom/node-exporter
+    tag: v1.8.2
+  cadvisor:
+    repository: gcr.io/cadvisor/cadvisor
+    tag: v0.45.0
+  alertmanager:
+    repository: prom/alertmanager
+    tag: v0.27.0
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  prometheus:
+    port: 9090
+  nodeExporter:
+    port: 9100
+  cadvisor:
+    port: 8080
+  alertmanager:
+    port: 9093
+
+args:
+  nodeExporter:
+    - '--path.rootfs=/host'
+    - '--path.procfs=/host/proc'
+    - '--path.sysfs=/host/sys'
+    - '--collector.filesystem.ignored-mount-points'
+    - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+  alertmanager:
+    - '--config.file=/etc/alertmanager/alertmanager.yml'
+    - '--storage.path=/alertmanager'
+
+resources:
+  prometheus:
+    limits:
+      cpu: 400m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+  nodeExporter:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+  cadvisor:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+  alertmanager:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi

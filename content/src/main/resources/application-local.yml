@@ -1,0 +1,70 @@
+server:
+  port: 8082
+
+grpc:
+  server:
+    port: 9091
+
+spring:
+  application:
+    name: content-api
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sangsiklog
+    username: sangsiklog
+    password: sangsik123
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  data:
+    elasticsearch:
+      hostname: localhost
+      port: 9200
+      schema: http
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: content-api
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+    propagation:
+      consume: b3
+      produce: b3_multi
+  zipkin:
+    tracing:
+      endpoint: "http://localhost:9411/api/v2/spans"
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - loggers
+          - mappings
+          - metrics
+          - shutdown
+          - prometheus
+
+logging:
+  level:
+    org.hibernate.sql: DEBUG
+
+
+

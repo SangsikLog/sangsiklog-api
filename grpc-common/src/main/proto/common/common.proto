@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package common;
+
+import "common/enum.proto";
+
+message Pageable {
+  int32 page = 1;
+  int32 size = 2;
+  optional string sortColumn = 3;
+  optional common.SortDirection direction = 4;
+}
+
+message PagerInfo {
+  int64 totalCount = 1;
+}
