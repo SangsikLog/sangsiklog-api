@@ -6,11 +6,9 @@ class PopularKnowledgeListGetResponse(
     val knowledgeList: List<Knowledge> = emptyList()
 )  {
     companion object {
-        fun fromProto(proto: KnowledgeServiceOuterClass.PopularKnowledgeListGetResponse, likeCounts: List<KnowledgeLikeCount>): PopularKnowledgeListGetResponse {
+        fun fromProto(proto: KnowledgeServiceOuterClass.PopularKnowledgeListGetResponse): PopularKnowledgeListGetResponse {
             val knowledgeList = proto.knowledgeDetailList
-                .map { Knowledge.fromWithLikeCount(it,
-                    likeCounts.firstOrNull { likeCount -> likeCount.knowledgeId == it.knowledgeId })
-                }
+                .map { Knowledge.fromProto(it) }
                 .toList()
 
             return PopularKnowledgeListGetResponse(

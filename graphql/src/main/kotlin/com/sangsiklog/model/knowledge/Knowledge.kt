@@ -30,16 +30,5 @@ data class Knowledge(
                 createdAt = DateTimeUtils.milliToLocalDateTime(proto.createdAt).toString(),
             )
         }
-
-        fun fromWithLikeCount(proto: KnowledgeDetail, likeCount: KnowledgeLikeCount?): Knowledge {
-            return Knowledge(
-                id = proto.knowledgeId,
-                title = proto.title,
-                description = proto.description,
-                category = proto.category?.let { Category.fromProto(it) },
-                likeCount = likeCount?.count ?: 0,
-                createdAt = DateTimeUtils.milliToLocalDateTime(proto.createdAt).toString(),
-            )
-        }
     }
 }
