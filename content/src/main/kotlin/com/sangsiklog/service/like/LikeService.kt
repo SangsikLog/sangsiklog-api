@@ -18,35 +18,30 @@ class LikeService(
 
     @Transactional
     override suspend fun addKnowledgeLike(request: KnowledgeLikeAddRequest): KnowledgeLikeAddResponse {
-        return withContext(Dispatchers.IO) {
-            likeRepository.findByKnowledgeIdAndUserId(request.knowledgeId, request.userId)
-                .ifPresent { throw LikeServiceException(ErrorType.ALREADY_LIKES) }
+        likeRepository.findByKnowledgeIdAndUserId(request.knowledgeId, request.userId)
+            .ifPresent { throw LikeServiceException(ErrorType.ALREADY_LIKES) }
 
-            val like = Like.create(request.knowledgeId, request.userId)
+        val like = Like.create(request.knowledgeId, request.userId)
 
-            likeRepository.save(like)
+        likeRepository.save(like)
 
-            KnowledgeLikeAddResponse.newBuilder()
-                .setLikeId(like.id!!)
-                .build()
-        }
+        return KnowledgeLikeAddResponse.newBuilder()
+            .setLikeId(like.id!!)
+            .build()
     }
 
     @Transactional
     override suspend fun removeKnowledgeLike(request: KnowledgeLikeRemoveRequest): KnowledgeLikeRemoveResponse {
-        return withContext(Dispatchers.IO) {
-            val like = likeRepository.findByKnowledgeIdAndUserId(request.knowledgeId, request.userId)
-                .orElseThrow { LikeServiceException(ErrorType.NOT_FOUND_LIKE) }
+        val like = likeRepository.findByKnowledgeIdAndUserId(request.knowledgeId, request.userId)
+            .orElseThrow { LikeServiceException(ErrorType.NOT_FOUND_LIKE) }
 
-            likeRepository.delete(like)
+        likeRepository.delete(like)
 
-            KnowledgeLikeRemoveResponse.newBuilder()
-                .setLikeId(like.id!!)
-                .build()
-        }
+        return KnowledgeLikeRemoveResponse.newBuilder()
+            .setLikeId(like.id!!)
+            .build()
     }
 
-    @Transactional
     override suspend fun getKnowledgeLikeCounts(request: KnowledgeLikeCountsRequest): KnowledgeLikeCountsResponse {
         return withContext(Dispatchers.IO) {
             val likes = likeRepository.findByKnowledgeIdIn(request.knowledgeIdsList)
