@@ -29,23 +29,21 @@ class KnowledgeService(
 ): KnowledgeServiceGrpcKt.KnowledgeServiceCoroutineImplBase() {
     @Transactional
     override suspend fun registerKnowledge(request: KnowledgeRegistrationRequest): KnowledgeRegistrationResponse {
-        return withContext(Dispatchers.IO) {
-            val category = categoryRepository.findById(request.categoryId)
-                .orElseThrow { KnowledgeServiceException(ErrorType.NOT_FOUND_CATEGORY) }
+        val category = categoryRepository.findById(request.categoryId)
+            .orElseThrow { KnowledgeServiceException(ErrorType.NOT_FOUND_CATEGORY) }
 
-            val knowledge = Knowledge.create(
-                userId = request.userId,
-                title = request.title,
-                description = request.description,
-                category = category
-            )
+        val knowledge = Knowledge.create(
+            userId = request.userId,
+            title = request.title,
+            description = request.description,
+            category = category
+        )
 
-            repository.save(knowledge)
+        repository.save(knowledge)
 
-            KnowledgeRegistrationResponse.newBuilder()
-                .setKnowledgeId(knowledge.id!!)
-                .build()
-        }
+        return KnowledgeRegistrationResponse.newBuilder()
+            .setKnowledgeId(knowledge.id!!)
+            .build()
     }
 
     override suspend fun getKnowledgeList(request: KnowledgeListGetRequest): KnowledgeListGetResponse {
